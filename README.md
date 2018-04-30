@@ -1,2 +1,14 @@
-# BookCave
-Verklegt nÃ¡mskeiÃ° 2 - Vor 2018
+3 Vikna verkefni - Verklegt námskeið 2
+Vorönn 2018
+
+Hópur 27
+
+Meðlimir: 
+Arnar Pálmi Elvarsson
+Hallgrímur Snær Andrésson
+Sigþór Andri Gunnlaugsson
+Sindri Dan Garðarsson
+
+
+Kennarar:
+Arnar Leifsson, Björgvin B. Björgvinsson
