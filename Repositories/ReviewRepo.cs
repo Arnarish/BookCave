@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using BookCave.Data;
 using BookCave.Models.ViewModels;
 
@@ -15,16 +16,16 @@ namespace BookCave.Repositories
 
         public List<ReviewListViewModel> GetAllReviews()
         {
-            var reviews = (from a in _db.reviews
-                            join b in _db.books on a.BookId equals b.BookId
-                            join u in _db.users on a.UserId equals base.UserId
+            var reviews = (from a in _db.Reviews
+                            join b in _db.Books on a.BookId equals b.BookId
+                            join u in _db.Users on a.UserId equals u.UserId
                             select new ReviewListViewModel
                             {
-                                ReviewID = a.ReviewID,
+                                ReviewId = a.ReviewId,
                                 Comment = a.Comment,
                                 Rating = a.Rating,
                                 
-                            });
+                            }).ToList();
                 return reviews;
         }
     }
