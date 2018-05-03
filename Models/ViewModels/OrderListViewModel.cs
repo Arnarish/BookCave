@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Web;
-namespace BookCave.Data.EntityModels
-{
+using BookCave.Data.EntityModels;
 
-    public class Order{
+namespace BookCave.Models.ViewModels
+{
+    public class OrderListViewModel{
         public int OrderId { get; set; }
         public List<Book> Books { get; set; }
         public DateTime Date { get; set; }

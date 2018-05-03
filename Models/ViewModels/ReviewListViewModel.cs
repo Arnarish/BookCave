@@ -1,9 +1,6 @@
-using System.ComponentModel;
-using System.Web;
-namespace BookCave.Data.EntityModels
+namespace BookCave.Models.ViewModels
 {
-
-    public class Review{
+    public class ReviewListViewModel{
         public int ReviewId { get; set; }
         public string Comment { get; set; }
         public double Rating { get; set; }
