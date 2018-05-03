@@ -39,7 +39,6 @@ namespace BookCave
                         { Title = "IT", Author = "Stephen King", ReleaseYear = 1986, Genre = "Horror", ISBN = "670813028", Price = 23.99, Stock = 15, TopSeller = false, OnSale = false, Discount = 0, Image = "http://cdn.collider.com/wp-content/uploads/2017/09/it-book-cover.jpg"}
 
                 };
-
                 db.AddRange(InitialBooks);
                 db.SaveChanges();
             }
