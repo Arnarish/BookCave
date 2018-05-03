@@ -23,5 +23,9 @@ namespace BookCave.Controllers
             
             return View(books);
         }
+        public IActionResult About()
+        {   
+            return View();
+        }
     }
 }
