@@ -16,9 +16,6 @@ namespace BookCave.Data.EntityModels
         public bool OnSale { get; set; }
         public int Discount { get; set; }
         public string Image { get; set; }
-        public double Rating { get; set; }
-
-
 
     }
 }
