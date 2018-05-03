@@ -1,9 +1,7 @@
-using System.ComponentModel;
-using System.Web;
-namespace BookCave.Data.EntityModels
+namespace BookCave.Models.ViewModels
 {
 
-    public class Book{
+    public class BookListViewModel{
         public int BookId { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
