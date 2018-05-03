@@ -21,7 +21,7 @@ namespace BookCave.Controllers
         {
             var books = _bookService.GetAllBooks();
             
-            return View();
+            return View(books);
         }
         public IActionResult About()
         {   
