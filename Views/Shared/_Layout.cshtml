@@ -17,7 +17,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,11 +26,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">BookCave</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" id="toplogo"><img src="https://i.imgur.com/T8dZpsY.png" alt="Logo" width = "60" height = "40"></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Top10">Top 10</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="PleaseChangeThis">Top 10</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About us</a></li>
                 </ul>
             </div>
@@ -40,6 +40,9 @@
         @RenderBody()
         <hr />
         <footer>
+            <p><a href="mailto:bookcave@bookcave.com?Subject=Hello%20again" target="_top">Contact us</a></p>
+            <p>Menntavegi 1, 101 Reykjavík, Iceland</p>
+            <p><a href="tel:+3545550001">+354 555 0001</a></p>
             <p>&copy; 2018 - BookCave</p>
         </footer>
     </div>
