@@ -10,7 +10,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BookCave.Controllers
 {
-    //[Authorize] bilað
+<<<<<<< HEAD
+    [Authorize]
+=======
+    //[Authorize] //bilað
+>>>>>>> 897048c802210d6edc9786b9a33de517efaae5f3
     public class HomeController : Controller    
     {
         private BookService _bookService;

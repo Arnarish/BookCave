@@ -8,6 +8,6 @@ namespace BookCave.Models.ViewModels
         public string Image { get; set; }
         public string Address { get; set; }
         public int FavoriteBookById { get; set; }
-        public bool IsStaff {get; set; }
+        public bool IsStaff { get; set; }
     }
 }
