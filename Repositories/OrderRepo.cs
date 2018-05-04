@@ -19,7 +19,9 @@ namespace BookCave.Repositories
                             select new OrderListViewModel
                             {
                                 OrderId = a.OrderId,
-                                Books = {  },
+                                Books = {  
+                                    
+                                },
                                 Date = a.Date,
                                 UserId = u.UserId
                             }).ToList();
