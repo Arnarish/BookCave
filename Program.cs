@@ -51,11 +51,13 @@ namespace BookCave
                     new Book 
                         { Title = "The Hobbit, or There and Back Again", Author = "J. R. R. Tolkien", ReleaseYear = 1937, Genre = "Fantasy", ISBN = "9780547928227", Price = 27.09, Stock = 50, TopSeller = false, OnSale = false, Discount = 0, Image = "http://media.bookbub.com/wp-content/uploads/2014/12/1937.jpg"},
                     new Book 
-                        { Title = "To Kill a Mockingbird", Author = "Harper Lee", ReleaseYear = 1960, Genre = "Drama", ISBN = "9780446310789", Price = 23.99, Stock = 15, TopSeller = false, OnSale = false, Discount = 0, Image = "https://upload.wikimedia.org/wikipedia/en/7/79/To_Kill_a_Mockingbird.JPG"}
+                        { Title = "To Kill a Mockingbird", Author = "Harper Lee", ReleaseYear = 1960, Genre = "Drama", ISBN = "9780446310789", Price = 23.99, Stock = 15, TopSeller = false, OnSale = false, Discount = 0, Image = "https://upload.wikimedia.org/wikipedia/en/7/79/To_Kill_a_Mockingbird.JPG"},
+                    new Book 
+                        { Title = "Foundation", Author = "Isaac Asimov", ReleaseYear = 1951, Genre = "SciFi", ISBN = "553293354", Price = 25.99, Stock = 30, TopSeller = false, OnSale = false, Discount = 0, Image = "https://static.squarespace.com/static/51b3dc8ee4b051b96ceb10de/51ce6099e4b0d911b4489b79/51ce6178e4b0d911b4495446/1317432124153/1000w/Isaac%20Asimov_1951_Foundation.jpg"}
                      };
                 db.AddRange(InitialBooks);
                 db.SaveChanges();
-            }
+            }            
         }
     }    
 }

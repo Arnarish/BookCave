@@ -3,23 +3,25 @@
     ViewData["Title"] = "Top Ten";
 }
 
-<h1>Top ten books</h1>
+<h1 id="top-ten-title"><b>Top ten rated books</b></h1>
 <div>
     <table class="table table-striped table-hover">
-        <tr>
+        <ol>
+            <th><b>Cover</b></th>
             <th><b>Title</b></th>
             <th><b>Author</b></th>
             <th><b>Year</b></th>
             <th><b>Price</b></th>
         </tr>
-        <!--@foreach(var book in Model)
+        @foreach(var book in Model)
         {
             <tr>
-                <td><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></td> 
+                <td><img src="@book.Image" alt="coverimage" width="80" height="120"></td> 
+                <td><i>@book.Title</i></td> 
                 <td>@book.Author</td>
                 <td>@book.ReleaseYear</td>
                 <td>@book.Price</td>
             </tr>
-        }-->
+        }
     </table>
 </div>
