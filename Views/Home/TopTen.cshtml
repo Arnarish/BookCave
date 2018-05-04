@@ -12,14 +12,14 @@
             <th><b>Year</b></th>
             <th><b>Price</b></th>
         </tr>
-        <!--@foreach(var book in Model)
+        @foreach(var book in Model)
         {
             <tr>
-                <td><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></td> 
+                <td>@book.Title</td> 
                 <td>@book.Author</td>
                 <td>@book.ReleaseYear</td>
                 <td>@book.Price</td>
             </tr>
-        }-->
+        }
     </table>
 </div>
