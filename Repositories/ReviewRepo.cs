@@ -24,7 +24,8 @@ namespace BookCave.Repositories
                                 ReviewId = a.ReviewId,
                                 Comment = a.Comment,
                                 Rating = a.Rating,
-                                
+                                UserId = u.UserId,
+                                BookId = b.BookId                                
                             }).ToList();
                 return reviews;
         }
