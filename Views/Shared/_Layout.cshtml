@@ -27,6 +27,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="TopTen">Top 10</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About us</a></li>
                 </ul>
+                @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </nav>
