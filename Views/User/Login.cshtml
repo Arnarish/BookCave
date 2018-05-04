@@ -1,10 +1,13 @@
-@model BookCave.Model.ViewModels.LoginViewModel
+@model BookCave.Models.ViewModels.LoginViewModel
 
 <h1>Login</h1>
 
 <form asp-action="Login" asp-controller="User" class="form-horizontal">
     <div class="from-group">
         <input type="email" aps-for="Email" class="form-control" placeholder="Enter email...">
+    </div>
+    <div class="from-group">
+        <input type="password" asp-for="Password" class="form-control" placeholder="Enter password...">
     </div>
     <div class="checkbox">
         <label for="RememberMe">Remember me</label>
