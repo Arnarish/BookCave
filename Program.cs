@@ -29,17 +29,17 @@ namespace BookCave
         public static void SeedData()
         {
             var db = new Datacontext();
-            if(db.Books.Any())
+            if(!db.Books.Any())
             {
                 var InitialBooks = new List<Book>()
                 {
                     //10 default books, Sindri
-                    /*new Book 
+                    new Book 
                         { Title = "The Hitchhiker's Guide to the Galaxy", Author = "Douglas Adams", ReleaseYear = 1979, Genre = "SciFi", ISBN = "330258648", Price = 17.99, Stock = 10, TopSeller = false, OnSale = false, Discount = 0, Image = "https://images.penguinrandomhouse.com/cover/9781400052929"},
                     new Book 
-                        { Title = "It", Author = "Stephen King", ReleaseYear = 1986, Genre = "Horror", ISBN = "670813028", Price = 23.99, Stock = 15, TopSeller = false, OnSale = false, Discount = 0, Image = "http://cdn.collider.com/wp-content/uploads/2017/09/it-book-cover.jpg"}
-                    */new Book 
-                        { Title = "The Dark Knight Returns", Author = "Frank Miller", ReleaseYear = 1986, Genre = "Comics", ISBN = "1563893428", Price = 20.99, Stock = 25, TopSeller = false, OnSale = false, Discount = 0, Image = "https://upload.wikimedia.org/wikipedia/en/7/77/Dark_knight_returns.jpg"}
+                        { Title = "It", Author = "Stephen King", ReleaseYear = 1986, Genre = "Horror", ISBN = "670813028", Price = 23.99, Stock = 15, TopSeller = false, OnSale = false, Discount = 0, Image = "http://cdn.collider.com/wp-content/uploads/2017/09/it-book-cover.jpg"},
+                    new Book 
+                        { Title = "The Dark Knight Returns", Author = "Frank Miller", ReleaseYear = 1986, Genre = "Comics", ISBN = "1563893428", Price = 20.99, Stock = 25, TopSeller = false, OnSale = false, Discount = 0, Image = "https://upload.wikimedia.org/wikipedia/en/7/77/Dark_knight_returns.jpg"},
                     new Book 
                         { Title = "The Shining", Author = "Stephen King", ReleaseYear = 1977, Genre = "Horror", ISBN = "9780385121675", Price = 10.99, Stock = 20, TopSeller = false, OnSale = false, Discount = 0, Image = "https://upload.wikimedia.org/wikipedia/en/4/4c/Shiningnovel.jpg"},
                     new Book 
