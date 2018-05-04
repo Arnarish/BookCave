@@ -33,3 +33,12 @@
         display: none;
     }
 }
+.search-bar{
+    margin-top: 10%;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+#navbar{
+    padding: 3px;
+}

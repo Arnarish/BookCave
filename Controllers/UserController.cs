@@ -2,11 +2,13 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using BookCave.Models;
 using BookCave.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
