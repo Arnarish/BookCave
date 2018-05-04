@@ -4,7 +4,8 @@ using System.Web;
 namespace BookCave.Data.EntityModels
 {
 
-    public class Book{
+    public class Book
+    {
         [Key]
         public int BookId { get; set; }
         public string Title { get; set; }
