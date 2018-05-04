@@ -12,3 +12,5 @@ Sindri Dan Garðarsson
 
 Kennarar:
 Arnar Leifsson, Björgvin B. Björgvinsson
+Leiðbeinandi:
+Ásgeir Freyr Kristinsson
