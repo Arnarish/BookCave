@@ -27,5 +27,9 @@ namespace BookCave.Controllers
         {   
             return View();
         }
+        public IActionResult TopTen()
+        {
+            return View();
+        }
     }
 }
