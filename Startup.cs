@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using authentication_repo.Data;
-using authentication_repo.Models;
+using BookCave.Data;
+using BookCave.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -32,12 +32,13 @@ namespace BookCave
                 .AddDefaultTokenProviders();
 
                 services.Configure<IdentityOptions>(config => {
+                    config.User.RequireUniqueEmail = true;
                     config.Password.RequiredLength = 8;
                 });
                 services.ConfigureApplicationCookie(options => {
                     options.Cookie.HttpOnly = true;
                     options.ExpireTimeSpan = TimeSpan.FromHours(3);
-                    options.LoginPath = "User/Login";
+                    options.LoginPath = "/User/Login";
                     options.AccessDeniedPath = "/User/AccessDenied";
                     options.SlidingExpiration = true;
                 });

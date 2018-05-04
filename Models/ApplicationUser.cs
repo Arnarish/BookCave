@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace authentication_repo.Models
+namespace BookCave.Models
 {
     public class ApplicationUser : IdentityUser
     {
