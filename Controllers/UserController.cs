@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
 {
-    [Authorize]
     public class UserController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -20,6 +19,10 @@ namespace BookCave.Controllers
             _userManager = userManager;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
         public IActionResult Register()
         {
             return View();
