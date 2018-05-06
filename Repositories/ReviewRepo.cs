@@ -14,7 +14,7 @@ namespace BookCave.Repositories
             _db = new Datacontext();
         }
 
-        public List<ReviewListViewModel> GetAllReviews()
+        /*public List<ReviewListViewModel> GetAllReviews()
         {
             var reviews = (from a in _db.Reviews
                             join b in _db.Books on a.BookId equals b.BookId
@@ -28,6 +28,6 @@ namespace BookCave.Repositories
                                 BookId = b.BookId                                
                             }).ToList();
                 return reviews;
-        }
+        }*/
     }
 }

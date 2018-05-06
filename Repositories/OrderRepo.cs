@@ -12,7 +12,7 @@ namespace BookCave.Repositories
         {
             _db = new Datacontext();
         }
-        public List<OrderListViewModel> GetAllOrders()
+        /*public List<OrderListViewModel> GetAllOrders()
         {
             var orders = (from a in _db.Orders
                             join u in _db.Users on a.UserId equals u.UserId
@@ -26,6 +26,6 @@ namespace BookCave.Repositories
                                 UserId = u.UserId
                             }).ToList();
             return orders;
-        }
+        }*/
     }
 }
