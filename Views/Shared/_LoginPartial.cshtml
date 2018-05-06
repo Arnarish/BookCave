@@ -10,13 +10,13 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <from asp-action="Logout" asp-controller="User" method="post">
+    <from asp-action="Logout" asp-controller="User" method="POST">
         <ul class="nav navbar-nav navbar-right">
             <li>
                 <button class="btn btn-link navbar-btn navbar-link">@claim</button>
             </li>
             <li>
-                <button type="submit" class"btn btn-link navbar-btn navbar-link">Log out</button>
+                <button class="btn btn-link navbar-btn navbar-link" type="submit">Log out</button>
             </li>
         </ul>
     </from>
