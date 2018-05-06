@@ -35,29 +35,32 @@ namespace BookCave.Controllers
             {
                 return View();
             }
+
             var user = new ApplicationUser
             {
                 UserName = model.Email,
                 Email = model.Email
             };
+            
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if(result.Succeeded)
             {
                 //The user is Successfully registered
                 // Add the Concatenated first and last name as fullname in claims
-                await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} { model.LastName}"));
+                await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 await _signInManager.SignInAsync(user, false);
 
                 return RedirectToAction("Index", "Home");
             }
-            return View();   
+            return View();
         }
 
         public IActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -80,6 +83,11 @@ namespace BookCave.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "User");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
