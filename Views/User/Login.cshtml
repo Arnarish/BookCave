@@ -1,8 +1,8 @@
-@model BookCave.Models.ViewModels.LoginInputModel
+@model BookCave.Models.ViewModels.LoginViewModel
 
 <h1>Login</h1>
 
-<form asp-action="Login" asp-controller="User" class="form-horizontal" method="POST">
+<form asp-action="Login" asp-controller="User" class="form-horizontal"method="POST">
     <div class="form-group">
         <input type="email" asp-for="Email" class="form-control" placeholder="Enter email address..." />
         <span asp-validation-for="Email" class="text-danger"></span>
