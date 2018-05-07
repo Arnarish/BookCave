@@ -4,7 +4,7 @@
 
 <form asp-action="Register" asp-controller="User" class="form-horizontal" method="POST">
     <div class="form-group">
-        <input autofocus="autofocus" type="email" asp-for="Email" class="form-control" placeholder="Enter email...">
+        <input type="email" asp-for="Email" class="form-control" placeholder="Enter email...">
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
