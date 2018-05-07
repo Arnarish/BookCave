@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
 using BookCave.Repositories;
@@ -21,7 +22,7 @@ namespace BookCave.Services
         }*/
         public void AddUser(RegisterInputModel model)
         {
-            var user = new UserInputModel
+            var user = new User
             {
                 FullName = model.FirstName + " " + model.LastName,
                 Image = model.Image,

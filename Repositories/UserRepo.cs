@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BookCave.Data;
+using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
 
@@ -19,9 +20,9 @@ namespace BookCave.Repositories
 
             return user;
         }*/
-        public void AddUser(UserInputModel model)
+        public void AddUser(User model)
         {
-            _db.Add(model);
+            //_db.Add(model);
         }
     }
 }
