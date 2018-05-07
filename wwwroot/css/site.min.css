@@ -6,14 +6,13 @@ body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;paddin
     text-align: center;
 }
 
-#navbar{
-    
-}
-
 #title-from-top-ten{
     font-size: 15pt
 }
 
 #toplogobox{
     padding-top: 2px;
+}
+.input-group{
+    width: 11%;
 }
