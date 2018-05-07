@@ -41,7 +41,7 @@ namespace BookCave.Controllers
                 UserName = model.Email,
                 Email = model.Email
             };
-            
+
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if(result.Succeeded)
@@ -82,7 +82,7 @@ namespace BookCave.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "User");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult AccessDenied()
