@@ -69,6 +69,10 @@ namespace BookCave
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "book",
+                    template: "{controller=Book}/{action=Index}/{id?}");
             });
         }
     }

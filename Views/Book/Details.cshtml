@@ -1,0 +1,12 @@
+@model BookCave.Models.ViewModels.BookListViewModel
+@{
+    ViewData["Title"] = "Book details";
+}
+
+<!--Todo-->
+<h2><i>@Model.Title</i></h2>
+<img src="@Model.Image" alt="coverimage" width="160" height="240"></a>
+@Model.Author
+@Model.Genre
+@Model.ISBN
+@Model.Price

@@ -10,6 +10,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+<<<<<<< HEAD
     <from asp-action="Logout" asp-controller="User" method="POST">
         <ul class="nav navbar-nav navbar-right">
             <li>
@@ -20,6 +21,19 @@
             </li>
         </ul>
     </from>
+=======
+    
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a asp-controller="User" asp-action="Index">@claim</a>
+        </li>
+        <li>
+            <form asp-action="Logout" asp-controller="User" method="post">
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+            </form>
+        </li>
+    </ul>
+>>>>>>> 0a34175a3419be49d31081bff55c664e6429cb1a
 }
 else
 {
