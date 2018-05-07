@@ -2,15 +2,14 @@ using System.Collections.Generic;
 using BookCave.Data;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
-using BookCave.Repositories;
 
-namespace BookCave.Services
+namespace BookCave.Repositories
 {
-    public class UserService
+    public class UserRepo
     {
         private Datacontext _db;
 
-        public UserService()
+        public UserRepo()
         {
             _db = new Datacontext();
         }
