@@ -1,26 +1,27 @@
 using System.Collections.Generic;
-using System.Linq;
 using BookCave.Data;
+using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
 
 namespace BookCave.Repositories
 {
     public class UserRepo
     {
-       /* private Datacontext _db;
+        private Datacontext _db;
 
         public UserRepo()
         {
             _db = new Datacontext();
         }
-        public UserViewModel GetUser()
+        /*public UserViewModel GetUser()
         {
-            var user = (from a in _db.Users
-                            select new UserViewModel
-                            {
-                                
-                            }).SingleOrDefault();
+            var user = (from 
+
             return user;
         }*/
+        public void AddUser(UserInputModel model)
+        {
+            _db.Add(model);
+        }
     }
 }
