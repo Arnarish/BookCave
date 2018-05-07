@@ -31,14 +31,16 @@
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="container body-content" id="footer-list">
         @RenderBody()
         <hr />
         <footer>
-            <p><a href="mailto:bookcave@bookcave.com?Subject=Hello%20again" target="_top">Contact us</a></p>
-            <p>Menntavegi 1, 101 Reykjavík, Iceland</p>
-            <p><a href="tel:+3545550001">+354 555 0001</a></p>
-            <p>&copy; 2018 - BookCave</p>
+            <ul>
+                <li><a href="mailto:bookcave@bookcave.com?Subject=Hello%20again" target="_top">Email us</a></li>
+                <li>Menntavegi 1, 101 Reykjavík, Iceland</li>
+                <li><span class="glyphicon glyphicon-earphone"></span><a href="tel:+3545550001">+354 555 0001</a></li>
+                <li>&copy; 2018 - BookCave</li>
+            </ul>
         </footer>
     </div>
 
