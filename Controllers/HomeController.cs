@@ -28,7 +28,6 @@ namespace BookCave.Controllers
         {   
             return View();
         }
-        //[Authorize]
         public IActionResult TopTen()
         {
             var topTenBooks = _bookService.GetAllBooks().Take(10).ToList();
