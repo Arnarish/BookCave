@@ -9,8 +9,7 @@
 }
 
 @if (SignInManager.IsSignedIn(User))
-{
-    
+{    
     <ul class="nav navbar-nav navbar-right">
         <li>
             <a asp-controller="User" asp-action="Index">@claim</a>
