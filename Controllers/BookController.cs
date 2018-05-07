@@ -23,9 +23,10 @@ namespace BookCave.Controllers
             
             return View(books);
         }
-        public IActionResult Details(int? BookId)
+        public IActionResult Details(int? id)
         {   
-            return View();
+            var filteredId = _bookService.GetAllBooks().FirstOrDefault(b => b.BookId == id);
+                return View(filteredId);
         }
 
         

@@ -7,9 +7,13 @@ body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;paddin
 }
 
 #navbar{
-    padding: 3px;
+    
 }
 
 #title-from-top-ten{
     font-size: 15pt
+}
+
+#toplogobox{
+    padding-top: 2px;
 }
