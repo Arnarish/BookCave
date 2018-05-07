@@ -30,6 +30,10 @@ namespace BookCave.Controllers
         {
             return View();
         }
+        public IActionResult Profile()
+        {
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterInputModel model)
