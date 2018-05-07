@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BookCave.Models.ViewModels
+namespace BookCave.Models.InputModels
 {
-    public class RegisterViewModel
+    public class RegisterInputModel
     {
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress]
@@ -14,5 +14,13 @@ namespace BookCave.Models.ViewModels
         [Required]
         [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "Please input a valid password")]
         public string Password { get; set; }
+        [Required]
+        public string Image { get; set; }
+        [Required]
+        public string Address { get; set; }
+        [Required]
+        public int Postal { get; set; }
+        [Required]
+        public string Country { get; set; }
     }
 }

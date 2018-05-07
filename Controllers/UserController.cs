@@ -1,20 +1,23 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BookCave.Models;
-using BookCave.Models.ViewModels;
+using BookCave.Models.InputModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using BookCave.Services;
 
 namespace BookCave.Controllers
 {
     public class UserController : Controller
     {
+        private UserService _userService;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
+            _userService = new UserService();
             _signInManager = signInManager;
             _userManager = userManager;
         }
@@ -33,7 +36,7 @@ namespace BookCave.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterInputModel model)
         {
             if(!ModelState.IsValid)
             {
@@ -55,6 +58,8 @@ namespace BookCave.Controllers
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 await _signInManager.SignInAsync(user, false);
 
+                _userService.AddUser(model);
+
                 return RedirectToAction("Index", "Home");
             }
             return View();
@@ -67,7 +72,7 @@ namespace BookCave.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginInputModel model)
         {
             if(!ModelState.IsValid)
             {
