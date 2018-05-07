@@ -18,7 +18,7 @@ namespace BookCave.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             return View();
