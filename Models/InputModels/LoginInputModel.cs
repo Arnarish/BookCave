@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BookCave.Models.ViewModels
+namespace BookCave.Models.InputModels
 {
-    public class LoginViewModel
+    public class LoginInputModel
     {
         [EmailAddress]
         [Required(ErrorMessage = "Email is valid")]
