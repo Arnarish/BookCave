@@ -26,15 +26,14 @@ body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;paddin
 #left-view-box{
     width:55%;
     margin-right:2%;
-    float: left;
 }
-
+/*
 #right-view-box{
     width:42%;
     float: left;
 }
-
-#footer-list li{
+*/
+/*#footer-list li{
     float: left;
     display: inline;
-}
+}*/

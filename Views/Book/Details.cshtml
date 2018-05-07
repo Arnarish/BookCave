@@ -15,17 +15,17 @@
         </ul>
     </div>
     <div class="view-box-book-details" id="right-view-box">
-        <ul>
             @if (Model.Stock != 0)
             {
-                <li id="in-stock-text">In stock</li>
+                <div id="in-stock-text">In stock</div>
             }
             else{
-                <li id="out-of-stock-text">Out of stock</li>
+                <div id="out-of-stock-text">Out of stock</div>
             }
-            <li>$@Model.Price</li>
-
-            <li>
+            <br>
+            $@Model.Price
+            <br>
+            <div>
                 @if(Model.Stock == 0)
                 {
                     <!-- display none -->
@@ -45,13 +45,13 @@
                         </span>
                     </div>
                 }
-            </li>
+            </div>
 
-            <li>
+            <div>
                 <button type="button" class="btn btn-info btn-lg">
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 </button>
-            </li>
+            <div>
         </ul>
     </div>    
 </div>
