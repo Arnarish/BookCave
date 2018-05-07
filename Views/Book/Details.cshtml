@@ -4,9 +4,42 @@
 }
 
 <!--Todo-->
-<h2><i>@Model.Title</i></h2>
-<img src="@Model.Image" alt="coverimage" width="160" height="240"></a>
-@Model.Author
-@Model.Genre
-@Model.ISBN
-@Model.Price
+<div class="left-view-box-for-books">
+    <h2><i>@Model.Title</i></h2>
+    <img src="@Model.Image" alt="coverimage" width="160" height="240"></a>
+    <ul class="left-view-box-details-list">
+        <li>@Model.Author</li>
+        <li>@Model.Genre</li> 
+        <li>@Model.ISBN</li>
+    </ul>
+</div>
+<div class="right-view-box-for-books">
+    <ul>
+    @if (Model.Stock != 0)
+    {
+        <li id="in-stock-text">In stock</li>
+    }
+    else{
+        <li id="out-of-stock-text">Out of stock</li>
+    }
+    <li>$@Model.Price</li>
+    <li>
+        @if(Model.Stock == 0)
+        {
+            <!-- display none -->
+        }
+        else{
+            <input type="button" id="increment" value="increment">
+            <p id="value"></p>
+            <input type="button" id="decrement" value="decrement">
+        }
+    </li>
+    </ul>
+
+    
+</div>
+
+<br>
+Ratings here..
+<hr>
+Comment system here..
