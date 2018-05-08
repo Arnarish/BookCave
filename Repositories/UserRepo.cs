@@ -16,7 +16,7 @@ namespace BookCave.Repositories
         {
             _db = new Datacontext();
         }
-        public UserViewModel GetUser(string user)
+        public UserViewModel GetUserViewModel(string user)
         {
             var retUser = (from u in _db.Users
                     where u.Email == user
@@ -34,9 +34,21 @@ namespace BookCave.Repositories
 
                     return retUser;      
         }
+        public User GetUser(string user)
+        {
+            var retUser = (from u in _db.Users
+                    where u.Email == user
+                    select u).SingleOrDefault();
+                    return retUser;
+        }
         public void AddUser(User model)
         {
             _db.Users.Add(model);
+            _db.SaveChanges();
+        }
+        public void UpdateUser(User user)
+        {
+            _db.Users.Update(user);
             _db.SaveChanges();
         }
     }

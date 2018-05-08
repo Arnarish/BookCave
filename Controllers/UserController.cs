@@ -27,8 +27,22 @@ namespace BookCave.Controllers
         public IActionResult Index()
         {
             var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
-            var user = _userService.GetUser(claim);
+            var user = _userService.GetUserViewModel(claim);
             return View(user);
+        }
+        public IActionResult EditProfile()
+        {
+            var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
+            var user = _userService.GetUserViewModel(claim);
+            return View(user);
+        }
+        [HttpPost]
+        public IActionResult EditProfile(UserInputModel model)
+        {
+            var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
+            var user = _userService.GetUser(claim);
+            _userService.UpdateUser(user, model);
+            return RedirectToAction("Index");
         }
         public IActionResult Register()
         {
