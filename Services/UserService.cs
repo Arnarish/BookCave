@@ -14,7 +14,11 @@ namespace BookCave.Services
         {
             _userRepo = new UserRepo();
         }
-        public UserViewModel GetUser(string user)
+        public UserViewModel GetUserViewModel(string user)
+        {
+            return _userRepo.GetUserViewModel(user);
+        }
+        public User GetUser(string user)
         {
             return _userRepo.GetUser(user);
         }
@@ -31,6 +35,15 @@ namespace BookCave.Services
                 FavoriteBookById = 0
             };
             _userRepo.AddUser(user);
+        }
+        public void UpdateUser(User user, UserInputModel model)
+        {
+            user.FullName = model.FullName;
+            user.Address = model.Address;
+            user.Image = model.Image;
+            user.Country = model.Country;
+            user.Postal = model.Postal;
+            _userRepo.UpdateUser(user);
         }
     }
 }
