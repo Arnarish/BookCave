@@ -1,4 +1,6 @@
 @model BookCave.Models.InputModels.RegisterInputModel
+@using Microsoft.AspNetCore.Identity
+@inject RoleManager<IdentityRole> RoleManager
 
 <h1>Register</h1>
 
@@ -43,6 +45,13 @@
             <option value="Qatar">Qatar</option>
         </select>
     </div>
+@if (this.User.IsInRole("Admin"))
+{
+    <div>
+        <input type="checkbox" asp-for="Admin" class="checkbox">
+        <label for="Admin">Employee</label>
+    </div>
+}
     <div class="form-group">
         <input type="submit" class="btn btn-default" value="Register">
     </div>
