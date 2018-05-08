@@ -18,5 +18,9 @@ namespace BookCave.Services
 
             return books;
         }
+        public List<BookListViewModel> GetBooksByAuthor(int? id)
+        {
+            return _bookRepo.GetBooksByAuthor(id);
+        }
     }
 }

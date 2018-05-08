@@ -33,5 +33,28 @@ namespace BookCave.Repositories
                             }).ToList();
             return books;
         }
+        public List<BookListViewModel> GetBooksByAuthor(int? id)
+        {
+            var book = (from b in _db.Books
+                        where b.BookId == id select b).SingleOrDefault();
+            var books = (from b in _db.Books
+                        where b.Author == book.Author
+                        select new BookListViewModel
+                        {
+                            BookId = b.BookId,
+                            Title = b.Title,
+                            Author = b.Author,
+                            ReleaseYear = b.ReleaseYear,
+                            Genre = b.Genre,
+                            ISBN = b.ISBN,
+                            Price = b.Price,
+                            Stock = b.Stock,
+                            TopSeller = b.TopSeller,
+                            OnSale = b.OnSale,
+                            Discount = b.Discount,
+                            Image = b.Image,
+                        }).ToList();
+            return books;
+        }
     }
 }

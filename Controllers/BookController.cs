@@ -46,33 +46,13 @@ namespace BookCave.Controllers
             return View(book);
         }
         
-
-        [HttpGet]
-        public IActionResult AuthorDetails(string id)
+        public IActionResult AuthorDetails(int? id)
         {
-            var books = _bookService.GetAllBooks();
 
-            var filteredAuthor = (from b in books
-                            where b.Author.ToLower() == id.ToLower()
-                            orderby b.ReleaseYear
-                            select new BookListViewModel
-                            {
-                                BookId = b.BookId,
-                                Author = b.Author,
-                                Title = b.Title,
-                                ReleaseYear = b.ReleaseYear,
-                                Genre = b.Genre,
-                                Price = b.Price,
-                                Image = b.Image
-                            }).ToList();
+                var books = _bookService.GetBooksByAuthor(id);
 
-             if(id == null)
-            {
-                return View();    
-            }
-            return View(filteredAuthor);
+                return View(books);    
         }
-
         
     }
 }
