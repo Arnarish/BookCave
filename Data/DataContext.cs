@@ -1,4 +1,5 @@
 using BookCave.Data.EntityModels;
+using BookCave.Models.InputModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookCave.Data
@@ -6,7 +7,9 @@ namespace BookCave.Data
     public class Datacontext : DbContext
     {
         public DbSet<Book> Books { get; set; }
-        //public DbSet<Order> Orders { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<User> Users { get; set; }
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
