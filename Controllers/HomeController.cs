@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
 using BookCave.Services;
 using Microsoft.AspNetCore.Authorization;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Controllers
 {
@@ -18,11 +19,38 @@ namespace BookCave.Controllers
         {
             _bookService = new BookService();
         }
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(string searchString, string genre)
         {
             var books = _bookService.GetAllBooks();
-            
-            return View(books);
+            if(searchString == null)
+            {
+                searchString = "";
+            }
+            if(genre == null)
+            {
+                genre = "";
+            }
+            var bookSearch = (from b in books
+                            where (b.ISBN.Contains(searchString) || 
+                            b.Title.ToLower().Contains(searchString.ToLower()) || 
+                            b.Author.ToLower().Contains(searchString.ToLower())) &&
+                            b.Genre.ToLower().Contains(genre.ToLower())
+                            orderby b.Title
+                            select new BookListViewModel
+                            {
+                                BookId = b.BookId,
+                                Author = b.Author,
+                                Title = b.Title,
+                                Genre = b.Genre,
+                                Price = b.Price,
+                                Image = b.Image
+                            }).ToList();
+            if(bookSearch == null)
+            {
+                return View();    
+            }
+            return View(bookSearch);
         }
         public IActionResult About()
         {   
