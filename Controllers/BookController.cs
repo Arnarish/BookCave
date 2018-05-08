@@ -12,10 +12,13 @@ namespace BookCave.Controllers
     public class BookController : Controller    
     {
         private BookService _bookService;
+        private ReviewService _reviewService;
 
+        
         public BookController()
         {
             _bookService = new BookService();
+            _reviewService = new ReviewService();
         }
         public IActionResult Index()
         {
@@ -23,11 +26,25 @@ namespace BookCave.Controllers
             
             return View(books);
         }
-        public IActionResult Details(int? id)
+        /*public IActionResult Details(int? id)
         {   
             var filteredId = _bookService.GetAllBooks().FirstOrDefault(b => b.BookId == id);
                 return View(filteredId);
+        }*/
+        public IActionResult Details(int? id)
+        {
+            if(id == null)
+            {
+                return View("Index");
+            }
+            var book = _reviewService.GetBookWithAllReviews(id.Value);
+            if(book == null)
+            {
+                return View("Index");
+            }
+            return View(book);
         }
+        
 
         
     }

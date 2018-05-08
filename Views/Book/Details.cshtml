@@ -1,4 +1,5 @@
-@model BookCave.Models.ViewModels.BookListViewModel
+@model BookCave.Models.ViewModels.BookAndReviewListViewModel
+
 @{
     ViewData["Title"] = "Book details";
 }
@@ -59,4 +60,4 @@
 <br>
 Ratings here..
 <hr>
-Comment system here..
+@Html.Partial("_ReviewPartial")
