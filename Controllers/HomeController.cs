@@ -19,8 +19,26 @@ namespace BookCave.Controllers
         {
             _bookService = new BookService();
         }
+        public IActionResult Index()
+        {
+            var rand = new Random();
+            var staffPicks = _bookService.GetAllBooks().ToList();
+            
+            var randomizedBooks = (from b in staffPicks
+                                    orderby rand.Next()
+                                    select new BookListViewModel{
+                                        BookId = b.BookId,
+                                        Author = b.Author,
+                                        Title = b.Title,
+                                        Genre = b.Genre,
+                                        Price = b.Price,
+                                        Image = b.Image
+                                    }).Take(3).ToList();
+                                    
+            return View(randomizedBooks);
+        }
         [HttpGet]
-        public IActionResult Index(string searchString, string genre)
+        public IActionResult SearchResults(string searchString, string genre)
         {
             var books = _bookService.GetAllBooks();
             if(searchString == null)
@@ -56,7 +74,6 @@ namespace BookCave.Controllers
         {   
             return View();
         }
-        //[Authorize]
         public IActionResult TopTen()
         {
             var topTenBooks = _bookService.GetAllBooks().Take(10).ToList();
