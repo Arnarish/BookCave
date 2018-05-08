@@ -14,16 +14,15 @@ namespace BookCave.Services
         {
             _userRepo = new UserRepo();
         }
-        /*public UserViewModel GetUser()
+        public UserViewModel GetUser(string user)
         {
-            var user = _userRepo.GetUser();
-
-            return user;
-        }*/
+            return _userRepo.GetUser(user);
+        }
         public void AddUser(RegisterInputModel model)
         {
             var user = new User
             {
+                Email = model.Email,
                 FullName = model.FirstName + " " + model.LastName,
                 Image = model.Image,
                 Address = model.Address,

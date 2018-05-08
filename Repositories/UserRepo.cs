@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using BookCave.Data;
+using System.Linq;
 using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
+using System;
 
 namespace BookCave.Repositories
 {
@@ -14,15 +16,28 @@ namespace BookCave.Repositories
         {
             _db = new Datacontext();
         }
-        /*public UserViewModel GetUser()
+        public UserViewModel GetUser(string user)
         {
-            var user = (from 
+            var retUser = (from u in _db.Users
+                    where u.Email == user
+                    select new UserViewModel
+                    {
+                        UserId = u.UserId,
+                        Email = u.Email,
+                        FullName = u.FullName,
+                        Image = u.Image,
+                        Address = u.Address,
+                        Country = u.Country,
+                        Postal = u.Postal,
+                        FavoriteBookById = u.FavoriteBookById
+                    }).SingleOrDefault();    
 
-            return user;
-        }*/
+                    return retUser;      
+        }
         public void AddUser(User model)
         {
-            //_db.Add(model);
+            _db.Users.Add(model);
+            _db.SaveChanges();
         }
     }
 }

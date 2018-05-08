@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
 using BookCave.Services;
 using Microsoft.AspNetCore.Authorization;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Controllers
 {
@@ -20,15 +21,59 @@ namespace BookCave.Controllers
         }
         public IActionResult Index()
         {
-            var books = _bookService.GetAllBooks();
+            var rand = new Random();
+            var staffPicks = _bookService.GetAllBooks().ToList();
             
-            return View(books);
+            var randomizedBooks = (from b in staffPicks
+                                    orderby rand.Next()
+                                    select new BookListViewModel{
+                                        BookId = b.BookId,
+                                        Author = b.Author,
+                                        Title = b.Title,
+                                        Genre = b.Genre,
+                                        Price = b.Price,
+                                        Image = b.Image
+                                    }).Take(3).ToList();
+                                    
+            return View(randomizedBooks);
+        }
+        [HttpGet]
+        public IActionResult SearchResults(string searchString, string genre)
+        {
+            var books = _bookService.GetAllBooks();
+            if(searchString == null)
+            {
+                searchString = "";
+            }
+            if(genre == null)
+            {
+                genre = "";
+            }
+            var bookSearch = (from b in books
+                            where (b.ISBN.Contains(searchString) || 
+                            b.Title.ToLower().Contains(searchString.ToLower()) || 
+                            b.Author.ToLower().Contains(searchString.ToLower())) &&
+                            b.Genre.ToLower().Contains(genre.ToLower())
+                            orderby b.Title
+                            select new BookListViewModel
+                            {
+                                BookId = b.BookId,
+                                Author = b.Author,
+                                Title = b.Title,
+                                Genre = b.Genre,
+                                Price = b.Price,
+                                Image = b.Image
+                            }).ToList();
+            if(bookSearch == null)
+            {
+                return View();    
+            }
+            return View(bookSearch);
         }
         public IActionResult About()
         {   
             return View();
         }
-        //[Authorize]
         public IActionResult TopTen()
         {
             var topTenBooks = _bookService.GetAllBooks().Take(10).ToList();
