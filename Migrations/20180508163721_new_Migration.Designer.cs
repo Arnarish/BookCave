@@ -11,8 +11,8 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(Datacontext))]
-    [Migration("20180504162149_initialMigration")]
-    partial class initialMigration
+    [Migration("20180508163721_new_Migration")]
+    partial class new_Migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,11 +38,11 @@ namespace BookCave.Migrations
 
                     b.Property<bool>("OnSale");
 
-                    b.Property<int?>("OrderId");
-
                     b.Property<double>("Price");
 
                     b.Property<int>("ReleaseYear");
+
+                    b.Property<double>("ReviewScore");
 
                     b.Property<int>("Stock");
 
@@ -52,8 +52,6 @@ namespace BookCave.Migrations
 
                     b.HasKey("BookId");
 
-                    b.HasIndex("OrderId");
-
                     b.ToTable("Books");
                 });
 
@@ -62,9 +60,23 @@ namespace BookCave.Migrations
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Date");
+                    b.Property<string>("Address");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("City");
+
+                    b.Property<string>("Country");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FullName");
+
+                    b.Property<DateTime>("OrderDate");
+
+                    b.Property<string>("PostalCode");
+
+                    b.Property<double>("Total");
+
+                    b.Property<string>("Username");
 
                     b.HasKey("OrderId");
 
@@ -98,30 +110,82 @@ namespace BookCave.Migrations
 
                     b.Property<string>("Country");
 
+                    b.Property<string>("Email");
+
                     b.Property<int>("FavoriteBookById");
 
                     b.Property<string>("FullName");
 
                     b.Property<string>("Image");
 
-                    b.Property<bool>("IsStaff");
-
-                    b.Property<string>("Password");
-
-                    b.Property<int>("PostalCode");
-
-                    b.Property<string>("Username");
+                    b.Property<int>("Postal");
 
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Book", b =>
+            modelBuilder.Entity("BookCave.Models.InputModels.Cart", b =>
                 {
-                    b.HasOne("BookCave.Data.EntityModels.Order")
-                        .WithMany("Books")
-                        .HasForeignKey("OrderId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BookId");
+
+                    b.Property<string>("CartId");
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<int>("count");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("BookCave.Models.InputModels.OrderDetails", b =>
+                {
+                    b.Property<int>("OrderDetailsId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BookId");
+
+                    b.Property<int>("BookQuantity");
+
+                    b.Property<int>("OrderId");
+
+                    b.Property<double>("UnitPrice");
+
+                    b.HasKey("OrderDetailsId");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("BookCave.Models.InputModels.Cart", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BookCave.Models.InputModels.OrderDetails", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BookCave.Data.EntityModels.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
