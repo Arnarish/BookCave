@@ -40,7 +40,7 @@
                         <tr>
                             <td><img src="@book.Image" alt="book-cover" width="80" height="120"></td>
                             <td><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></td> 
-                            <td><a asp-controller="Book" asp-action="AuthorDetails">@book.Author</a></td>
+                            <td><a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@book.BookId">@book.Author</a></td>
                             <td>@book.Genre</td>
                             <td>
                                 <div id="price-of-item-front-page"><b>$@book.Price</b></div>
