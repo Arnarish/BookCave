@@ -1,12 +1,10 @@
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Web;
-namespace BookCave.Data.EntityModels
+using System.Collections.Generic;
+
+namespace BookCave.Models.ViewModels
 {
 
-    public class Book
+    public class BookAndReviewListViewModel
     {
-        [Key]
         public int BookId { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
@@ -16,9 +14,10 @@ namespace BookCave.Data.EntityModels
         public double Price { get; set; }
         public int Stock { get; set; }
         public bool TopSeller { get; set; }
-        public double ReviewScore { get; set; }
         public bool OnSale { get; set; }
         public int Discount { get; set; }
         public string Image { get; set; }
+        public List<ReviewListViewModel> Reviews { get; set;}
+
     }
 }

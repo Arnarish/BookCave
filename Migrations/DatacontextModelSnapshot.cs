@@ -41,6 +41,8 @@ namespace BookCave.Migrations
 
                     b.Property<int>("ReleaseYear");
 
+                    b.Property<double>("ReviewScore");
+
                     b.Property<int>("Stock");
 
                     b.Property<string>("Title");
@@ -50,6 +52,52 @@ namespace BookCave.Migrations
                     b.HasKey("BookId");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Country");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FullName");
+
+                    b.Property<DateTime>("OrderDate");
+
+                    b.Property<string>("PostalCode");
+
+                    b.Property<double>("Total");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.Review", b =>
+                {
+                    b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BookId");
+
+                    b.Property<string>("Comment");
+
+                    b.Property<double>("Rating");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("ReviewId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.User", b =>
@@ -74,6 +122,69 @@ namespace BookCave.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("BookCave.Models.InputModels.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BookId");
+
+                    b.Property<string>("CartId");
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<int>("count");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("BookCave.Models.InputModels.OrderDetails", b =>
+                {
+                    b.Property<int>("OrderDetailsId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BookId");
+
+                    b.Property<int>("BookQuantity");
+
+                    b.Property<int>("OrderId");
+
+                    b.Property<double>("UnitPrice");
+
+                    b.HasKey("OrderDetailsId");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("BookCave.Models.InputModels.Cart", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BookCave.Models.InputModels.OrderDetails", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BookCave.Data.EntityModels.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
