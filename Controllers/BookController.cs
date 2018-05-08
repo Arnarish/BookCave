@@ -31,12 +31,12 @@ namespace BookCave.Controllers
         }
 
         [HttpGet]
-        public IActionResult AuthorDetails(string name)
+        public IActionResult AuthorDetails(string id)
         {
             var books = _bookService.GetAllBooks();
 
             var filteredAuthor = (from b in books
-                            where b.Author == name
+                            where b.Author.ToLower() == id.ToLower()
                             orderby b.ReleaseYear
                             select new BookListViewModel
                             {
@@ -49,7 +49,7 @@ namespace BookCave.Controllers
                                 Image = b.Image
                             }).ToList();
 
-             if(name == null)
+             if(id == null)
             {
                 return View();    
             }

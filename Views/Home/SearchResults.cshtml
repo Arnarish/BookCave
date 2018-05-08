@@ -51,7 +51,7 @@
             <tr>
                 <td><img src="@book.Image" alt="book-cover" width="80" height="120"></td>
                 <td><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></td> 
-                <td><form><a asp-controller="Book" asp-action="AuthorDetails" value="@book.Author" name="name">@book.Author</a></form></td>
+                <td><form><a asp-controller="Book" asp-action="AuthorDetails" value="bingo" name="name">@book.Author</a></form></td>
                 <td>@book.Genre</td>
                 <td>
                     <div id="price-of-item-front-page"><b>$@book.Price</b></div>
