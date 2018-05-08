@@ -1,33 +1,20 @@
-@model BookCave.ViewModels.UserViewModel
+@model BookCave.Models.ViewModels.UserViewModel
 
 
 <h2>Profile info</h2>
 <div>
-    <img src=@Model.Image alt=@Model.FullName>
     <div>
-        <p>Username: @Model.Username</p>
+        <p>Full name: @Model.FullName</p>
         <p>Email @Model.Email</p>
-        <p>Phone: @Model.Phone</p>
         <p>Address: @Model.Address</p>
+        <p>ZIP: @Model.Postal</p>
         <p>Country: @Model.Country</p>
+        <p>Favorite book: @Model.FavoriteBookById</p>
     </div>
-    <button type="button">View all orders</button>
+    <a asp-controller="User" asp-action="OrderHistory"><button type="button">View all orders</button></a>
 </div>
-<h2>Reviews (@Model.Reviews)</h2>
-<div>
-    <table>
-        @foreach(review in Model)
-        {
-            <tr>
-                <td>
-                    <a asp-controller="Book" asp-action="Details" asp-route-id=@review.BookId>@review.Title</a>
-                    <a asp-controller="Book" asp-action="AuthorDetails" asp-route-id=@review.AuthorId>@review.Author</a>
-                    <p>@review.Comment</p>
-                    <p>Rating</p>
-                </td>
-            </tr>
-        }
-    </table>
-</div>
+<h2>Reviews (Model.Reviews)</h2>
+
+
 
 

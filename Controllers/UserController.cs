@@ -14,7 +14,7 @@ namespace BookCave.Controllers
         private UserService _userService;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-
+    
         public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _userService = new UserService();
@@ -24,7 +24,8 @@ namespace BookCave.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+            var user = _userService.GetUser("pepe@live.com");
+            return View(user);
         }
         public IActionResult Register()
         {
