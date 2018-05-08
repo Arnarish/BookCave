@@ -22,5 +22,6 @@ namespace BookCave.Models.InputModels
         public int Postal { get; set; }
         [Required]
         public string Country { get; set; }
+        public bool Admin { get; set; }
     }
 }
