@@ -20,7 +20,7 @@
                 <td id="title-from-top-ten"><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId"><i>@book.Title</i></a></td> 
                 <td>@book.Author</td>
                 <td>@book.ReleaseYear</td>
-                <td>@book.Price</td>
+                <td>$@book.Price</td>
             </tr>
         }
     </table>

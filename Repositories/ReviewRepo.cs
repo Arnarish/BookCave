@@ -13,21 +13,35 @@ namespace BookCave.Repositories
         {
             _db = new Datacontext();
         }
-
-        /*public List<ReviewListViewModel> GetAllReviews()
+        public BookAndReviewListViewModel GetBookWithAllReviews(int id)
         {
-            var reviews = (from a in _db.Reviews
-                            join b in _db.Books on a.BookId equals b.BookId
-                            join u in _db.Users on a.UserId equals u.UserId
-                            select new ReviewListViewModel
-                            {
-                                ReviewId = a.ReviewId,
-                                Comment = a.Comment,
-                                Rating = a.Rating,
-                                UserId = u.UserId,
-                                BookId = b.BookId                                
-                            }).ToList();
-                return reviews;
-        }*/
+            var bookreview = (from m in _db.Books
+                                where id == m.BookId
+                                select new BookAndReviewListViewModel{
+                                BookId = m.BookId,
+                                Title = m.Title,
+                                Author = m.Author,
+                                ReleaseYear = m.ReleaseYear,
+                                Genre = m.Genre,
+                                ISBN = m.ISBN,
+                                Price = m.Price,
+                                Stock = m.Stock,
+                                TopSeller = m.TopSeller,
+                                OnSale = m.OnSale,
+                                Discount = m.Discount,
+                                Image = m.Image,
+                                Reviews = (from a in _db.Reviews
+                                            where m.BookId == a.ReviewId
+                                            select new ReviewListViewModel
+                                            {
+                                                ReviewId = a.ReviewId,
+                                                Comment = a.Comment,
+                                                Rating = a.Rating,
+                                                UserId = a.UserId,
+                                                BookId = a.BookId,
+                                            }).ToList()
+                                }).SingleOrDefault();
+            return bookreview;
+        }
     }
 }

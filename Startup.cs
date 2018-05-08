@@ -51,7 +51,10 @@ namespace BookCave
                     options.AccessDeniedPath = "/User/AccessDenied";
                     options.SlidingExpiration = true;
                 });
-            services.AddMvc();
+            services.AddMvc()
+                .AddSessionStateTempDataProvider();
+
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +71,7 @@ namespace BookCave
 
             app.UseStaticFiles();
             app.UseAuthentication();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

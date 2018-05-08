@@ -6,18 +6,17 @@ namespace BookCave.Services
 {
     public class ReviewService
     {
-        private ReviewRepo _reviewRepo;
-    
+        private ReviewRepo _ReviewRepo;
 
         public ReviewService()
         {
-            _reviewRepo = new ReviewRepo();
+            _ReviewRepo = new ReviewRepo();
         }
-        /*public List<ReviewListViewModel> GetAllReviews()
+        public BookAndReviewListViewModel GetBookWithAllReviews(int id)
         {
-            var reviews = _reviewRepo.GetAllReviews();
+            var book = _ReviewRepo.GetBookWithAllReviews(id);
 
-            return reviews;   
-        }*/
+            return book;
+        }
     }
 }

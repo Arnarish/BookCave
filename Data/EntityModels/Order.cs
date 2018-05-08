@@ -2,14 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Web;
+using BookCave.Models.InputModels;
+
 namespace BookCave.Data.EntityModels
 {
 
-    public class Order
+   public partial class Order
     {
         public int OrderId { get; set; }
-        public List<Book> Books { get; set; }
-        public DateTime Date { get; set; }
-        public int UserId { get; set; }
+        public string Username   { get; set; }
+        public string FullName  { get; set; }
+        public string Address    { get; set; }
+        public string City       { get; set; }
+        public string PostalCode { get; set; }
+        public string Country    { get; set; }
+        public string Email      { get; set; }
+        public double Total     { get; set; }
+        public System.DateTime OrderDate      { get; set; }
+        public List<OrderDetails> OrderDetails { get; set; }
     }
 }

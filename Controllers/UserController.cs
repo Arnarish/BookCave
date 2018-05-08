@@ -14,24 +14,23 @@ namespace BookCave.Controllers
         private UserService _userService;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
     
-        public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userService = new UserService();
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
         [Authorize]
         public IActionResult Index()
         {
-            var user = _userService.GetUser("pepe@live.com");
+            var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
+            var user = _userService.GetUser(claim);
             return View(user);
         }
         public IActionResult Register()
-        {
-            return View();
-        }
-        public IActionResult Profile()
         {
             return View();
         }
@@ -52,11 +51,33 @@ namespace BookCave.Controllers
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
+            IdentityResult roleResult;
+            bool userRoleExists = await _roleManager.RoleExistsAsync("User");
+            if (!userRoleExists)
+            {
+                roleResult = await _roleManager.CreateAsync(new IdentityRole("User"));
+            }
+            IdentityResult roleResult1;
+            bool AdminRoleExists = await _roleManager.RoleExistsAsync("Admin");
+            if (!AdminRoleExists)
+            {
+                roleResult1 = await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+            if (!await _userManager.IsInRoleAsync(user, "User"))
+            {
+                var userResult = await _userManager.AddToRoleAsync(user, "User");
+            }
+            if (model.Admin)
+            {
+                var userResult = await _userManager.AddToRoleAsync(user, "Admin");
+            }
+
             if(result.Succeeded)
             {
                 //The user is Successfully registered
                 // Add the Concatenated first and last name as fullname in claims
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
+                await _userManager.AddClaimAsync(user, new Claim("UserName", $"{model.Email}"));
                 await _signInManager.SignInAsync(user, false);
 
                 _userService.AddUser(model);
