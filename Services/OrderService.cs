@@ -22,7 +22,8 @@ namespace BookCave.Services
             cart.ShoppingCartId = cart.GetCartId(context);
             return cart;
         }
-        public static OrderService orders(Controller controller)
+        // Helper method to simplify shopping cart calls
+        public static OrderService GetCart(Controller controller)
         {
             return GetCart(controller.HttpContext);
         }
@@ -34,12 +35,12 @@ namespace BookCave.Services
             if(CartItem == null)
             {
                 //no items in cart
-                CartItem = new Cart
+                CartItem = new Cart 
                 {
-                  CartId = ShoppingCartId,
-                  BookId = book.BookId,
-                  count = 1,
-                  DateCreated = DateTime.Now  
+                    BookId = book.BookId,
+                    CartId = ShoppingCartId,
+                    count = 1,
+                    DateCreated = DateTime.Now
                 };
                 _StoreDb.Carts.Add(CartItem);
             }
@@ -136,14 +137,17 @@ namespace BookCave.Services
             {
                 if(!string.IsNullOrWhiteSpace(context.User.Identity.Name))
                 {
+                    //context.Session.SetString(CartSessionKey, context.User.Identity.Name);
                     context.Session.SetString(CartSessionKey, context.User.Identity.Name);
                 }
-            }
-            else
-            {
-                //generate a new id from guid
-                Guid tempCartId = Guid.NewGuid();
-                context.Session.SetString(CartSessionKey, tempCartId.ToString());
+                else
+                {
+                    //generate a new id from guid
+                    Guid tempCartId = Guid.NewGuid();
+                    //context.Session.SetString(CartSessionKey, tempCartId.ToString());
+                    context.Session.SetString(CartSessionKey, tempCartId.ToString());
+
+                }
             }
             return context.Session.GetString(CartSessionKey);
         }
