@@ -7,7 +7,7 @@ using BookCave.Models.InputModels;
 namespace BookCave.Data.EntityModels
 {
 
-   public partial class Order
+   public class Order
     {
         public int OrderId { get; set; }
         public string Username   { get; set; }
@@ -18,7 +18,7 @@ namespace BookCave.Data.EntityModels
         public string Country    { get; set; }
         public string Email      { get; set; }
         public double Total     { get; set; }
-        public System.DateTime OrderDate      { get; set; }
+        public DateTime OrderDate      { get; set; }
         public List<OrderDetails> OrderDetails { get; set; }
     }
 }
