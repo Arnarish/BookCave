@@ -27,7 +27,42 @@ namespace BookCave.Controllers
         public IActionResult Index()
         {
             var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
-            var user = _userService.GetUser(claim);
+            var user = _userService.GetUserViewModelByString(claim);
+            return View(user);
+        }
+        public IActionResult EditProfile()
+        {
+            var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
+            var user = _userService.GetUserViewModelByString(claim);
+            return View(user);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditProfile(UserInputModel model)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            await _userManager.ReplaceClaimAsync(user,
+                                                ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "Name"),
+                                                new Claim("Name", $"{model.FullName}"));
+
+            /*((ClaimsIdentity) User.Identity).RemoveClaim(((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "Name"));
+            ((ClaimsIdentity) User.Identity).AddClaim(new Claim("Name", $"{model.FullName}"));*/
+            var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
+            var retUser = _userService.GetUser(claim);
+            _userService.UpdateUser(retUser, model);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult UserDetails(int? id)
+        {
+            var user = _userService.GetUserViewModelById(id);
+            if(user.Email == ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value)
+            {
+                return RedirectToAction("Index");
+            }
+            if(user == null)
+            {
+                return View("AccessDenied");
+            }
             return View(user);
         }
         public IActionResult Register()
@@ -78,8 +113,15 @@ namespace BookCave.Controllers
                 // Add the Concatenated first and last name as fullname in claims
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 await _userManager.AddClaimAsync(user, new Claim("UserName", $"{model.Email}"));
-                await _signInManager.SignInAsync(user, false);
 
+                if(!_signInManager.IsSignedIn(User))
+                {
+                    await _signInManager.SignInAsync(user, false);
+                }
+                if(model.Image == null)
+                {
+                    model.Image = "https://www.freeiconspng.com/uploads/profile-icon-9.png";
+                }
                 _userService.AddUser(model);
 
                 return RedirectToAction("Index", "Home");
@@ -89,6 +131,10 @@ namespace BookCave.Controllers
 
         public IActionResult Login()
         {
+            if(_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "User");
+            }
             return View();
         }
 

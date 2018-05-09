@@ -13,21 +13,20 @@ namespace BookCave.Repositories
         {
             _db = new Datacontext();
         }
-
-        /*public List<ReviewListViewModel> GetAllReviews()
+        public List<ReviewListViewModel> GetAllReviewsByBookID(int? id)
         {
-            var reviews = (from a in _db.Reviews
-                            join b in _db.Books on a.BookId equals b.BookId
-                            join u in _db.Users on a.UserId equals u.UserId
-                            select new ReviewListViewModel
-                            {
-                                ReviewId = a.ReviewId,
-                                Comment = a.Comment,
-                                Rating = a.Rating,
-                                UserId = u.UserId,
-                                BookId = b.BookId                                
-                            }).ToList();
-                return reviews;
-        }*/
+            var bookreview = (from a in _db.Reviews
+                                where id == a.BookId
+                                select new ReviewListViewModel
+                                {
+                                    ReviewId = a.ReviewId,
+                                    Comment = a.Comment,
+                                    Rating = a.Rating,
+                                    UserId = a.UserId,
+                                    BookId = a.BookId,
+                                }).ToList();
+
+            return bookreview;
+        }
     }
 }

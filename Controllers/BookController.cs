@@ -13,10 +13,13 @@ namespace BookCave.Controllers
     public class BookController : Controller    
     {
         private BookService _bookService;
+        private ReviewService _reviewService;
 
+        
         public BookController()
         {
             _bookService = new BookService();
+            _reviewService = new ReviewService();
         }
         public IActionResult Index()
         {
@@ -24,38 +27,45 @@ namespace BookCave.Controllers
             
             return View(books);
         }
+
         public IActionResult Details(int? id)
-        {   
-            var filteredId = _bookService.GetAllBooks().FirstOrDefault(b => b.BookId == id);
-                return View(filteredId);
-        }
-
-        [HttpGet]
-        public IActionResult AuthorDetails(string name)
         {
-            var books = _bookService.GetAllBooks();
-
-            var filteredAuthor = (from b in books
-                            where b.Author == name
-                            orderby b.ReleaseYear
-                            select new BookListViewModel
-                            {
-                                BookId = b.BookId,
-                                Author = b.Author,
-                                Title = b.Title,
-                                ReleaseYear = b.ReleaseYear,
-                                Genre = b.Genre,
-                                Price = b.Price,
-                                Image = b.Image
-                            }).ToList();
-
-             if(name == null)
+            if(id == null)
             {
-                return View();    
+                return View("Index");
             }
-            return View(filteredAuthor);
+            var book = _bookService.GetBookById(id);
+            var reviews = _reviewService.GetAllReviewsByBookID(id);
+            var bookAndReviews = new BookAndReviewListViewModel
+            {
+                BookId = book.BookId,
+                Title = book.Title,
+                Author = book.Author,
+                ReleaseYear = book.ReleaseYear,
+                Genre = book.Genre,
+                ISBN = book.ISBN,
+                Price = book.Price,
+                Stock = book.Stock,
+                TopSeller = book.TopSeller,
+                OnSale = book.OnSale,
+                Discount = book.Discount,
+                Image = book.Image,
+                Reviews = reviews
+            };
+            if(bookAndReviews == null)
+            {
+                return View("Index");
+            }
+            return View(bookAndReviews);
         }
+        
+        public IActionResult AuthorDetails(int? id)
+        {
 
+                var books = _bookService.GetBooksByAuthor(id);
+
+                return View(books);    
+        }
         
     }
 }
