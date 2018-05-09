@@ -23,7 +23,19 @@
             else{
                 <span id="out-of-stock-text">Out of stock</span>
             }
-            $@Model.Price
+            @if (Model.OnSale)
+            {
+                <div id="on-sale-text">
+                    <span id="bookPrice">@Model.Price</span>
+                    <span id="bookDiscount">@Model.Discount</span>
+                    <i>@Model.Discount% discount, original price: @Model.Price</i>
+                    <br>
+                    <span id="priceAfterDiscount"></span>
+                </div>
+            }
+            else{
+                @Model.Price;
+            }
             @if(Model.Stock == 0)
             {
                 <!-- display none -->
@@ -43,9 +55,16 @@
                     </span>
                 </div>
             }
-        <button type="button" class="btn btn-info btn-lg">
-        <span class="glyphicon glyphicon-shopping-cart"></span>
-        </button>
+        
+        @if(@Model.Stock != 0)
+        {
+            <button type="button" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+            </button>
+        }
+        else{
+            <button type="button" class="btn btn-info btn-lg" id="waiting-list-button">Add to waiting list</button>
+        }
     </div>    
 </div>
 
@@ -62,15 +81,16 @@ Ratings here..
         
             <div class="row" id="post-review-box" style="display:none;">
                 <div class="col-md-12">
-                    <form accept-charset="UTF-8" action="" method="post">
+                    <form accept-charset="UTF-8" action="CreateNewReview" method="post">
                         <input id="ratings-hidden" name="rating" type="hidden"> 
                         <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
         
                         <div class="text-right">
-                            <div class="stars starrr" data-rating="0"></div>
+                            <!--<div class="stars starrr" data-rating="0"></div>-->
+                            <input id="number" type="number" value="1" min="1" max="5" >
                             <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
                             <span class="glyphicon glyphicon-remove"></span>Cancel</a>
-                            <button class="btn btn-success btn-lg" type="submit">Save</button>
+                            <button class="btn btn-success btn-lg" type="submit">Submit review</button>
                         </div>
                     </form>
                 </div>

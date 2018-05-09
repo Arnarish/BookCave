@@ -13,6 +13,7 @@ namespace BookCave.Repositories
         {
             _db = new Datacontext();
         }
+        
         public BookAndReviewListViewModel GetBookWithAllReviews(int id)
         {
             var bookreview = (from m in _db.Books

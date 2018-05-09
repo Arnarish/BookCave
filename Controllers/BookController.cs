@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
 using BookCave.Services;
 using BookCave.Models.ViewModels;
+using BookCave.Models.InputModels;
+using BookCave.Data.EntityModels;
 
 namespace BookCave.Controllers
 {
@@ -49,6 +51,24 @@ namespace BookCave.Controllers
 
                 return View(books);    
         }
+        
+        /*[HttpPost]
+        public IActionResult CreateNewReview(ReviewInputModel review)
+        {
+                
+                if(ModelState.IsValid)
+                {
+                    var newReview = new Review(){
+                        Comment = review.Comment,
+                        Rating = review.Rating,
+                        UserId = review.UserId,
+                        BookId = review.BookId
+                };
+                //_db.ReviewRepo.Add(newReview);
+                return RedirectToAction("Details");
+                }
+            return View();
+        } todo*/
         
     }
 }
