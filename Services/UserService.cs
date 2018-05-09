@@ -14,9 +14,13 @@ namespace BookCave.Services
         {
             _userRepo = new UserRepo();
         }
-        public UserViewModel GetUserViewModel(string user)
+        public UserViewModel GetUserViewModelByString(string user)
         {
-            return _userRepo.GetUserViewModel(user);
+            return _userRepo.GetUserViewModelByString(user);
+        }
+        public UserViewModel GetUserViewModelById(int? id)
+        {
+            return _userRepo.GetUserViewModelById(id);
         }
         public User GetUser(string user)
         {
