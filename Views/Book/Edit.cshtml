@@ -1,0 +1,54 @@
+@model BookCave.Models.ViewModels.BookListViewModel
+@{
+    ViewData["Title"] = "Add a book";
+}
+<h1>Edit book</h1>
+<form asp-action="Create" asp-controller="Book" class="form-horizontal" method="POST">
+    <div class="form-group">
+        <input type="text" asp-for="Title" class="form-control" Value="@Model.Title">
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="Author" class="form-control" Value="@Model.Author">
+        <span asp-validation-for="Author" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="number" asp-for="ReleaseYear" class="form-control" Value="@Model.ReleaseYear">
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="Genre" class="form-control" Value="@Model.Genre">
+        <span asp-validation-for="Genre" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="ISBN" class="form-control" Value="@Model.ISBN">
+        <span asp-validation-for="ISBN" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="number" asp-for="Price" class="form-control" Value="@Model.Price">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="Stock" class="form-control" Value="@Model.Stock">
+        <span asp-validation-for="Stock" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" asp-for="TopSeller" class="form-control" Value="@Model.TopSeller">
+        <span asp-validation-for="TopSeller" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" asp-for="OnSale" class="form-control" Value="@Model.OnSale">
+        <span asp-validation-for="OnSale" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="number" asp-for="Discount" class="form-control" Value="@Model.Discount">
+        <span asp-validation-for="Discount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="Image" class="form-control" Value="@Model.Image">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-default" value="Register">
+    </div>
+</form>

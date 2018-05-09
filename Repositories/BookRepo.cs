@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BookCave.Data;
+using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 
 namespace BookCave.Repositories
@@ -135,6 +136,16 @@ namespace BookCave.Repositories
                         Image = b.Image,
                     }).SingleOrDefault();
                     return book;
+        }
+        public void AddBook(Book book)
+        {
+            _db.Add(book);
+            _db.SaveChanges();
+        }
+        public void UpdateBook(Book book)
+        {
+            _db.Update(book);
+            _db.SaveChanges();
         }
     }
 }

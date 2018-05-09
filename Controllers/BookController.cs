@@ -9,6 +9,7 @@ using BookCave.Services;
 using BookCave.Models.ViewModels;
 using BookCave.Models.InputModels;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookCave.Controllers
 {
@@ -63,6 +64,7 @@ namespace BookCave.Controllers
             return View(bookAndReviews);
         }
         [HttpPost]
+        [Authorize]
         public IActionResult Details(ReviewInputModel model)
         {
             if(!ModelState.IsValid)
@@ -83,6 +85,38 @@ namespace BookCave.Controllers
 
                 return View(books);    
         }
-        
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult Create(BookInputModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+            _bookService.AddBook(model);
+            return RedirectToAction("Index", "User");
+        }
+        public IActionResult Edit(int? id)
+        {   
+            var book = _bookService.GetBookById(id);
+            return View(book);
+        }
+        [HttpPost]
+        [Authorize(Roles="Admin")]
+        public IActionResult Edit(BookInputModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+            _bookService.UpdateBook(model);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

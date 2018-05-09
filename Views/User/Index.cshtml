@@ -39,7 +39,7 @@
 @if (this.User.IsInRole("Admin"))
 {
     <div>
-        <button>Add a book</button>
+        <a asp-controller="Book" asp-action="Create"><button>Add a book</button></a>
         <a  asp-controller="User" asp-action="Register"><button>Register a user</button></a>
     </div>
 }

@@ -1,0 +1,55 @@
+@model BookCave.Models.InputModels.BookInputModel
+@{
+    ViewData["Title"] = "Add a book";
+}
+<h1>Add a book</h1>
+<form asp-action="Create" asp-controller="Book" class="form-horizontal" method="POST">
+    <div class="form-group">
+        <input type="text" asp-for="Title" class="form-control" placeholder="Enter Title...">
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="Author" class="form-control" placeholder="Enter Author...">
+        <span asp-validation-for="Author" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="number" asp-for="ReleaseYear" class="form-control" placeholder="Enter Release year...">
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="Genre" class="form-control" placeholder="Enter Genre...">
+        <span asp-validation-for="Genre" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="ISBN" class="form-control" placeholder="Enter ISBN...">
+        <span asp-validation-for="ISBN" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="number" asp-for="Price" class="form-control" placeholder="Enter Price...">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="number" asp-for="Stock" class="form-control" placeholder="Enter amount in Stock...">
+        <span asp-validation-for="Stock" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>
+        <input type="checkbox" asp-for="TopSeller" class="form-control">
+        Top seller</label>
+    </div>
+    <div class="form-group">
+        <label>
+        <input type="checkbox" asp-for="OnSale" class="form-control">
+        On sale</label>
+    </div>
+    <div class="form-group">
+        <input type="number" asp-for="Discount" class="form-control" placeholder="Enter Discount...">
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="Image" class="form-control" placeholder="Enter Image URL...">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-default" value="Create">
+    </div>
+</form>

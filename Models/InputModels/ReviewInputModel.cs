@@ -6,7 +6,6 @@ namespace BookCave.Models.InputModels
 {
     public class ReviewInputModel
     {
-        public int ReviewId { get; set; }
         [Required]
         public string Comment { get; set; }
         [Required]
