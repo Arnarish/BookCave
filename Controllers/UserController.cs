@@ -43,9 +43,6 @@ namespace BookCave.Controllers
             await _userManager.ReplaceClaimAsync(user,
                                                 ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "Name"),
                                                 new Claim("Name", $"{model.FullName}"));
-
-            /*((ClaimsIdentity) User.Identity).RemoveClaim(((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "Name"));
-            ((ClaimsIdentity) User.Identity).AddClaim(new Claim("Name", $"{model.FullName}"));*/
             var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
             var retUser = _userService.GetUser(claim);
             _userService.UpdateUser(retUser, model);
@@ -65,6 +62,7 @@ namespace BookCave.Controllers
             }
             return View(user);
         }
+        //public IActionResult Create
         public IActionResult Register()
         {
             return View();

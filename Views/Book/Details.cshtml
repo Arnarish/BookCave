@@ -81,13 +81,13 @@ Ratings here..
         
             <div class="row" id="post-review-box" style="display:none;">
                 <div class="col-md-12">
-                    <form accept-charset="UTF-8" action="CreateNewReview" method="post">
-                        <input id="ratings-hidden" name="rating" type="hidden"> 
-                        <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
-        
+                    <form asp-action="Details" method="post">
+                        <input id="ratings-hidden" type="hidden"> 
+                        <textarea class="form-control animated" cols="50" id="new-review" name="Comment" placeholder="Enter your review here..." rows="5"></textarea>
+                        <input type="hidden" name="BookId" value="@Model.BookId">
                         <div class="text-right">
                             <!--<div class="stars starrr" data-rating="0"></div>-->
-                            <input id="number" type="number" value="1" min="1" max="5" >
+                            <input id="number" type="number" name="Rating" value="1" min="1" max="5" >
                             <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
                             <span class="glyphicon glyphicon-remove"></span>Cancel</a>
                             <button class="btn btn-success btn-lg" type="submit">Submit review</button>
