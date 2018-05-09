@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using BookCave.Models.InputModels;
 using BookCave.Data.EntityModels;
-using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
 using BookCave.Repositories;
 
