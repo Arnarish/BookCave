@@ -8,7 +8,7 @@ using BookCave.Models;
 using BookCave.Services;
 using BookCave.Models.ViewModels;
 using BookCave.Models.InputModels;
-using BookCave.Data.EntityModels;
+using System.Security.Claims;
 
 namespace BookCave.Controllers
 {
@@ -16,12 +16,14 @@ namespace BookCave.Controllers
     {
         private BookService _bookService;
         private ReviewService _reviewService;
+        private UserService _userService;
 
         
         public BookController()
         {
             _bookService = new BookService();
             _reviewService = new ReviewService();
+            _userService = new UserService();
         }
         public IActionResult Index()
         {
@@ -60,6 +62,19 @@ namespace BookCave.Controllers
             }
             return View(bookAndReviews);
         }
+        [HttpPost]
+        public IActionResult Details(ReviewInputModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("Index");
+            }
+            var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
+            var user = _userService.GetUserViewModelByString(claim);
+            model.UserId = user.UserId;
+            _reviewService.AddReview(model);
+            return RedirectToAction("Details", model.BookId);
+        }
         
         public IActionResult AuthorDetails(int? id)
         {
@@ -68,24 +83,6 @@ namespace BookCave.Controllers
 
                 return View(books);    
         }
-        
-        /*[HttpPost]
-        public IActionResult CreateNewReview(ReviewInputModel review)
-        {
-                
-                if(ModelState.IsValid)
-                {
-                    var newReview = new Review(){
-                        Comment = review.Comment,
-                        Rating = review.Rating,
-                        UserId = review.UserId,
-                        BookId = review.BookId
-                };
-                //_db.ReviewRepo.Add(newReview);
-                return RedirectToAction("Details");
-                }
-            return View();
-        } todo*/
         
     }
 }
