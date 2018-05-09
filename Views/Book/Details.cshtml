@@ -1,5 +1,4 @@
 @model BookCave.Models.ViewModels.BookAndReviewListViewModel
-
 @{
     ViewData["Title"] = "Book details";
 }
@@ -80,3 +79,11 @@ Ratings here..
 		</div>
 	</div>
 </div>
+<table>
+    @foreach(var review in Model.Reviews)
+    {
+        <tr>
+            <td>review.Comment</td>
+        </tr>
+    }
+</table> 
