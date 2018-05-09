@@ -49,6 +49,7 @@ namespace BookCave
             services.AddMvc()
                 .AddSessionStateTempDataProvider();
 
+            services.AddDistributedMemoryCache();
             services.AddSession();
         }
 
