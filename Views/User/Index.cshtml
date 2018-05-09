@@ -8,7 +8,7 @@
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "UserName")?.Value;
 }
 
-<h2>Profile info</h2>
+<h2>Profile info for @Model.FullName</h2>
 <div>
     <div>
         <img src="@Model.Image" alt="@Model.FullName" height="80" width="80">
@@ -39,10 +39,13 @@
 @if (this.User.IsInRole("Admin"))
 {
     <div>
-        <button>Add a book</button>
+        <a asp-controller="Book" asp-action="Create"><button>Add a book</button></a>
         <a  asp-controller="User" asp-action="Register"><button>Register a user</button></a>
     </div>
 }
+
+<h1>Books on waiting list</h1>
+<hr>
 <h2>Reviews (Model.Reviews)</h2>
 
 

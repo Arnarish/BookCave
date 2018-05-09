@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using BookCave.Data.EntityModels;
+using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
 using BookCave.Repositories;
 
@@ -37,6 +39,41 @@ namespace BookCave.Services
         {
             return _bookRepo.GetBookById(id);
         }
-
+        public void AddBook(BookInputModel model)
+        {
+            var book = new Book
+            {
+                Title = model.Title,
+                Author = model.Author,
+                ReleaseYear = model.ReleaseYear,
+                Genre = model.Genre,
+                ISBN = model.ISBN,
+                Price = model.Price,
+                Stock = model.Stock,
+                TopSeller = model.TopSeller,
+                OnSale = model.OnSale,
+                Discount = model.Discount,
+                Image = model.Image,
+            };
+            _bookRepo.AddBook(book);
+        }
+        public void UpdateBook(BookInputModel model)
+        {
+            var book = new Book
+            {
+                Title = model.Title,
+                Author = model.Author,
+                ReleaseYear = model.ReleaseYear,
+                Genre = model.Genre,
+                ISBN = model.ISBN,
+                Price = model.Price,
+                Stock = model.Stock,
+                TopSeller = model.TopSeller,
+                OnSale = model.OnSale,
+                Discount = model.Discount,
+                Image = model.Image,
+            };
+            _bookRepo.UpdateBook(book);
+        }
     }
 }

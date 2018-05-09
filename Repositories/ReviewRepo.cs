@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BookCave.Data;
+using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 
 namespace BookCave.Repositories
@@ -27,6 +28,11 @@ namespace BookCave.Repositories
                                 }).ToList();
 
             return bookreview;
+        }
+        public void AddReview(Review review)
+        {
+            _db.Add(review);
+            _db.SaveChanges();
         }
     }
 }

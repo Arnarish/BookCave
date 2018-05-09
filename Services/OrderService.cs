@@ -41,7 +41,23 @@ namespace BookCave.Services
                     BookId = book.BookId,
                     CartId = ShoppingCartId,
                     count = 1,
-                    DateCreated = DateTime.Now
+                    DateCreated = DateTime.Now,
+                    Book = (from b in _StoreDb.Books where book.BookId == b.BookId
+                    select new Book
+                    {
+                        BookId = b.BookId,
+                        Title = b.Title,
+                        Author = b.Author,
+                        ReleaseYear = b.ReleaseYear,
+                        Genre = b.Genre,
+                        ISBN = b.ISBN,
+                        Price = b.Price,
+                        Stock = b.Stock,
+                        TopSeller = b.TopSeller,
+                        OnSale = b.OnSale,
+                        Discount = b.Discount,
+                        Image = b.Image,
+                    }).SingleOrDefault()
                 };
                 _StoreDb.Carts.Add(CartItem);
             }

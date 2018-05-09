@@ -113,3 +113,46 @@ $(function(){
     ratingsField.val(value);
   });
 });
+
+//discount price javascript
+
+var originalPrice = document.getElementById("bookPrice");
+var Discount = document.getElementById("bookDiscount");
+if(originalPrice != null && Discount != null)
+{
+    var newPrice = document.getElementById("priceAfterDiscount");
+
+    function discountCalculated(cost, disc)
+    {
+        var calculateDiscountOnOriginalPrice = cost * (disc / 100);
+        var finalPrice = cost - calculateDiscountOnOriginalPrice;
+
+        return Number((finalPrice).toFixed(2));
+    }
+
+    total = discountCalculated(originalPrice.innerHTML, Discount.innerHTML);
+    document.onload = originalPrice.style.display= "none";
+    document.onload = Discount.style.display= "none";
+
+    newPrice.innerHTML = total;
+}
+
+//waiting list buttonpres
+
+var waitingButton = document.getElementById("waiting-list-button");
+if(waitingButton != null)
+{
+    waitingButton.addEventListener("click", changeTextForWaitingListButton);
+
+    function changeTextForWaitingListButton()
+    {
+        var newText = "Added to waiting list";
+        waitingButton.innerHTML = newText;
+        waitingButton.removeEventListener("click", changeTextForWaitingListButton);
+    }
+}
+
+
+
+
+
