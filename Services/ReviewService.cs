@@ -12,9 +12,9 @@ namespace BookCave.Services
         {
             _ReviewRepo = new ReviewRepo();
         }
-        public BookAndReviewListViewModel GetBookWithAllReviews(int id)
+        public List<ReviewListViewModel> GetAllReviewsByBookID(int? id)
         {
-            var book = _ReviewRepo.GetBookWithAllReviews(id);
+            var book = _ReviewRepo.GetAllReviewsByBookID(id);
 
             return book;
         }

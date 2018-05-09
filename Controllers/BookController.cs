@@ -34,12 +34,29 @@ namespace BookCave.Controllers
             {
                 return View("Index");
             }
-            var book = _reviewService.GetBookWithAllReviews(id.Value);
-            if(book == null)
+            var book = _bookService.GetBookById(id);
+            var reviews = _reviewService.GetAllReviewsByBookID(id);
+            var bookAndReviews = new BookAndReviewListViewModel
+            {
+                BookId = book.BookId,
+                Title = book.Title,
+                Author = book.Author,
+                ReleaseYear = book.ReleaseYear,
+                Genre = book.Genre,
+                ISBN = book.ISBN,
+                Price = book.Price,
+                Stock = book.Stock,
+                TopSeller = book.TopSeller,
+                OnSale = book.OnSale,
+                Discount = book.Discount,
+                Image = book.Image,
+                Reviews = reviews
+            };
+            if(bookAndReviews == null)
             {
                 return View("Index");
             }
-            return View(book);
+            return View(bookAndReviews);
         }
         
         public IActionResult AuthorDetails(int? id)
