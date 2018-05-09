@@ -1,8 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using BookCave.Data.EntityModels;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BookCave.Models.InputModels
+namespace BookCave.Data.EntityModels
 {
     public class Cart
     {
@@ -12,6 +12,7 @@ namespace BookCave.Models.InputModels
         public int BookId { get; set; }
         public int count { get; set; }
         public DateTime DateCreated  { get; set; }
+        [ForeignKey("BookId")]
         public virtual Book Book { get; set; }
     }
 }

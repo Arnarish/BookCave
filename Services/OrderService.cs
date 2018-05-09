@@ -3,6 +3,7 @@ using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,8 +102,15 @@ namespace BookCave.Services
         }
         public List<Cart> GetCartItems()
         {
-            return _StoreDb.Carts.Where(
-                        cart => cart.CartId == ShoppingCartId).ToList();
+            var item = _StoreDb.Carts.Where(
+                        cart => cart.CartId == ShoppingCartId)
+                        //.Include("Books")
+                        .ToList();
+            foreach ( var c in item ) {
+                var book = _StoreDb.Books.Where( b => b.BookId == c.BookId ).Single();
+                c.Book = book;
+            }
+            return item;
         }
         public int GetCount()
         {
