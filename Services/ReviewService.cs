@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using BookCave.Models.InputModels;
 using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
@@ -20,6 +22,13 @@ namespace BookCave.Services
 
             return book;
         }
+
+        /*internal void AddReview(ReviewInputModel model)
+        {
+            throw new NotImplementedException();
+        }
+            return book;
+        }*/
         public void AddReview(ReviewInputModel model)
         {
             var review = new Review

@@ -69,7 +69,13 @@
 </div>
 
 <br>
-Ratings here..
+Ratings here
+    <ul>
+     @foreach(var review in Model.Reviews)
+    {
+        <li class="ratings-gathered">@review.Rating</li>
+    }
+    </ul>
 <hr>
 <div class="container">
 	<div class="row" style="margin-top:40px;">
