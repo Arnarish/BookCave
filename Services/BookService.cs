@@ -18,5 +18,21 @@ namespace BookCave.Services
 
             return books;
         }
+        public List<BookListViewModel> GetBooksByAuthor(int? id)
+        {
+            return _bookRepo.GetBooksByAuthor(id);
+        }
+        public List<BookListViewModel> GetThreeBooksByRandom()
+        {
+            var randomizedBooks = _bookRepo.GetThreeBooksByRandom();
+            
+            return randomizedBooks;
+        }
+
+        public List<BookListViewModel> SearchResults(string searchString, string genre)
+        {
+            return _bookRepo.SearchResults(searchString, genre);
+        }
+
     }
 }

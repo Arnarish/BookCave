@@ -18,7 +18,7 @@
             <tr>
                 <td><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId"><img src="@book.Image" alt="coverimage" width="80" height="120"></a></td>
                 <td id="title-from-top-ten"><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId"><i>@book.Title</i></a></td> 
-                <td>@book.Author</td>
+                <td><a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@book.BookId">@book.Author</a></td>
                 <td>@book.ReleaseYear</td>
                 <td>$@book.Price</td>
             </tr>

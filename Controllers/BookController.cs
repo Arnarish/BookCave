@@ -27,11 +27,7 @@ namespace BookCave.Controllers
             
             return View(books);
         }
-        /*public IActionResult Details(int? id)
-        {   
-            var filteredId = _bookService.GetAllBooks().FirstOrDefault(b => b.BookId == id);
-                return View(filteredId);
-        }*/
+
         public IActionResult Details(int? id)
         {
             if(id == null)
@@ -46,33 +42,13 @@ namespace BookCave.Controllers
             return View(book);
         }
         
-
-        [HttpGet]
-        public IActionResult AuthorDetails(string name)
+        public IActionResult AuthorDetails(int? id)
         {
-            var books = _bookService.GetAllBooks();
 
-            var filteredAuthor = (from b in books
-                            where b.Author == name
-                            orderby b.ReleaseYear
-                            select new BookListViewModel
-                            {
-                                BookId = b.BookId,
-                                Author = b.Author,
-                                Title = b.Title,
-                                ReleaseYear = b.ReleaseYear,
-                                Genre = b.Genre,
-                                Price = b.Price,
-                                Image = b.Image
-                            }).ToList();
+                var books = _bookService.GetBooksByAuthor(id);
 
-             if(name == null)
-            {
-                return View();    
-            }
-            return View(filteredAuthor);
+                return View(books);    
         }
-
         
     }
 }
