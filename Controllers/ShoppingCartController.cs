@@ -10,18 +10,18 @@ namespace BookCave.Controllers
     public class ShoppingCartController : Controller
     {
         private Datacontext _StoreDb = new Datacontext();
-        
+
+
         //get shopping cart
-        public IActionResult index()
+        public IActionResult Index()
         {
             var cart = OrderService.GetCart(this.HttpContext);
-
             var viewModel = new ShoppingCartViewModel
             {
               CartItems = cart.GetCartItems(),
               CartTotal = cart.GetTotal()
             };
-            //return entire cart
+            //return entire cart viewModel
             return View(viewModel);
         }
 

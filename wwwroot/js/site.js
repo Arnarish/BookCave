@@ -137,7 +137,7 @@ if(originalPrice != null && Discount != null)
     newPrice.innerHTML = total;
 }
 
-//waiting list buttonpres
+//waiting list buttonpress
 
 var waitingButton = document.getElementById("waiting-list-button");
 if(waitingButton != null)
@@ -152,7 +152,23 @@ if(waitingButton != null)
     }
 }
 
+//calculating ratings
+var ratings = document.getElementsByClassName("ratings-gathered");
+var ratingsList = document.getElementById("list-of-ratings");
 
+if(ratingsList != null){
+    document.onload = ratingsList.style.display= "none";
+    var sum = 0;
+
+    for(var i = 0; i < ratings.length; i++){
+        var sum = sum + parseFloat(ratings[i].innerHTML);
+    }
+
+    var ratingAverage = Number((sum / ratings.length).toFixed(1));
+
+    var getAverage = document.getElementById("average-value");
+    getAverage.innerHTML = ratingAverage;
+}
 
 
 
