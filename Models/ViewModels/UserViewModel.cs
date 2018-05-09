@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace BookCave.Models.ViewModels
 {
     public class UserViewModel
@@ -11,5 +13,6 @@ namespace BookCave.Models.ViewModels
         public int Postal { get; set; }
         public string FavoriteBook { get; set; }
         public int FavoriteBookId { get; set; }
+        public List <BookListViewModel> WaitingListBooks { get; set; }
     }
 }

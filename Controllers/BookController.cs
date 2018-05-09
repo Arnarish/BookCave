@@ -118,5 +118,12 @@ namespace BookCave.Controllers
             _bookService.UpdateBook(model);
             return RedirectToAction("Index", "Home");
         }
+        public IActionResult AddBookToWaitingList(int? id)
+        {
+
+            var book = _bookService.GetBookById(id);
+            
+            return View();
+        }
     }
 }
