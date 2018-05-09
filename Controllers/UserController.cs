@@ -39,6 +39,10 @@ namespace BookCave.Controllers
         [HttpPost]
         public IActionResult EditProfile(UserInputModel model)
         {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
             var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
             var user = _userService.GetUser(claim);
             _userService.UpdateUser(user, model);
