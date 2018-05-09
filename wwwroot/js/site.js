@@ -115,12 +115,11 @@ $(function(){
 });
 
 //discount price javascript
-while (originalPrice != null && Discount != null)
+
+var originalPrice = document.getElementById("bookPrice");
+var Discount = document.getElementById("bookDiscount");
+if(originalPrice != null && Discount != null)
 {
-    var originalPrice = document.getElementById("bookPrice");
-
-    var Discount = document.getElementById("bookDiscount");
-
     var newPrice = document.getElementById("priceAfterDiscount");
 
     function discountCalculated(cost, disc)
@@ -137,18 +136,21 @@ while (originalPrice != null && Discount != null)
 
     newPrice.innerHTML = total;
 }
-//waiting list buttonpress
+
+//waiting list buttonpres
 
 var waitingButton = document.getElementById("waiting-list-button");
-waitingButton.addEventListener("click", changeTextForWaitingListButton);
-
-function changeTextForWaitingListButton()
+if(waitingButton != null)
 {
-    var newText = "Added to waiting list";
-    waitingButton.innerHTML = newText;
-    waitingButton.removeEventListener("click", changeTextForWaitingListButton);
-}
+    waitingButton.addEventListener("click", changeTextForWaitingListButton);
 
+    function changeTextForWaitingListButton()
+    {
+        var newText = "Added to waiting list";
+        waitingButton.innerHTML = newText;
+        waitingButton.removeEventListener("click", changeTextForWaitingListButton);
+    }
+}
 
 
 

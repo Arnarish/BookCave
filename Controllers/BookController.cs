@@ -68,6 +68,14 @@ namespace BookCave.Controllers
 
                 return View(books);    
         }
+
+        public IActionResult AddBookToWaitingList(int? id)
+        {
+
+            var book = _bookService.GetBookById(id);
+            
+            return View();
+        }
         
         /*[HttpPost]
         public IActionResult CreateNewReview(ReviewInputModel review)
