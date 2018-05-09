@@ -70,22 +70,6 @@
 </div>
 
 <br>
-<ul id="list-of-ratings">
-     @foreach(var review in Model.Reviews)
-    {
-        <li class="ratings-gathered">@review.Rating</li>
-    }
-    </ul>
-    <h2>Average rating: <span id="average-value"></span></h2>
-<hr>
-
-<ul id="list-of-reviews">
-    @foreach(var review in Model.Reviews)
-    {
-        
-    }
-
-</ul>
 
 <div class="container">
 	<div class="row" style="margin-top:40px;">
@@ -119,3 +103,28 @@
 <div>
     <a class="btn btn-primary" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.BookId">Edit this book</a>
 </div>
+<hr>
+<br>
+<fieldset class="form-group">
+    <legend>Reviews</legend>
+    <ul id="list-of-ratings">
+        @foreach(var review in Model.Reviews)
+        {
+            <li class="ratings-gathered">@review.Rating</li>
+        }
+        </ul>
+        <h2>Average rating: <span id="average-value"></span></h2>
+    <div>
+        <ul id="list-of-reviews">
+            @foreach(var review in Model.Reviews)
+            {
+                <li class="review-block">
+                @review.UserId,
+                @review.Rating,
+                @review.Comment
+                </li>
+            }
+
+        </ul>
+    </div>
+</fieldset>
