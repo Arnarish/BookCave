@@ -29,7 +29,10 @@ namespace BookCave.Repositories
                         Address = u.Address,
                         Country = u.Country,
                         Postal = u.Postal,
-                        FavoriteBookById = u.FavoriteBookById
+                        FavoriteBookId = u.FavoriteBookById,
+                        FavoriteBook = (from b in _db.Books
+                                        where b.BookId == u.FavoriteBookById
+                                        select b.Title).SingleOrDefault()
                     }).SingleOrDefault();    
 
                     return retUser;      

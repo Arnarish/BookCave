@@ -107,6 +107,10 @@ namespace BookCave.Controllers
 
         public IActionResult Login()
         {
+            if(_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "User");
+            }
             return View();
         }
 
