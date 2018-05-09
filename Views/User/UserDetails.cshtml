@@ -1,12 +1,4 @@
 @model BookCave.Models.ViewModels.UserViewModel
-@using Microsoft.AspNetCore.Identity
-@using System.Security.Claims
-
-@inject SignInManager<ApplicationUser> SignInManager
-
-@{
-    var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "UserName")?.Value;
-}
 
 <h2>Profile info</h2>
 <div>
@@ -27,23 +19,10 @@
            {
                 <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.FavoriteBookId">@Model.FavoriteBook</a>
            } 
-            </p>  
-        @if(claim == Model.Email)
-        {
-            <a asp-controller="User" asp-action="OrderHistory"><button type="button">View all orders</button></a>
-            <a asp-controller="User" asp-action="EditProfile">Manage profile</a>
-        }
+            </p>           
     </div>
     
 </div>
-@if (this.User.IsInRole("Admin"))
-{
-    <div>
-        <button>Add a book</button>
-        <a  asp-controller="User" asp-action="Register"><button>Register a user</button></a>
-    </div>
-}
-
 <h2>Reviews (Model.Reviews)</h2>
 
 
