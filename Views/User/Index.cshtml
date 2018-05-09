@@ -16,7 +16,7 @@
         <p>Address: @Model.Address</p>
         <p>ZIP: @Model.Postal</p>
         <p>Country: @Model.Country</p>
-        <p>Favorite book: @Model.FavoriteBookById</p>
+        <p>Favorite book: <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.FavoriteBookId">@Model.FavoriteBook</a></p>
         @if(claim == Model.Email)
         {
             <a asp-controller="User" asp-action="OrderHistory"><button type="button">View all orders</button></a>

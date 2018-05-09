@@ -9,6 +9,7 @@ namespace BookCave.Models.ViewModels
         public string Address { get; set; }
         public string Country { get; set; }
         public int Postal { get; set; }
-        public int FavoriteBookById { get; set; }
+        public string FavoriteBook { get; set; }
+        public int FavoriteBookId { get; set; }
     }
 }

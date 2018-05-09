@@ -33,6 +33,10 @@ namespace BookCave.Services
         {
             return _bookRepo.SearchResults(searchString, genre);
         }
+        public BookListViewModel GetBookById(int? id)
+        {
+            return _bookRepo.GetBookById(id);
+        }
 
     }
 }
