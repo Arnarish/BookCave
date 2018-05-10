@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using BookCave.Data.EntityModels;
 
-namespace BookCave.Models.InputModels
+namespace BookCave.Data.EntityModels
 {
     public class OrderDetails
     {
@@ -10,7 +11,9 @@ namespace BookCave.Models.InputModels
         public int BookId { get; set; }
         public int BookQuantity { get; set; }
         public double UnitPrice { get; set; }
-        public virtual Book Book { get; set; }
+        [ForeignKey("BookId")]
+        public virtual Book Books { get; set; }
+        [ForeignKey("OrderId")]
         public virtual Order Order { get; set; }
     }
 }

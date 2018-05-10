@@ -3,6 +3,7 @@ using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,10 +38,10 @@ namespace BookCave.Services
                 //no items in cart
                 CartItem = new Cart 
                 {
-                    BookId = book.BookId,
                     CartId = ShoppingCartId,
+                    BookId = book.BookId,
                     count = 1,
-                    DateCreated = DateTime.Now
+                    DateCreated = DateTime.Now,
                 };
                 _StoreDb.Carts.Add(CartItem);
             }
@@ -54,7 +55,7 @@ namespace BookCave.Services
         public int RemoveFromCart(int id)
         {
             //get the cart
-            var cartitem = _StoreDb.Carts.Single(
+            var cartitem = _StoreDb.Carts.SingleOrDefault(
                             cart => cart.CartId == ShoppingCartId
                             && cart.BookId == id);
             int itemcount = 0;
@@ -85,8 +86,15 @@ namespace BookCave.Services
         }
         public List<Cart> GetCartItems()
         {
-            return _StoreDb.Carts.Where(
-                        cart => cart.CartId == ShoppingCartId).ToList();
+            var item = _StoreDb.Carts.Where(
+                        cart => cart.CartId == ShoppingCartId)
+                        //.Include("Books")
+                        .ToList();
+            foreach ( var c in item ) {
+                var book = _StoreDb.Books.Where( b => b.BookId == c.BookId ).Single();
+                c.Book = book;
+            }
+            return item;
         }
         public int GetCount()
         {

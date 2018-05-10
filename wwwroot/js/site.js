@@ -115,12 +115,11 @@ $(function(){
 });
 
 //discount price javascript
-while (originalPrice != null && Discount != null)
+
+var originalPrice = document.getElementById("bookPrice");
+var Discount = document.getElementById("bookDiscount");
+if(originalPrice != null && Discount != null)
 {
-    var originalPrice = document.getElementById("bookPrice");
-
-    var Discount = document.getElementById("bookDiscount");
-
     var newPrice = document.getElementById("priceAfterDiscount");
 
     function discountCalculated(cost, disc)
@@ -137,20 +136,65 @@ while (originalPrice != null && Discount != null)
 
     newPrice.innerHTML = total;
 }
+
 //waiting list buttonpress
 
 var waitingButton = document.getElementById("waiting-list-button");
-waitingButton.addEventListener("click", changeTextForWaitingListButton);
-
-function changeTextForWaitingListButton()
+if(waitingButton != null)
 {
-    var newText = "Added to waiting list";
-    waitingButton.innerHTML = newText;
-    waitingButton.removeEventListener("click", changeTextForWaitingListButton);
+    waitingButton.addEventListener("click", changeTextForWaitingListButton);
+
+    function changeTextForWaitingListButton()
+    {
+        var newText = "Added to waiting list";
+        waitingButton.innerHTML = newText;
+        waitingButton.removeEventListener("click", changeTextForWaitingListButton);
+    }
 }
 
+//calculating ratings
+var ratings = document.getElementsByClassName("ratings-gathered");
+var ratingsList = document.getElementById("list-of-ratings");
 
+if(ratingsList != null){
+    document.onload = ratingsList.style.display= "none";
+    var sum = 0;
 
+    for(var i = 0; i < ratings.length; i++){
+        var sum = sum + parseFloat(ratings[i].innerHTML);
+    }
+
+    var ratingAverage = Number((sum / ratings.length).toFixed(1));
+
+    if(!(ratingAverage >= 1 && ratingAverage <= 5)){
+        ratingAverage = "Not ratings yet";
+    }
+
+    var getAverage = document.getElementById("average-value");
+    getAverage.innerHTML = ratingAverage;
+}
+
+$(function () {
+    $(".RemoveLink").click(function () {
+        // Get the id from the link
+        var recordToDelete = $(this).attr("data-id");
+        if (recordToDelete != '') {
+            // Perform the ajax post
+            $.post("/ShoppingCart/RemoveFromCart", {"id": recordToDelete },
+                function (data) {
+                    // Successful requests get here
+                    // Update the page elements
+                    if (data.ItemCount == 0) {
+                        $('#row-' + data.DeleteId).fadeOut('slow');
+                    } else {
+                        $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                    }
+                    $('#cart-total').text(data.CartTotal);
+                    $('#cart-status').text('Cart (' + data.CartCount + ')');
+                });
+        }
+    });
+});
 
 
 

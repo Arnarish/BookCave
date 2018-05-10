@@ -66,7 +66,6 @@ namespace BookCave.Controllers
             }
             return View(user);
         }
-        //public IActionResult Create
         public IActionResult Register()
         {
             return View();

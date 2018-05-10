@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BookCave.Data;
+using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 
 namespace BookCave.Repositories
@@ -115,26 +116,22 @@ namespace BookCave.Repositories
                             }).ToList();
             return bookSearch;
         }
-        public BookListViewModel GetBookById(int? id)
+        public Book GetBookById(int? id)
         {
             var book = (from b in _db.Books
                     where id == b.BookId
-                    select new BookListViewModel
-                    {
-                        BookId = b.BookId,
-                        Title = b.Title,
-                        Author = b.Author,
-                        ReleaseYear = b.ReleaseYear,
-                        Genre = b.Genre,
-                        ISBN = b.ISBN,
-                        Price = b.Price,
-                        Stock = b.Stock,
-                        TopSeller = b.TopSeller,
-                        OnSale = b.OnSale,
-                        Discount = b.Discount,
-                        Image = b.Image,
-                    }).SingleOrDefault();
+                    select b).SingleOrDefault();
                     return book;
+        }
+        public void AddBook(Book book)
+        {
+            _db.Add(book);
+            _db.SaveChanges();
+        }
+        public void UpdateBook(Book book)
+        {
+            _db.Update(book);
+            _db.SaveChanges();
         }
     }
 }
