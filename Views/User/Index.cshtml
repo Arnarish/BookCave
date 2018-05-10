@@ -56,13 +56,22 @@
     <legend>Reviews: (@Model.Reviews.Count())</legend>
 
     <div>
-        <ul id="list-of-reviews">
+        <ul type="NONE" id="list-of-reviews">
             @foreach(var review in Model.Reviews)
             {
+                <hr>
                 <li class="review-block">
-                @review.Rating,
-                @review.Comment
+                <a asp-controller="Book" asp-action="Details" asp-route-id="@review.Book.BookId">
+                    <img src="@review.Book.Image" alt="@review.Book.Title" width="80" height="80">
+                </a>
+                <span>book: <a asp-controller="Book" asp-action="Details" asp-route-id="@review.Book.BookId">@review.Book.Title</a></span>
+                <span>Rating: @review.Rating</span>
+                <div>
+                    <h4>Comment:</h4>
+                    <span>@review.Comment</span>
+                </div>
                 </li>
+                
             }
         </ul>
     </div>
