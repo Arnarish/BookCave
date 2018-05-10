@@ -37,6 +37,10 @@ namespace BookCave.Services
         {
             return _OrderRep.RemoveFromCart(id, this.ShoppingCartId);
         }
+        public int RemoveAllFromCart(int id)
+        {
+            return _OrderRep.RemoveAllFromCart(id, this.ShoppingCartId);
+        }
         public void EmptyCart()
         {
             _OrderRep.EmptyCart(this.ShoppingCartId);
