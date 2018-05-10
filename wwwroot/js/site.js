@@ -196,5 +196,16 @@ $(function () {
     });
 });
 
+//change favorite book
 
-
+$("#change-favorite-book").click(function(){
+    var id = $("#BookId").val();
+    console.log(id);
+    $.post("/User/ChangeFavoriteBook/"+ id, id, function(data, status){
+        console.log(id);
+    })
+    .fail(function(err){
+        alert("something went wrong");
+        console.log(err);
+    });
+});

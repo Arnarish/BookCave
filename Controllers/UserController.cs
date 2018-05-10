@@ -52,6 +52,14 @@ namespace BookCave.Controllers
             _userService.UpdateUser(retUser, model);
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public IActionResult ChangeFavoriteBook(int id)
+        {
+            var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
+            var user = _userService.GetUser(claim);
+            _userService.ChangeFavoriteBook(user, id);
+            return Ok();
+        }
 
         public IActionResult UserDetails(int? id)
         {
@@ -150,6 +158,7 @@ namespace BookCave.Controllers
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
             if(result.Succeeded)
             {
+                MigrateShoppingCart(model.Email.ToString());
                 return RedirectToAction("Index", "Home");
             }
             return View();
@@ -166,6 +175,16 @@ namespace BookCave.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        private void MigrateShoppingCart(string UserName)
+        {
+            var cart = OrderService.GetCart(this.HttpContext);
+
+            cart.MigrateCart(UserName);
+            this.HttpContext.Session.Clear();
+            cart.SetCartId(this.HttpContext);
+            
         }
     }
 }
