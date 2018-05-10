@@ -20,7 +20,7 @@
     <div class="view-box-book-details" id="right-view-box">
             @if (Model.Stock != 0)
             {
-                <span id="in-stock-text">In stock</span>
+                <span id="in-stock-text">In stock: @Model.Stock</span>
             }
             else{
                 <span id="out-of-stock-text">Out of stock</span>
@@ -36,7 +36,7 @@
                 </div>
             }
             else{
-                @Model.Price;
+                <span>Price: @Model.Price</span>
             }
             @if(Model.Stock == 0)
             {
@@ -62,7 +62,7 @@
     <input type="hidden" id="BookId" value="@Model.BookId">
     @if (this.User.IsInRole("Admin"))
     {
-        <button type="button" class="btn btn-primary" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.BookId">Edit this book</button>
+        <a class="btn btn-primary" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.BookId">Edit this book</a>
         <button type="button" class="btn btn-danger" id="remove-book">Remove book</button>
 
     }
@@ -113,14 +113,22 @@
         </ul>
         <h2>Average rating: <span id="average-value"></span></h2>
     <div>
-        <ul id="list-of-reviews">
+        <ul type="NONE" id="list-of-reviews">
             @foreach(var review in Model.Reviews)
             {
+                <hr>
                 <li class="review-block">
-                <a asp-controller="User" asp-action="UserDetails" asp-route-id="@review.User.UserId">@review.User.FullName</a>,
-                @review.Rating,
-                @review.Comment
+                <a asp-controller="User" asp-action="UserDetails" asp-route-id="@review.User.UserId">
+                    <img src="@review.User.Image" alt="@review.User.FullName" width="40" height="40">
+                </a>
+                <span>Made by: <a asp-controller="User" asp-action="UserDetails" asp-route-id="@review.User.UserId">@review.User.FullName</a></span>
+                <span>Rating: @review.Rating</span>
+                <div>
+                    <h4>Comment:</h4>
+                    <span>@review.Comment</span>
+                </div>
                 </li>
+                
             }
 
         </ul>
