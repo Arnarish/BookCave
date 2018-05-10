@@ -103,7 +103,8 @@ Ratings here..
     @foreach(var review in Model.Reviews)
     {
         <tr>
-            <td>review.Comment</td>
+            <td>@review.Comment</td>
+            <td>@review.Rating</td>
         </tr>
     }
 </table> 
