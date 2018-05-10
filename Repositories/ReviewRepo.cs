@@ -39,5 +39,24 @@ namespace BookCave.Repositories
             _db.Add(review);
             _db.SaveChanges();
         }
+        public List<ReviewListViewModel> GetAllReviewsByUserID(int UserId)
+        {
+            var userReviews = (from a in _db.Reviews
+                                where UserId == a.UserId
+                                select new ReviewListViewModel
+                                {
+                                    ReviewId = a.ReviewId,
+                                    Comment = a.Comment,
+                                    Rating = a.Rating,
+                                    UserId = a.UserId,
+                                    BookId = a.BookId,
+                                }).ToList();
+            foreach (var r in userReviews)
+            {
+                var book = _db.Books.Where( u => u.BookId == r.BookId).Single();
+                r.Book = book;
+            }
+            return userReviews;
+        }
     }
 }

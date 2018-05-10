@@ -49,5 +49,15 @@ namespace BookCave.Services
             user.Postal = model.Postal;
             _userRepo.UpdateUser(user);
         }
+        public void ChangeFavoriteBook(User user, int? id)
+        {
+            if(id == null)
+            {
+                return;
+            }
+            user.FavoriteBookById = id.Value;
+            _userRepo.ChangeFavoriteBook(user);
+
+        }
     }
 }

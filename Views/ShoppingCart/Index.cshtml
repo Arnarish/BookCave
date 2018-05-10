@@ -6,7 +6,7 @@
 <h3>
     <em>Review</em> Your Cart:
 </h3>
-<p class="button">@Html.ActionLink("Checkout >>", "AddressAndPayment", "Checkout")</p>
+<p class="button">@Html.ActionLink("Checkout >>", "Checkout", "Checkout")</p>
 <div id="update-message">
 </div>
 
@@ -27,12 +27,12 @@
             @item.Book.Price
             </td>
             <td id="item-count-@item.BookId">
+            <button id="dec" class="btn" type="button">-</button>
             @item.count
+            <button id="inc" class="btn" type="button">+</button>
             </td>
             <td>
-                <a href="#" class="RemoveLink"
-                data-id="@item.BookId">Remove
-                from cart</a>
+                <a class="RemoveLink" id="@item.BookId">Remove from cart</a>
             </td>
         </tr>
     }
