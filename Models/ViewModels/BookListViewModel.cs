@@ -10,6 +10,7 @@ namespace BookCave.Models.ViewModels
         public string Genre { get; set; }
         public string ISBN { get; set; }
         public double Price { get; set; }
+        public double ReviewScore { get; set; }
         public int Stock { get; set; }
         public bool TopSeller { get; set; }
         public bool OnSale { get; set; }

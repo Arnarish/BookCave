@@ -12,5 +12,7 @@ namespace BookCave.Models.InputModels
         public double Rating { get; set; }
         public int UserId { get; set; }
         public int BookId { get; set; }
+        public double BookAverageRating { get; set; }
+        public int AmountOfRatings { get; set; }
     }
 }

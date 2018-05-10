@@ -50,6 +50,7 @@ namespace BookCave.Controllers
                 ISBN = book.ISBN,
                 Price = book.Price,
                 Stock = book.Stock,
+                ReviewScore = book.ReviewScore,
                 TopSeller = book.TopSeller,
                 OnSale = book.OnSale,
                 Discount = book.Discount,

@@ -44,7 +44,7 @@ namespace BookCave.Controllers
         
         public IActionResult TopTen()
         {
-            var topTenBooks = _bookService.GetAllBooks().Take(10).ToList();
+            var topTenBooks = _bookService.GetTopTenBooks();
 
             return View(topTenBooks);
 
