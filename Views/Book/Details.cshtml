@@ -1,9 +1,6 @@
 @model BookCave.Models.ViewModels.BookAndReviewListViewModel
-<<<<<<< HEAD
-=======
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
->>>>>>> a293c6591fab23e1c47078b0ac6615fef15eb81f
 @{
     ViewData["Title"] = "Book details";
 }
@@ -11,12 +8,12 @@
 <!--Todo-->
 <div class="central-container">
     <div class="view-box-book-details" id="left-view-box">
-        <h2><i>@Model.Title</i></h2>
-        <img src="@Model.Image" alt="coverimage" width="160" height="240"></a>
+        <h1><i>@Model.Title</i></h1>
+        <img id="Details-photo" src="@Model.Image" alt="coverimage" width="160" height="240"></a>
         <ul class="left-view-box-details-list">
-            <li>@Model.Author</li>
-            <li>@Model.Genre</li> 
-            <li>@Model.ISBN</li>
+            <li><h2>By: <a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@Model.BookId">@Model.Author</a><h2></li>
+            <li class="list-group-item"> Genre: @Model.Genre</li> 
+            <li class="list-group-item"> ISBN: @Model.ISBN</li>
         </ul>
     </div>
     <div class="view-box-book-details" id="right-view-box">
@@ -44,21 +41,7 @@
             {
                 <!-- display none -->
             }
-            else{
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
-                        <span class="glyphicon glyphicon-minus"></span>
-                            </button>
-                    </span>
-                    <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="100">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                        <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                    </span>
-                </div>
-            }
+            
         
         @if(@Model.Stock != 0)
         {
