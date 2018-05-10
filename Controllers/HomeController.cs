@@ -21,7 +21,7 @@ namespace BookCave.Controllers
         }
         public IActionResult Index()
         {
-            var randomizedBooks = _bookService.GetThreeBooksByRandom();
+            var randomizedBooks = _bookService.GetBooksByRandom();
                                     
             return View(randomizedBooks);
         }
