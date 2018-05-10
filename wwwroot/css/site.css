@@ -89,11 +89,15 @@
 
 #random-good-reads
 {
-    width: 65%;
+    background-color: rgb(245, 245, 245);
+    border-radius: 25px;
+    width: 75%;
     margin: auto;
+    text-align: center;
 }
 .individual-books-in-random
 {
-    border: black solid 1px;
+    text-align: center;
     display:inline-block;
+    list-style-type: none;
 }

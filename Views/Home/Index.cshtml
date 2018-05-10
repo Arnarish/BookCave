@@ -7,7 +7,7 @@
     <h1>Welcome to Book Cave</h1> 
     <p><i>The Internet's busiest book shop</i></p> 
 </div>
-<hr>
+
 <div class="search-bar">
     <h3><b>Search for a book</b></h3>
     <form method="get" id="front-page-search" asp-action="SearchResults">
@@ -31,25 +31,23 @@
 
 <div id="random-good-reads">
     <form>
-        <fieldset>
-            <legend>Random good reads</legend>
-            <div id="random-books">
-                    @foreach(var book in Model)
-                {
-                    <ul class="individual-books-in-random">
-                        <li><img src="@book.Image" alt="book-cover" width="80" height="120"></li>
-                        <li><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></li> 
-                        <li><a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@book.BookId">@book.Author</a></li>
-                        <li>@book.Genre</li>
-                        <li>
-                            <div id="price-of-item-front-page"><b>$@book.Price</b></div>
-                                <button type="button" class="btn btn-info btn-lg" class="add-to-cart-button">
-                                    <a class="glyphicon glyphicon-shopping-cart" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@book.BookId"></a>
-                                </button>
-                        </li>
-                    </ul>
-                }
-            </div>
-        </fieldset>
+        <legend>Random good reads</legend>
+        <div id="random-books">
+            @foreach(var book in Model)
+            {
+                <ul class="individual-books-in-random">
+                    <li><img src="@book.Image" alt="book-cover" width="80" height="120"></li>
+                    <li><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></li> 
+                    <li><a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@book.BookId">@book.Author</a></li>
+                    <li>@book.Genre</li>
+                    <li>
+                        <div id="price-of-item-front-page"><b>$@book.Price</b></div>
+                            <button type="button" class="btn btn-info btn-lg" class="add-to-cart-button">
+                                <a class="glyphicon glyphicon-shopping-cart" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@book.BookId"></a>
+                            </button>
+                    </li>
+                </ul>
+            }
+        </div>
     </form>
 </div>

@@ -35,7 +35,7 @@ namespace BookCave.Repositories
                             }).ToList();
             return books;
         }
-        public List<BookListViewModel> GetThreeBooksByRandom()
+        public List<BookListViewModel> GetBooksByRandom()
         {
             var rand = new Random();
             
