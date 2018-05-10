@@ -1,0 +1,15 @@
+@model BookCave.Data.EntityModels.Order
+@{
+    ViewData["Title"] = "Checkout";
+}
+@using (Html.Beginform("CheckourController", "Checkout"))
+{
+    <h2>Checkout</h2>
+    <fieldset>
+        <legend>Shipping Information</legend>
+        @Html.EditorModel()
+    </fieldset>
+    <fieldset>
+        <legend>Payment</legend>
+    </fieldset>
+}

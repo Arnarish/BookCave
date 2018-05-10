@@ -11,6 +11,7 @@ namespace BookCave.Controllers
 {
     public class UserController : Controller
     {
+        private ReviewService _reviewService;
         private UserService _userService;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -18,17 +19,11 @@ namespace BookCave.Controllers
     
         public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
+            _reviewService = new ReviewService();
             _userService = new UserService();
             _signInManager = signInManager;
             _userManager = userManager;
             _roleManager = roleManager;
-        }
-        [Authorize]
-        public IActionResult Index()
-        {
-            var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
-            var user = _userService.GetUserViewModelByString(claim);
-            return View(user);
         }
         public IActionResult EditProfile()
         {
@@ -60,17 +55,25 @@ namespace BookCave.Controllers
             _userService.ChangeFavoriteBook(user, id);
             return Ok();
         }
-
+        [Authorize]
+        public IActionResult Index()
+        {
+            var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
+            var user = _userService.GetUserViewModelByString(claim);
+            user = _reviewService.AddReviewsToViewModel(user);
+            return View(user);
+        }
         public IActionResult UserDetails(int? id)
         {
             var user = _userService.GetUserViewModelById(id);
+            if(user == null)
+            {
+                return View("NotFound");
+            }
+            user = _reviewService.AddReviewsToViewModel(user);
             if(user.Email == ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value)
             {
                 return RedirectToAction("Index");
-            }
-            if(user == null)
-            {
-                return View("AccessDenied");
             }
             return View(user);
         }
@@ -132,6 +135,7 @@ namespace BookCave.Controllers
                     model.Image = "https://www.freeiconspng.com/uploads/profile-icon-9.png";
                 }
                 _userService.AddUser(model);
+                MigrateShoppingCart(model.Email.ToString());
 
                 return RedirectToAction("Index", "Home");
             }

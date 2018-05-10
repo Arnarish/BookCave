@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookCave.Data
 {
-    public class Datacontext : DbContext
+    public class Datacontext : DbContext //laga í camel casing?
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Order> Orders { get; set; }

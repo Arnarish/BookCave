@@ -21,13 +21,6 @@ namespace BookCave.Services
 
             return book;
         }
-
-        /*internal void AddReview(ReviewInputModel model)
-        {
-            throw new NotImplementedException();
-        }
-            return book;
-        }*/
         public void AddReview(ReviewInputModel model)
         {
             var review = new Review
@@ -38,6 +31,11 @@ namespace BookCave.Services
                 BookId = model.BookId
             };
             _ReviewRepo.AddReview(review);
+        }
+        public UserViewModel AddReviewsToViewModel(UserViewModel model)
+        {
+            model.Reviews = _ReviewRepo.GetAllReviewsByUserID(model.UserId);
+            return model;
         }
     }
 }
