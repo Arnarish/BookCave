@@ -40,20 +40,6 @@
     <div id="filter-and-results-container">
         <h2>Search results</h2>
         <br>
-        <div class="filter-radio-buttons">
-                <label class="radio-inline">
-                    <input type="radio" name="alpharadio" id="ar1">A-Z
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="alpharadio" id="ar2">Z-A
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="priceradio" id="pr1">Price: highest
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="priceradio" id="pr2">Price: lowest
-                </label>
-        </div>
     </div>
     <div id="random-good-reads">
         <form>
@@ -71,7 +57,8 @@
                         <li><a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@book.BookId">@book.Author</a></li>
                         <li>@book.Genre</li>
                         <li>
-                        <div id="price-of-item-front-page"><b>$@book.Price</b></div>
+                        
+                            <div><b>$@book.Price</b></div>    
                         @if(@book.Stock == 0)
                         {
                             <button type="button" class="btn btn-danger btn-lg" class="add-to-cart-button" disabled>
