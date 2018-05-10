@@ -20,13 +20,17 @@ namespace BookCave.Services
 
             return books;
         }
+        public List<BookListViewModel> GetTopTenBooks()
+        {
+            return _bookRepo.GetTopTenBooks();
+        }
         public List<BookListViewModel> GetBooksByAuthor(int? id)
         {
             return _bookRepo.GetBooksByAuthor(id);
         }
         public List<BookListViewModel> GetBooksByRandom()
         {
-            var randomizedBooks = _bookRepo.GetBooksByRandom();
+            var randomizedBooks = _bookRepo.GetThreeBooksByRandom();
             
             return randomizedBooks;
         }

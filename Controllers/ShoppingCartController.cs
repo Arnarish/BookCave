@@ -58,12 +58,5 @@ namespace BookCave.Controllers
             };
             return Json(result);
         }
-        public IActionResult CartSummary()
-        {
-            var cart = OrderService.GetCart(this.HttpContext);
-
-            ViewData["CartCount"] = cart.GetCount();
-            return PartialView("CartSummary");
-        }
     }
 }

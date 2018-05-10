@@ -167,7 +167,11 @@ if(ratingsList != null){
     var ratingAverage = Number((sum / ratings.length).toFixed(1));
 
     if(!(ratingAverage >= 1 && ratingAverage <= 5)){
-        ratingAverage = "Not ratings yet";
+        ratingAverage = "No ratings";
+    }
+    else
+    {
+        ratingAverage += " out of 5";
     }
 
     var getAverage = document.getElementById("average-value");
