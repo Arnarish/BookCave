@@ -162,10 +162,12 @@
     padding-left: 0px;
     padding-right: 0px;
 
+
 }
 #comment-whole{
     background-color: rgb(245, 245, 245);
     border-radius: 25px;
+    padding-left: 20px;
 }
 #profile{
     overflow: hidden;
@@ -182,22 +184,23 @@
     width: 200px;
     height: 220px; 
 }
-#profile-buttons{
+.profile-buttons{
     float: right;
-    margin-right: 10%;
-    
-}
-#profile-comments-whole{
-    background-color: rgb(245, 245, 245);
-    border-radius: 25px;
-    padding-left: 0px;
-    padding-right: 0px;
+    margin: 5px;
 }
 #profile-comment-photo{
     float: left;
-    height: 120px;
-    margin-left: 1%;
+    height: 150px;
+    
 }
 #profile-comment-content{
-    margin-left: 10%;
+    background-color: rgb(245, 245, 245);
+    border-radius: 25px;
+    overflow: hidden;
+    padding-left: 0px;
+    padding-right: 0px;
+    
+}
+#review-content{
+    padding-left: 90px;
 }

@@ -118,7 +118,7 @@
             @foreach(var review in Model.Reviews)
             {
                 <div id="comment-whole">
-                <hr>
+                
                 <li class="review-block">
                 <div id="comment-head">
                 <a asp-controller="User" asp-action="UserDetails" asp-route-id="@review.User.UserId">
@@ -133,6 +133,7 @@
                 </div>
                 </li>
                 </div>
+                <br>
                 
             }
 
