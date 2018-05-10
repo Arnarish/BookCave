@@ -43,7 +43,11 @@
     padding-bottom: 2px;
     padding-top: 4px;
 }
+#Details-photo
+{
+    float: left;
 
+<<<<<<< HEAD
 .front-page-welcome{
     background-color: rgb(245, 245, 245);
     text-align: center;
@@ -100,4 +104,29 @@
     text-align: center;
     display:inline-block;
     list-style-type: none;
+=======
+}
+.left-view-box-details-list
+{
+    
+    width: 25%;
+    float: left;
+}
+#right-view-box
+{
+    padding-left: 40%;
+    padding-top: 5%;
+
+}
+.central-container
+{
+    border: gray groove 1px;
+    overflow: hidden;
+    padding: 10px;
+}
+#leave-a-review-box
+{   
+    float: left;
+    margin-right: 100%;
+>>>>>>> 72f242cfab422a03af5bab0896f5ec9ab012c827
 }
