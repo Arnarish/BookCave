@@ -112,15 +112,19 @@
 }
 #right-view-box
 {
-    padding-left: 40%;
+    padding-left: 41%;
     padding-top: 5%;
 
 }
 .central-container
 {
-    border: gray groove 1px;
+
     overflow: hidden;
     padding: 10px;
+}
+#change-favorite-book
+{
+    margin-left: 10px;
 }
 #leave-a-review-box
 {   
