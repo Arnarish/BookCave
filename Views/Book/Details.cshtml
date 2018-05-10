@@ -59,14 +59,18 @@
         
         @if(@Model.Stock != 0)
         {
-            <button type="button" class="btn btn-info btn-lg">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                @Html.ActionLink("", "AddToCart", "ShoppingCart", new { id = Model.BookId }, "")
-            </button>
+            <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.BookId">
+                <button type="button" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                </button>
+            </a>
         }
         else{
             <button type="button" class="btn btn-info btn-lg" id="waiting-list-button">Add to waiting list</button>
         }
+        <div>
+            <a class="btn btn-primary" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.BookId">Edit this book</a>
+        </div>
     </div>    
 </div>
 
@@ -101,6 +105,7 @@
 		</div>
 	</div>
 </div>
+<<<<<<< HEAD
 <div>
     @if (this.User.IsInRole("Admin"))
     {
@@ -112,6 +117,9 @@
         <a class="btn btn-default" id="change-favorite-book">Make this book your favorite</a>
     }
 </div>
+=======
+
+>>>>>>> bfd65519a18fdc0d2fd66c4d62f6e39efe0f5794
 <hr>
 <br>
 <fieldset class="form-group">

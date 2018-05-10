@@ -1,3 +1,5 @@
+using BookCave.Data.EntityModels;
+
 namespace BookCave.Models.ViewModels
 {
     public class ReviewListViewModel
@@ -8,5 +10,6 @@ namespace BookCave.Models.ViewModels
         public string Date { get; set; }
         public int UserId { get; set; }
         public int BookId { get; set; }
+        public virtual User User { get; set; }
     }
 }

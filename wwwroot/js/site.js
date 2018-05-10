@@ -174,6 +174,28 @@ if(ratingsList != null){
     getAverage.innerHTML = ratingAverage;
 }
 
+$(function () {
+    $(".RemoveLink").click(function () {
+        // Get the id from the link
+        var recordToDelete = $(this).attr("data-id");
+        if (recordToDelete != '') {
+            // Perform the ajax post
+            $.post("/ShoppingCart/RemoveFromCart", {"id": recordToDelete },
+                function (data) {
+                    // Successful requests get here
+                    // Update the page elements
+                    if (data.ItemCount == 0) {
+                        $('#row-' + data.DeleteId).fadeOut('slow');
+                    } else {
+                        $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                    }
+                    $('#cart-total').text(data.CartTotal);
+                    $('#cart-status').text('Cart (' + data.CartCount + ')');
+                });
+        }
+    });
+});
+
 //change favorite book
 
 $("#change-favorite-book").click(function(){
@@ -187,4 +209,3 @@ $("#change-favorite-book").click(function(){
         console.log(err);
     });
 });
-

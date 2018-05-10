@@ -154,6 +154,7 @@ namespace BookCave.Controllers
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
             if(result.Succeeded)
             {
+                MigrateShoppingCart(model.Email.ToString());
                 return RedirectToAction("Index", "Home");
             }
             return View();
@@ -170,6 +171,16 @@ namespace BookCave.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        private void MigrateShoppingCart(string UserName)
+        {
+            var cart = OrderService.GetCart(this.HttpContext);
+
+            cart.MigrateCart(UserName);
+            this.HttpContext.Session.Clear();
+            cart.SetCartId(this.HttpContext);
+            
         }
     }
 }

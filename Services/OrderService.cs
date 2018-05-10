@@ -1,6 +1,7 @@
 using BookCave.Data;
 using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
+using BookCave.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ namespace BookCave.Services
     public partial class OrderService
     {
         private Datacontext _StoreDb = new Datacontext();
+        private OrderRepo _OrderRep = new OrderRepo();
         string ShoppingCartId { get; set; }
         public const string CartSessionKey = "CartId";
         public static OrderService GetCart(HttpContext context)
@@ -38,60 +40,43 @@ namespace BookCave.Services
                 //no items in cart
                 CartItem = new Cart 
                 {
-                    BookId = book.BookId,
                     CartId = ShoppingCartId,
+                    BookId = book.BookId,
                     count = 1,
                     DateCreated = DateTime.Now,
-                    Book = (from b in _StoreDb.Books where book.BookId == b.BookId
-                    select new Book
-                    {
-                        BookId = b.BookId,
-                        Title = b.Title,
-                        Author = b.Author,
-                        ReleaseYear = b.ReleaseYear,
-                        Genre = b.Genre,
-                        ISBN = b.ISBN,
-                        Price = b.Price,
-                        Stock = b.Stock,
-                        TopSeller = b.TopSeller,
-                        OnSale = b.OnSale,
-                        Discount = b.Discount,
-                        Image = b.Image,
-                    }).SingleOrDefault()
                 };
-                _StoreDb.Carts.Add(CartItem);
+                _OrderRep.AddToCart(CartItem);
             }
             else
             {
                 //item exists in cart, increase quantity
-                CartItem.count++;
+                _OrderRep.IncBook(CartItem);
             }
-            _StoreDb.SaveChanges();
         }
         public int RemoveFromCart(int id)
         {
+            //move to repo
             //get the cart
-            var cartitem = _StoreDb.Carts.Single(
+            var CartItem = _StoreDb.Carts.SingleOrDefault(
                             cart => cart.CartId == ShoppingCartId
                             && cart.BookId == id);
-            int itemcount = 0;
-            if(cartitem != null)
+            int ItemCount = 0;
+            if(CartItem != null)
             {
-                if(cartitem.count > 1)
+                if(CartItem.count > 1)
                 {
-                    cartitem.count--;
-                    itemcount = cartitem.count;
+                    ItemCount = CartItem.count;
                 }
                 else
                 {
-                    _StoreDb.Remove(cartitem);
+                    ItemCount = _OrderRep.RemoveFromCart(CartItem);
                 }
-                _StoreDb.SaveChanges();
             }
-            return itemcount;
+            return ItemCount;
         }
         public void EmptyCart()
         {
+            //move to repo
             var cartItems = _StoreDb.Carts.Where(
                     cart => cart.CartId == ShoppingCartId);
             foreach(var cartitem in cartItems)
@@ -102,6 +87,7 @@ namespace BookCave.Services
         }
         public List<Cart> GetCartItems()
         {
+            //move to repo
             var item = _StoreDb.Carts.Where(
                         cart => cart.CartId == ShoppingCartId)
                         //.Include("Books")
@@ -114,6 +100,7 @@ namespace BookCave.Services
         }
         public int GetCount()
         {
+            //move to repo
             int? count = (from cartItems in _StoreDb.Carts
                         where cartItems.CartId == ShoppingCartId
                         select (int?)cartItems.count).Sum();
@@ -122,6 +109,7 @@ namespace BookCave.Services
         }
         public double GetTotal()
         {
+            //move to repo
             double? total = (from cartItems in _StoreDb.Carts
                                 where cartItems.CartId == ShoppingCartId
                                 select (int?)cartItems.count * cartItems.Book.Price).Sum();
@@ -130,6 +118,7 @@ namespace BookCave.Services
         }
         public int CreateOrder(Order order)
         {
+            //move to repo
             double orderTotal = 0;
 
             var cartItems = GetCartItems();
@@ -161,19 +150,27 @@ namespace BookCave.Services
             {
                 if(!string.IsNullOrWhiteSpace(context.User.Identity.Name))
                 {
-                    //context.Session.SetString(CartSessionKey, context.User.Identity.Name);
+                    //sets the cartId as the username of the user if he's logged in
                     context.Session.SetString(CartSessionKey, context.User.Identity.Name);
                 }
                 else
                 {
-                    //generate a new id from guid
+                    //generate a new id from guid for a guest user
                     Guid tempCartId = Guid.NewGuid();
-                    //context.Session.SetString(CartSessionKey, tempCartId.ToString());
                     context.Session.SetString(CartSessionKey, tempCartId.ToString());
 
                 }
             }
             return context.Session.GetString(CartSessionKey);
+        }
+
+        public void SetCartId(HttpContext context)
+        {
+            //if a guest user logs in we must update the id to the correct id.
+            if(!string.IsNullOrWhiteSpace(context.User.Identity.Name))
+                {
+                    context.Session.SetString(CartSessionKey, context.User.Identity.Name);
+                }
         }
         public void MigrateCart(string UserName)
         {
