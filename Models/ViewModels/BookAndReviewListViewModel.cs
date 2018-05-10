@@ -19,6 +19,6 @@ namespace BookCave.Models.ViewModels
         public int Discount { get; set; }
         public string Image { get; set; }
         public List<ReviewListViewModel> Reviews { get; set;}
-
+        
     }
 }

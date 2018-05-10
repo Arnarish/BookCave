@@ -34,6 +34,10 @@ namespace BookCave.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProfile(UserInputModel model)
         {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
             var user = await _userManager.GetUserAsync(HttpContext.User);
             await _userManager.ReplaceClaimAsync(user,
                                                 ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "Name"),
@@ -131,6 +135,7 @@ namespace BookCave.Controllers
                     model.Image = "https://www.freeiconspng.com/uploads/profile-icon-9.png";
                 }
                 _userService.AddUser(model);
+                MigrateShoppingCart(model.Email.ToString());
 
                 return RedirectToAction("Index", "Home");
             }

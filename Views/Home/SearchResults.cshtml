@@ -3,9 +3,10 @@
     ViewData["Title"] = "Search results";
 }
 <div class="search-bar">
+    <h3><b>Search for a book</b></h3>
     <form method="get" id="front-page-search" asp-action="SearchResults">
 
-        <select class="form-control" name="genre" form="front-page-search">
+        <select class="form-control" name="genre" form="front-page-search" id="select-genres">
             <option value="" disabled selected>Genre</option>
             <option value="classics" name="genre">Classics</option>
             <option value="comics" name="genre">Comics</option>
@@ -17,7 +18,7 @@
             <option value="thriller" name="genre">Thriller</option>
         </select>
         
-        <input type="search" class="form-control" id="sel1" name="searchString" placeholder="Book title, author or ISBN">
+        <input type="search" class="form-control" id="search-input" name="searchString" placeholder="Book title, author or ISBN">
         <input type="submit" value="Search" class="btn btn-primary" id="search-button">
     </form>
 </div>

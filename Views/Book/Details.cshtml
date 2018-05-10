@@ -9,12 +9,12 @@
 <!--Todo-->
 <div class="central-container">
     <div class="view-box-book-details" id="left-view-box">
-        <h2><i>@Model.Title</i></h2>
-        <img src="@Model.Image" alt="coverimage" width="160" height="240"></a>
-        <ul class="left-view-box-details-list">
-            <li>@Model.Author</li>
-            <li>@Model.Genre</li> 
-            <li>@Model.ISBN</li>
+        <h1><i>@Model.Title</i></h1>
+        <img id="Details-photo" src="@Model.Image" alt="coverimage" width="160" height="240">
+        <ul type="none" class="left-view-box-details-list">
+            <li><h2>By: <a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@Model.BookId">@Model.Author</a><h2></li>
+            <li class="list-group-item"> Genre: @Model.Genre</li> 
+            <li class="list-group-item"> ISBN: @Model.ISBN</li>
         </ul>
     </div>
     <div class="view-box-book-details" id="right-view-box">
@@ -42,25 +42,11 @@
             {
                 <!-- display none -->
             }
-            else{
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
-                        <span class="glyphicon glyphicon-minus"></span>
-                            </button>
-                    </span>
-                    <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="100">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                        <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                    </span>
-                </div>
-            }
+            
         
         @if(@Model.Stock != 0)
         {
-            <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.BookId">
+            <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.BookId" class="add-to-cart-button">
                 <button type="button" class="btn btn-info btn-lg">
                     <span class="glyphicon glyphicon-shopping-cart"></span>
                 </button>
@@ -82,7 +68,8 @@
     }
     @if (SignInManager.IsSignedIn(User))
     {
-        <a class="btn btn-default" id="change-favorite-book">Make this book your favorite</a>
+        <button type="button" class="btn btn-default" id="change-favorite-book">Make this book your favorite</button>
+        <hr>
         <div class="container">
             <div class="row" style="margin-top:40px;">
                 <div class="col-md-6">
@@ -114,7 +101,7 @@
         </div>
     }
 </div>
-<hr>
+
 <br>
 <fieldset class="form-group">
     <legend>Reviews: (@Model.Reviews.Count())</legend>
@@ -130,7 +117,7 @@
             @foreach(var review in Model.Reviews)
             {
                 <li class="review-block">
-                @review.UserId,
+                <a asp-controller="User" asp-action="UserDetails" asp-route-id="@review.User.UserId">@review.User.FullName</a>,
                 @review.Rating,
                 @review.Comment
                 </li>

@@ -1,0 +1,8 @@
+@model int
+@{
+    ViewData["Title"] = "Checkout Complete";
+}
+
+<h2>Checkout Complete!</h2>
+<p>Thank you for your order, your order number is: @model</p>
+<a asp-action="index" asp-controller="Home">Click here to go back to the front page.</a>

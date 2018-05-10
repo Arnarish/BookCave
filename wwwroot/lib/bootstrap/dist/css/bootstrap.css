@@ -2564,6 +2564,7 @@ output {
   -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
           transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          
 }
 .form-control:focus {
   border-color: #66afe9;
@@ -6769,3 +6770,4 @@ button.close {
   font-size: 24px;
   color: #d17581;
 }
+

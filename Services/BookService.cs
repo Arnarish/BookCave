@@ -28,7 +28,7 @@ namespace BookCave.Services
         {
             return _bookRepo.GetBooksByAuthor(id);
         }
-        public List<BookListViewModel> GetThreeBooksByRandom()
+        public List<BookListViewModel> GetBooksByRandom()
         {
             var randomizedBooks = _bookRepo.GetThreeBooksByRandom();
             

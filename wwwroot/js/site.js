@@ -204,6 +204,18 @@ $(function ()
     });
 });
 
+//add to cart aesthetics
+
+var getButton = document.getElementsByClassName("add-to-cart-button");
+
+for(var i = 0; i < getButton.length; i++){
+    getButton[i].addEventListener("click", cartButtonChanges);
+}
+
+function cartButtonChanges()
+{
+    this.innerHTML = "Book added to cart";
+}
 //change favorite book
 
 $("#change-favorite-book").click(function()
