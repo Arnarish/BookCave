@@ -30,13 +30,13 @@
                 <div id="on-sale-text">
                     <span id="bookPrice">@Model.Price</span>
                     <span id="bookDiscount">@Model.Discount</span>
-                    <i>@Model.Discount% discount, original price: @Model.Price</i>
+                    <i>@Model.Discount% discount, original price: $@Model.Price </i>
                     <br>
                     <span id="priceAfterDiscount"></span>
                 </div>
             }
             else{
-                <span>Price: @Model.Price</span>
+                <span>Price: @Model.Price$</span>
             }
             @if(Model.Stock == 0)
             {
@@ -59,9 +59,10 @@
     <input type="hidden" id="BookId" value="@Model.BookId">
     @if (this.User.IsInRole("Admin"))
     {
+        <div id="admin-button-details">
         <a class="btn btn-primary" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.BookId">Edit this book</a>
         <button type="button" class="btn btn-danger" id="remove-book">Remove book</button>
-
+        </div>
     }
     @if (SignInManager.IsSignedIn(User))
     {
@@ -119,7 +120,7 @@
             @foreach(var review in Model.Reviews)
             {
                 <div id="comment-whole">
-                <hr>
+                
                 <li class="review-block">
                 <div id="comment-head">
                 <a asp-controller="User" asp-action="UserDetails" asp-route-id="@review.User.UserId">
@@ -134,6 +135,7 @@
                 </div>
                 </li>
                 </div>
+                <br>
                 
             }
 
