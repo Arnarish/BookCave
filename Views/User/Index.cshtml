@@ -10,9 +10,12 @@
 }
 
 <h2>Profile info for @Model.FullName</h2>
+<br>
 <div>
     <div>
-        <img src="@Model.Image" alt="@Model.FullName" height="80" width="80">
+
+        <img id="profile-photo" src="@Model.Image" alt="@Model.FullName" height="80" width="80">
+        <div id="profile">
         <p>Full name: @Model.FullName</p>
         <p>Email @Model.Email</p>
         <p>Address: @Model.Address</p>
@@ -28,12 +31,15 @@
            {
                 <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.FavoriteBookId">@Model.FavoriteBook</a>
            } 
-            </p>  
+            </p>
+        </div>  
+        <div id="profile-buttons">
         @if(claim == Model.Email)
         {
             <a class ="btn btn-primary" asp-controller="User" asp-action="OrderHistory">View all orders</a>
             <a class ="btn btn-primary" asp-controller="User" asp-action="EditProfile">Manage profile</a>
         }
+    </div>
     </div>
     
 </div>
@@ -45,23 +51,23 @@
     </div>
 }
 
-<h1>Books on waiting list</h1>
-<hr>
+
 <fieldset class="form-group">
     <legend>Reviews: (@Model.Reviews.Count())</legend>
 
-    <div>
+    <div id="profile-comments-whole">
         <ul type="NONE" id="list-of-reviews">
             @foreach(var review in Model.Reviews)
             {
                 <hr>
                 <li class="review-block">
                 <a asp-controller="Book" asp-action="Details" asp-route-id="@review.Book.BookId">
-                    <img src="@review.Book.Image" alt="@review.Book.Title" width="80" height="80">
+                    <img id="profile-comment-photo" src="@review.Book.Image" alt="@review.Book.Title" width="80" height="80">
                 </a>
+                <div id="profile-comment-content">
                 <span>book: <a asp-controller="Book" asp-action="Details" asp-route-id="@review.Book.BookId">@review.Book.Title</a></span>
                 <span>Rating: @review.Rating</span>
-                <div>
+                
                     <h4>Comment:</h4>
                     <span>@review.Comment</span>
                 </div>

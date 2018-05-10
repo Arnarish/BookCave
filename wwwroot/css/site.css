@@ -116,31 +116,88 @@
 
 .left-view-box-details-list
 {
-    
+    background-color: rgb(245, 245, 245);
     width: 25%;
     float: left;
+}
+.list-group-item
+{
+    background-color: rgb(245, 245, 245);
+    
 }
 #right-view-box
 {
     padding-left: 41%;
-    padding-top: 5%;
+    margin-top: 10%;
 
 }
 .central-container
 {
-
+    margin-top: 3%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color: rgb(245, 245, 245);
     overflow: hidden;
     padding: 10px;
 }
 #change-favorite-book
 {
     margin-left: 10px;
+    background-color: rgb(245, 245, 245);
 }
-#leave-a-review-box
-{   
-    float: left;
-    margin-right: 100%;
+#favorite-book-btn
+{
+    background-color: rgb(245, 245, 245);
+    padding-bottom: 10px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 #bookPrice{
     text-decoration: line-through;
+}
+#list-of-reviews{
+    vertical-align: middle;
+    margin: auto;
+    list-style: none;
+    padding-left: 0px;
+    padding-right: 0px;
+
+}
+#comment-whole{
+    background-color: rgb(245, 245, 245);
+    border-radius: 25px;
+}
+#profile{
+    overflow: hidden;
+    padding-left: 10px;
+    height: 220px;
+    max-width: 50%;
+    display: inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0, 2, 4, 0.2);
+    padding-right: 300px;
+}
+#profile-photo{
+    float: left;
+    box-shadow: 0 4px 8px 0 rgba(0, 2, 4, 0.2);
+    width: 200px;
+    height: 220px; 
+}
+#profile-buttons{
+    float: right;
+    margin-right: 10%;
+    
+}
+#profile-comments-whole{
+    background-color: rgb(245, 245, 245);
+    border-radius: 25px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+#profile-comment-photo{
+    float: left;
+    height: 120px;
+    margin-left: 1%;
+}
+#profile-comment-content{
+    margin-left: 10%;
 }

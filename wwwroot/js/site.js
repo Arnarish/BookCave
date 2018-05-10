@@ -180,14 +180,15 @@ if(ratingsList != null){
 
 $(function ()
 {
-    $(".RemoveLink").click(function ()
+    $(".dec").click(function ()
     {
         // Get the id from the link
         var recordToDelete = $(this).attr("data-id");
+        console.log(recordToDelete);
         if (recordToDelete != '') 
         {
             // Perform the ajax post
-            $.post("/ShoppingCart/RemoveFromCart", {"id": recordToDelete },
+            $.post("/ShoppingCart/DecBook", {"id": recordToDelete },
                 function (data) 
                 {
                     // Successful requests get here
@@ -197,6 +198,52 @@ $(function ()
                     } else {
                         $('#item-count-' + data.DeleteId).text(data.ItemCount);
                     }
+                    $('#cart-total').text(data.CartTotal);
+                    $('#cart-status').text('Cart (' + data.CartCount + ')');
+                });
+        }
+    });
+});
+
+$(function ()
+{
+    $(".inc").click(function ()
+    {
+        // Get the id from the link
+        var recordToAdd = $(this).attr("data-id");
+        console.log(recordToAdd);
+        if (recordToAdd != '')
+        {
+            // Perform the ajax post
+            $.post("/ShoppingCart/IncBook", {"id": recordToAdd },
+                function (data) 
+                {
+                    // Successful requests get here
+                    // Update the page elements
+                    $('#item-count-' + data.recordToAdd).text(+ ($(this).text())+1);
+                    $('#cart-total').text(data.CartTotal);
+                    $('#cart-status').text('Cart (' + data.CartCount + ')');
+                });
+        }
+    });
+});
+
+$(function ()
+{
+    $(".RemoveLink").click(function ()
+    {
+        // Get the id from the link
+        var recordToDelete = $(this).attr("data-id");
+        console.log(recordToDelete);
+        if (recordToDelete != '') 
+        {
+            // Perform the ajax post
+            $.post("/ShoppingCart/RemoveAll", {"id": recordToDelete },
+                function (data) 
+                {
+                    // Successful requests get here
+                    // Update the page elements
+                    $('#row-' + data.DeleteId).fadeOut('slow');
                     $('#cart-total').text(data.CartTotal);
                     $('#cart-status').text('Cart (' + data.CartCount + ')');
                 });
@@ -233,7 +280,7 @@ $("#change-favorite-book").click(function()
 //Remove book
 $("#remove-book").click(function()
 {
-    if(confirm("Are you sure you want to remove tis book?"))
+    if(confirm("Are you sure you want to remove this book?"))
     {
         var id = $("#BookId").val();
         $.post("/Book/RemoveBook/" + id, id, function(data, status){})

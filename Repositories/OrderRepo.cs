@@ -43,11 +43,19 @@ namespace BookCave.Repositories
 
         public int DecBook(Cart CartItem)
         {
+            int count = 0;
             var incItem = _StoreDb.Carts.SingleOrDefault(
                                                  i => i.CartId == CartItem.CartId
                                                 && i.BookId == CartItem.BookId);
-            incItem.count--;
-            int count = incItem.count;
+            if(CartItem.count > 1)
+            {
+                incItem.count--;
+                count = incItem.count;
+            }
+            else
+            {
+                _StoreDb.Carts.Remove(CartItem);
+            }
 
             _StoreDb.SaveChanges();
 
@@ -70,7 +78,7 @@ namespace BookCave.Repositories
                 }
                 else
                 {
-                    _StoreDb.Remove(CartItem);
+                    _StoreDb.Carts.Remove(CartItem);
                 }
             }       
             _StoreDb.SaveChanges();
@@ -82,7 +90,7 @@ namespace BookCave.Repositories
             var CartItem = _StoreDb.Carts.SingleOrDefault(
                             cart => cart.CartId == ShoppingCartId
                             && cart.BookId == id);
-            _StoreDb.Remove(CartItem);
+            _StoreDb.Carts.Remove(CartItem);
             _StoreDb.SaveChanges();
 
             return (int)0;
@@ -158,10 +166,22 @@ namespace BookCave.Repositories
         }
         public double GetTotal(string ShoppingCartId)
         {
-            double? total = (from cartItems in _StoreDb.Carts
+            /*double? total = (from cartItems in _StoreDb.Carts
                                 where cartItems.CartId == ShoppingCartId
-                                select (int?)cartItems.count * cartItems.Book.Price).Sum();
-
+                                select (int?)cartItems.count * cartItems.Book.Price).Sum();*/
+            var stuff = GetCartItems(ShoppingCartId);
+            double? total = 0;
+            foreach (var item in stuff)
+            {
+                if(item.Book.OnSale)
+                {
+                    total += Math.Round((item.Book.Price * (1-((double)item.Book.Discount / 100))) * item.count, 2);
+                }
+                else
+                {
+                    total += item.Book.Price * item.count;
+                }
+            }
             return total ?? 0;
         }
     }
