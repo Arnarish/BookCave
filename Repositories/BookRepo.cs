@@ -133,5 +133,10 @@ namespace BookCave.Repositories
             _db.Update(book);
             _db.SaveChanges();
         }
+        public void RemoveBook(Book book)
+        {
+            _db.Remove(book);
+            _db.SaveChanges();
+        }
     }
 }

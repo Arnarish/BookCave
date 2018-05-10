@@ -127,5 +127,11 @@ namespace BookCave.Controllers
             
             return View();
         }
+        public IActionResult RemoveBook(int id)
+        {
+            var book = _bookService.GetBookById(id);
+            _bookService.RemoveBook(book);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

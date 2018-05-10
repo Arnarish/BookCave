@@ -75,5 +75,10 @@ namespace BookCave.Repositories
             _db.Users.Update(user);
             _db.SaveChanges();
         }
+        public void ChangeFavoriteBook(User user)
+        {
+            _db.Users.Update(user);
+            _db.SaveChanges();
+        }
     }
 }
