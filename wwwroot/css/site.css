@@ -128,11 +128,12 @@
 #right-view-box
 {
     padding-left: 41%;
-    padding-top: 1%;
+    margin-top: 10%;
 
 }
 .central-container
 {
+    margin-top: 3%;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     background-color: rgb(245, 245, 245);
@@ -151,12 +152,38 @@
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
 }
-<<<<<<< HEAD
-#list-of-reviews
-{
-    
-=======
 #bookPrice{
     text-decoration: line-through;
->>>>>>> 6c08d033f09f6ceaa4b242bd847f6e39008fb711
+}
+#list-of-reviews{
+    vertical-align: middle;
+    margin: auto;
+    list-style: none;
+    padding-left: 0px;
+    padding-right: 0px;
+
+}
+#comment-whole{
+    background-color: rgb(245, 245, 245);
+    border-radius: 25px;
+}
+#profile{
+    overflow: hidden;
+    padding-left: 10px;
+    height: 220px;
+    max-width: 50%;
+    display: inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0, 2, 4, 0.2);
+    padding-right: 300px;
+}
+#profile-photo{
+    float: left;
+    box-shadow: 0 4px 8px 0 rgba(0, 2, 4, 0.2);
+    width: 200px;
+    height: 220px; 
+}
+#profile-buttons{
+    float: right;
+    margin-right: 10%;
+    
 }

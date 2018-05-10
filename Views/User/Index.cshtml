@@ -9,9 +9,12 @@
 }
 
 <h2>Profile info for @Model.FullName</h2>
+<br>
 <div>
     <div>
-        <img src="@Model.Image" alt="@Model.FullName" height="80" width="80">
+
+        <img id="profile-photo" src="@Model.Image" alt="@Model.FullName" height="80" width="80">
+        <div id="profile">
         <p>Full name: @Model.FullName</p>
         <p>Email @Model.Email</p>
         <p>Address: @Model.Address</p>
@@ -27,12 +30,15 @@
            {
                 <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.FavoriteBookId">@Model.FavoriteBook</a>
            } 
-            </p>  
+            </p>
+        </div>  
+        <div id="profile-buttons">
         @if(claim == Model.Email)
         {
             <a class ="btn btn-primary" asp-controller="User" asp-action="OrderHistory">View all orders</a>
             <a class ="btn btn-primary" asp-controller="User" asp-action="EditProfile">Manage profile</a>
         }
+    </div>
     </div>
     
 </div>
@@ -58,7 +64,6 @@
                 @review.Comment
                 </li>
             }
-
         </ul>
     </div>
 </fieldset>

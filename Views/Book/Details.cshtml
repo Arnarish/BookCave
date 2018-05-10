@@ -73,7 +73,7 @@
         </div>
         <hr>
         <div class="container">
-            <div class="row" style="margin-top:40px;">
+            <div class="row">
                 <div class="col-md-6">
                     <div class="well well-sm">
                         <div class="text-right">
@@ -104,7 +104,6 @@
     }
 </div>
 
-<br>
 <fieldset class="form-group">
     <legend>Reviews: (@Model.Reviews.Count())</legend>
     <ul id="list-of-ratings">
@@ -118,18 +117,22 @@
         <ul type="NONE" id="list-of-reviews">
             @foreach(var review in Model.Reviews)
             {
+                <div id="comment-whole">
                 <hr>
                 <li class="review-block">
+                <div id="comment-head">
                 <a asp-controller="User" asp-action="UserDetails" asp-route-id="@review.User.UserId">
-                    <img src="@review.User.Image" alt="@review.User.FullName" width="40" height="40">
+                    <img id="review-photo" src="@review.User.Image" alt="@review.User.FullName" width="40" height="40">
                 </a>
                 <span>Made by: <a asp-controller="User" asp-action="UserDetails" asp-route-id="@review.User.UserId">@review.User.FullName</a></span>
                 <span>Rating: @review.Rating</span>
-                <div>
+                </div>
+                <div id="comment-content">
                     <h4>Comment:</h4>
                     <span>@review.Comment</span>
                 </div>
                 </li>
+                </div>
                 
             }
 
