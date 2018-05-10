@@ -92,18 +92,28 @@
 
 #random-good-reads
 {
+    overflow: hidden;
     background-color: rgb(245, 245, 245);
     border-radius: 25px;
     width: 75%;
     margin: auto;
     text-align: center;
+    
 }
+
 .individual-books-in-random
 {
+    border: black solid 1px;
     text-align: center;
     display:inline-block;
     list-style-type: none;
+    width: 33%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 10px;
+    padding-right: 10px;    
 }
+
 .left-view-box-details-list
 {
     background-color: rgb(245, 245, 245);
@@ -141,7 +151,12 @@
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
 }
+<<<<<<< HEAD
 #list-of-reviews
 {
     
+=======
+#bookPrice{
+    text-decoration: line-through;
+>>>>>>> 6c08d033f09f6ceaa4b242bd847f6e39008fb711
 }

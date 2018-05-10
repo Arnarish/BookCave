@@ -12,6 +12,7 @@
             <th><b>Author</b></th>
             <th><b>Year</b></th>
             <th><b>Price</b></th>
+            <th><b>Rating</b></th>
         </tr>
         @foreach(var book in Model)
         {
@@ -21,6 +22,15 @@
                 <td><a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@book.BookId">@book.Author</a></td>
                 <td>@book.ReleaseYear</td>
                 <td>$@book.Price</td>
+                @if(@book.ReviewScore == 0)
+                {
+                    <td>No ratings</td>
+                }
+                else
+                {
+                    <td>@book.ReviewScore</td>
+                }
+                
             </tr>
         }
     </table>

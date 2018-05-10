@@ -28,6 +28,7 @@ namespace BookCave.Repositories
                                 ISBN = a.ISBN,
                                 Price = a.Price,
                                 Stock = a.Stock,
+                                ReviewScore = a.ReviewScore,
                                 TopSeller = a.TopSeller,
                                 OnSale = a.OnSale,
                                 Discount = a.Discount,
@@ -35,7 +36,29 @@ namespace BookCave.Repositories
                             }).ToList();
             return books;
         }
-        public List<BookListViewModel> GetBooksByRandom()
+        public List<BookListViewModel> GetTopTenBooks()
+        {
+            var topTen = (from a in _db.Books
+                          orderby a.ReviewScore descending
+                          select new BookListViewModel
+                          {
+                              BookId = a.BookId,
+                                Title = a.Title,
+                                Author = a.Author,
+                                ReleaseYear = a.ReleaseYear,
+                                Genre = a.Genre,
+                                ISBN = a.ISBN,
+                                Price = a.Price,
+                                Stock = a.Stock,
+                                ReviewScore = a.ReviewScore,
+                                TopSeller = a.TopSeller,
+                                OnSale = a.OnSale,
+                                Discount = a.Discount,
+                                Image = a.Image,
+                          }).Take(10).ToList();
+            return topTen;
+        }
+        public List<BookListViewModel> GetThreeBooksByRandom()
         {
             var rand = new Random();
             
@@ -50,6 +73,7 @@ namespace BookCave.Repositories
                                         ISBN = a.ISBN,
                                         Price = a.Price,
                                         Stock = a.Stock,
+                                        ReviewScore = a.ReviewScore,
                                         TopSeller = a.TopSeller,
                                         OnSale = a.OnSale,
                                         Discount = a.Discount,
@@ -75,6 +99,7 @@ namespace BookCave.Repositories
                             ISBN = b.ISBN,
                             Price = b.Price,
                             Stock = b.Stock,
+                            ReviewScore = b.ReviewScore,
                             TopSeller = b.TopSeller,
                             OnSale = b.OnSale,
                             Discount = b.Discount,
@@ -109,6 +134,7 @@ namespace BookCave.Repositories
                                 ISBN = b.ISBN,
                                 Price = b.Price,
                                 Stock = b.Stock,
+                                ReviewScore = b.ReviewScore,
                                 TopSeller = b.TopSeller,
                                 OnSale = b.OnSale,
                                 Discount = b.Discount,
@@ -125,17 +151,17 @@ namespace BookCave.Repositories
         }
         public void AddBook(Book book)
         {
-            _db.Add(book);
+            _db.Books.Add(book);
             _db.SaveChanges();
         }
         public void UpdateBook(Book book)
         {
-            _db.Update(book);
+            _db.Books.Update(book);
             _db.SaveChanges();
         }
         public void RemoveBook(Book book)
         {
-            _db.Remove(book);
+            _db.Books.Remove(book);
             _db.SaveChanges();
         }
     }

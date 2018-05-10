@@ -34,9 +34,13 @@ namespace BookCave.Repositories
 
             return bookreview;
         }
-        public void AddReview(Review review)
+        public void AddReview(Review review, double average, int amount)
         {
-            _db.Add(review);
+            _db.Reviews.Add(review);
+            var book = (from b in _db.Books
+                        where b.BookId == review.BookId
+                        select b).SingleOrDefault();
+            book.ReviewScore = (review.Rating + average * amount) / (amount + 1);
             _db.SaveChanges();
         }
         public List<ReviewListViewModel> GetAllReviewsByUserID(int UserId)

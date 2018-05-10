@@ -30,7 +30,7 @@ namespace BookCave.Services
                 UserId = model.UserId,
                 BookId = model.BookId
             };
-            _ReviewRepo.AddReview(review);
+            _ReviewRepo.AddReview(review, model.BookAverageRating, model.AmountOfRatings);
         }
         public UserViewModel AddReviewsToViewModel(UserViewModel model)
         {
