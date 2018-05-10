@@ -121,7 +121,7 @@
             @foreach(var review in Model.Reviews)
             {
                 <li class="review-block">
-                @review.UserId,
+                <a asp-controller="User" asp-action="UserDetails" asp-route-id="@review.User.UserId">@review.User.FullName</a>,
                 @review.Rating,
                 @review.Comment
                 </li>

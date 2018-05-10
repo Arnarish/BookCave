@@ -27,14 +27,7 @@ body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;paddin
     width:55%;
     margin-right:2%;
 }
-/*
-#right-view-box{
-    width:42%;
-    float: left;
-}
-*/
-/*#footer-list li{
-    float: left;
-    display: inline;
-}*/
 
+.jumbotron {
+    background-color: red !important;
+}

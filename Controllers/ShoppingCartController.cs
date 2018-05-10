@@ -36,7 +36,7 @@ namespace BookCave.Controllers
 
             cart.AddToCart(addedBook);
 
-            return RedirectToAction("Details", "Book", fragment: id.ToString()); //tofix
+            return RedirectToAction("Details", "Book", new { id = id}); 
         }
 
         [HttpPost]
