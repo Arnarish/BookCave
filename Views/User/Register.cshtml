@@ -2,6 +2,9 @@
 @using Microsoft.AspNetCore.Identity
 @inject RoleManager<IdentityRole> RoleManager
 
+@{
+    ViewData["Title"] = "Register";
+}
 <h1>Register</h1>
 
 <form asp-action="Register" asp-controller="User" class="form-horizontal" method="POST">

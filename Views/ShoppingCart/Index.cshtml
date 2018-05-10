@@ -6,14 +6,13 @@
 <h3>
     <em>Review</em> Your Cart:
 </h3>
-<p class="button">@Html.ActionLink("Checkout >>", "Checkout", "Checkout")</p>
 <div id="update-message">
 </div>
 
 <table>
     <tr>
         <th>Book Name </th>
-        <th> Price (each) </th>
+        <th> Price(each) </th>
         <th> Quantity</th>
         <th></th>
     </tr>
@@ -21,18 +20,31 @@
     {
         <tr id="row-@item.BookId">
             <td>
-            <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId">@item.Book.Title</a>
+            <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId">@item.Book.Title</a>&nbsp;
             </td>
             <td>
-            @item.Book.Price
+            @if(!item.Book.OnSale)
+            {
+                @item.Book.Price
+            }
+            else
+            {
+                double price = Math.Round((item.Book.Price * (1 - ((double)item.Book.Discount / 100))), 2);
+                
+                <p>@price</p>
+            }
             </td>
             <td id="item-count-@item.BookId">
-            <button id="dec" class="btn" type="button">-</button>
+            <button class="btn dec" type="button" data-id="@item.BookId">-</button>
             @item.count
-            <button id="inc" class="btn" type="button">+</button>
+            <a asp-controller="ShoppingCart" asp-action="IncBook" asp-route-id="@item.BookId">
+            <button class="btn inc" type="button" data-id="@item.BookId">+</button>
+            </a>
             </td>
             <td>
-                <a class="RemoveLink" id="@item.BookId">Remove from cart</a>
+                <a>
+                    &nbsp;<button class="RemoveLink btn btn-danger btn-sm" data-id="@item.BookId">Remove from cart</button>
+                </a>
             </td>
         </tr>
     }
@@ -45,7 +57,33 @@
         <td>
         </td>
         <td id="cart-total">
-            @Model.CartTotal
+            $@Model.CartTotal
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Shipping:
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+            @if(Model.CartTotal >= 50)
+            {
+                <p>Free</p>
+            }
+            else if(Model.CartTotal < 1)
+            {
+                <p>No books means nothing to ship!<br> please consider buying a book.</p>
+            }
+            else
+            {
+                <P>$ 5</P>
+            }
         </td>
     </tr>
 </table>
+<br>
+
+<span class="button glyphicon glyphicon-shopping-cart">@Html.ActionLink("Proceed to checkout", "Checkout", "Checkout")</span>

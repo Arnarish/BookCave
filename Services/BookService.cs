@@ -35,9 +35,9 @@ namespace BookCave.Services
             return randomizedBooks;
         }
 
-        public List<BookListViewModel> SearchResults(string searchString, string genre)
+        public List<BookListViewModel> SearchResults(string searchString, string genre, int sorted)
         {
-            return _bookRepo.SearchResults(searchString, genre);
+            return _bookRepo.SearchResults(searchString, genre, sorted);
         }
         public BookListViewModel GetBookViewModelById(int? id)
         {

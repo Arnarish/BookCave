@@ -132,30 +132,41 @@
 
 .left-view-box-details-list
 {
-    
+    background-color: rgb(245, 245, 245);
     width: 25%;
     float: left;
+}
+.list-group-item
+{
+    background-color: rgb(245, 245, 245);
+    
 }
 #right-view-box
 {
     padding-left: 41%;
-    padding-top: 5%;
+    margin-top: 10%;
 
 }
 .central-container
 {
-
+    margin-top: 3%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color: rgb(245, 245, 245);
     overflow: hidden;
     padding: 10px;
 }
 #change-favorite-book
 {
     margin-left: 10px;
+    background-color: rgb(245, 245, 245);
 }
-#leave-a-review-box
-{   
-    float: left;
-    margin-right: 100%;
+#favorite-book-btn
+{
+    background-color: rgb(245, 245, 245);
+    padding-bottom: 10px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 #search-results-container
