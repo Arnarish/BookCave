@@ -68,7 +68,9 @@
     }
     @if (SignInManager.IsSignedIn(User))
     {
+        <div id="favorite-book-btn">
         <button type="button" class="btn btn-default" id="change-favorite-book">Make this book your favorite</button>
+        </div>
         <hr>
         <div class="container">
             <div class="row" style="margin-top:40px;">
