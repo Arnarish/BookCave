@@ -20,23 +20,24 @@
         
         <input type="search" class="form-control" id="search-input" name="searchString" placeholder="Book title, author or ISBN">
         <input type="submit" value="Search" class="btn btn-primary" id="search-button">
+        <div>
+            <label class="radio-inline">
+                <input type="radio" name="sorted" checked="checked" value="1">A-Z
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="sorted" value="2">Z-A
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="sorted" value="3">Price: highest
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="sorted" value="4">Price: lowest
+            </label>
+        </div>
     </form>
 </div>
 
-<div>
-    <label class="radio-inline">
-            <input type="radio" name="alpharadio">A-Z
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="alpharadio">Z-A
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="priceradio">Price: highest
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="priceradio">Price: lowest
-        </label>
-</div>
+
 
 <div id="search-results-front-page">
     <table class="table table-striped table-hover">

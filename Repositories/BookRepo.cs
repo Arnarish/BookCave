@@ -108,7 +108,7 @@ namespace BookCave.Repositories
             return books;
         }
 
-        public List<BookListViewModel> SearchResults(string searchString, string genre)
+        public List<BookListViewModel> SearchResults(string searchString, string genre, int sorted)
         {
             if(searchString == null)
             {
@@ -140,6 +140,22 @@ namespace BookCave.Repositories
                                 Discount = b.Discount,
                                 Image = b.Image,
                             }).ToList();
+            if(sorted == 1)
+            {
+                
+            }
+            else if(sorted == 2)
+            {
+                bookSearch = (from b in bookSearch orderby b.Title descending select b).ToList();
+            }
+            else if(sorted == 3)
+            {
+                bookSearch = (from b in bookSearch orderby b.Price descending select b).ToList();
+            }
+            else if(sorted == 4)
+            {
+                bookSearch = (from b in bookSearch orderby b.Price select b).ToList();
+            }
             return bookSearch;
         }
         public Book GetBookById(int? id)
