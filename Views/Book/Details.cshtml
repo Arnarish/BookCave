@@ -58,10 +58,11 @@
         
         @if(@Model.Stock != 0)
         {
-            <button type="button" class="btn btn-info btn-lg">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                @Html.ActionLink("", "AddToCart", "ShoppingCart", new { id = Model.BookId }, "")
-            </button>
+            <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.BookId">
+                <button type="button" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                </button>
+            </a>
         }
         else{
             <button type="button" class="btn btn-info btn-lg" id="waiting-list-button">Add to waiting list</button>

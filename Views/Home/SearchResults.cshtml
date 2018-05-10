@@ -55,10 +55,11 @@
                 <td>@book.Genre</td>
                 <td>
                     <div id="price-of-item-front-page"><b>$@book.Price</b></div>
-                    <button type="button" class="btn btn-info btn-lg">
-                        <span class="glyphicon glyphicon-shopping-cart"></span>
-                        @Html.ActionLink("", "AddToCart", "ShoppingCart", new { id = book.BookId }, "")
-                    </button>
+                    <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@book.BookId">
+                        <button type="button" class="btn btn-info btn-lg">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                        </button>
+                    </a>
                 </td>
             </tr>
         }
