@@ -120,6 +120,7 @@ namespace BookCave.Controllers
                     model.Image = "https://www.freeiconspng.com/uploads/profile-icon-9.png";
                 }
                 _userService.AddUser(model);
+                MigrateShoppingCart(model.Email.ToString());
 
                 return RedirectToAction("Index", "Home");
             }
