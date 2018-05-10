@@ -32,7 +32,7 @@
     </div>
     <div class="form-group">
         <label asp-for="Price">Price:</label>
-        <input type="text" asp-for="Price" class="form-control" Value="@Model.Price.ToString().Replace(',','.')">
+        <input type="text" name="Price" class="form-control" Value="@Model.Price" >
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
     <div class="form-group">
