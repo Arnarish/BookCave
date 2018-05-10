@@ -11,6 +11,7 @@ namespace BookCave.Controllers
 {
     public class UserController : Controller
     {
+        private ReviewService _reviewService;
         private UserService _userService;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -18,6 +19,7 @@ namespace BookCave.Controllers
     
         public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
+            _reviewService = new ReviewService();
             _userService = new UserService();
             _signInManager = signInManager;
             _userManager = userManager;
@@ -28,6 +30,7 @@ namespace BookCave.Controllers
         {
             var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
             var user = _userService.GetUserViewModelByString(claim);
+            user = _reviewService.AddReviewsToViewModel(user);
             return View(user);
         }
         public IActionResult EditProfile()

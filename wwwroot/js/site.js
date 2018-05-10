@@ -200,12 +200,26 @@ $(function () {
 
 $("#change-favorite-book").click(function(){
     var id = $("#BookId").val();
-    console.log(id);
     $.post("/User/ChangeFavoriteBook/"+ id, id, function(data, status){
-        console.log(id);
     })
     .fail(function(err){
         alert("something went wrong");
         console.log(err);
     });
+    this.innerText = "Book Has been made favorite";
+});
+
+//Remove book
+$("#remove-book").click(function(){
+    if(confirm("Are you sure you want to remove tis book?"))
+    {
+        var id = $("#BookId").val();
+        $.post("/Book/RemoveBook/" + id, id, function(data, status){
+        })
+        .fail(function(err){
+            alert("something went wrong");
+            console.log(err);
+        });
+        this.innerText = "Book Has been Removed";
+    }
 });

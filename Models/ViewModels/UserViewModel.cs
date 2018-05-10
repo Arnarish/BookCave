@@ -14,5 +14,6 @@ namespace BookCave.Models.ViewModels
         public string FavoriteBook { get; set; }
         public int FavoriteBookId { get; set; }
         public List <BookListViewModel> WaitingListBooks { get; set; }
+        public List <ReviewListViewModel> Reviews { get; set; }
     }
 }

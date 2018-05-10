@@ -26,7 +26,29 @@
 <hr>
 
 
-<h2>Reviews (Model.Reviews)</h2>
+<fieldset class="form-group">
+    <legend>Reviews: (@Model.Reviews.Count())</legend>
+    <ul id="list-of-ratings">
+        @foreach(var review in Model.Reviews)
+        {
+            <li class="ratings-gathered">@review.Rating</li>
+        }
+        </ul>
+        <h2>Average rating: <span id="average-value"></span> out of 5</h2>
+    <div>
+        <ul id="list-of-reviews">
+            @foreach(var review in Model.Reviews)
+            {
+                <li class="review-block">
+                @review.UserId,
+                @review.Rating,
+                @review.Comment
+                </li>
+            }
+
+        </ul>
+    </div>
+</fieldset>
 
 
 

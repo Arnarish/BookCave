@@ -92,5 +92,9 @@ namespace BookCave.Services
             book.Image = model.Image;
             _bookRepo.UpdateBook(book);
         }
+        public void RemoveBook(Book book)
+        {
+            _bookRepo.RemoveBook(book);
+        }
     }
 }
