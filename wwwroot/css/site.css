@@ -3,6 +3,7 @@
     padding-bottom: 20px;
 }
 
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -101,9 +102,8 @@
     
 }
 
-.individual-books-in-random
+.individual-books-in-container
 {
-    border: black solid 1px;
     text-align: center;
     display:inline-block;
     list-style-type: none;
@@ -112,6 +112,22 @@
     padding-bottom: 2%;
     padding-left: 10px;
     padding-right: 10px;    
+}
+.individual-books-in-search-container
+{
+    text-align: center;
+    display:inline-block;
+    list-style-type: none;
+    width: 33%;
+    height: 280px;
+    margin-top: 3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 8%;
+    border: rgb(51, 122, 183) solid 1px;
+    background-color: white;
 }
 
 .left-view-box-details-list
@@ -145,6 +161,11 @@
     margin-left: 10px;
     background-color: rgb(245, 245, 245);
 }
+#admin-button-details
+{
+    background-color: rgb(245, 245, 245);
+    
+}
 #favorite-book-btn
 {
     background-color: rgb(245, 245, 245);
@@ -152,18 +173,7 @@
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
 }
-#bookPrice{
-    text-decoration: line-through;
-}
-#list-of-reviews{
-    vertical-align: middle;
-    margin: auto;
-    list-style: none;
-    padding-left: 0px;
-    padding-right: 0px;
 
-
-}
 #comment-whole{
     background-color: rgb(245, 245, 245);
     border-radius: 25px;
@@ -203,4 +213,29 @@
 }
 #review-content{
     padding-left: 90px;
+}
+#search-results-container
+{
+    text-align: center;
+    margin: auto;
+    width: 95%;
+    border-radius: 25px;
+    background: rgb(245, 245, 245);
+
+}
+#filter-and-results-container
+{
+    padding-top: 8px;
+    background-color: rgb(51, 122, 183);
+    color: snow;
+}
+
+#filter-and-results-container > h1
+{
+    padding-top: 2%;
+}
+#list-of-reviews
+{
+    padding-left: 0;
+    padding-right: 0;
 }
