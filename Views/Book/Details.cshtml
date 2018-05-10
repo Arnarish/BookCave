@@ -83,6 +83,8 @@
                                     <input id="ratings-hidden" type="hidden"> 
                                     <textarea class="form-control animated" cols="50" id="new-review" name="Comment" placeholder="Enter your review here..." rows="5"></textarea>
                                     <input type="hidden" name="BookId" value="@Model.BookId">
+                                    <input type="hidden" name="BookAverageRating" value="@Model.ReviewScore">
+                                    <input type="hidden" name="AmountOfRatings" value="@Model.Reviews.Count()">
                                     <div class="text-right">
                                         <!--<div class="stars starrr" data-rating="0"></div>-->
                                         <input id="number" type="number" name="Rating" value="1" min="1" max="5" >
@@ -109,7 +111,7 @@
             <li class="ratings-gathered">@review.Rating</li>
         }
         </ul>
-        <h2>Average rating: <span id="average-value"></span> out of 5</h2>
+        <h2>Average rating: <span id="average-value"></span></h2>
     <div>
         <ul id="list-of-reviews">
             @foreach(var review in Model.Reviews)
