@@ -46,8 +46,7 @@
 #Details-photo
 {
     float: left;
-
-<<<<<<< HEAD
+}
 .front-page-welcome{
     background-color: rgb(245, 245, 245);
     text-align: center;
@@ -104,7 +103,6 @@
     text-align: center;
     display:inline-block;
     list-style-type: none;
-=======
 }
 .left-view-box-details-list
 {
@@ -128,5 +126,4 @@
 {   
     float: left;
     margin-right: 100%;
->>>>>>> 72f242cfab422a03af5bab0896f5ec9ab012c827
 }
