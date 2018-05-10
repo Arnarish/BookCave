@@ -44,11 +44,13 @@
                             <td>@book.Genre</td>
                             <td>
                                 <div id="price-of-item-front-page"><b>$@book.Price</b></div>
+<<<<<<< HEAD
                                 <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@book.BookId" class="add-to-cart-button">
+=======
+>>>>>>> bfd65519a18fdc0d2fd66c4d62f6e39efe0f5794
                                     <button type="button" class="btn btn-info btn-lg">
-                                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                                        <a  class="glyphicon glyphicon-shopping-cart" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@book.BookId"></a>
                                     </button>
-                                </a>
                             </td>
                         </tr>
                     }

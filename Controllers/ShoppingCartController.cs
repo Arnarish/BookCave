@@ -3,6 +3,7 @@ using System.Web;
 using BookCave.Data;
 using BookCave.Models.ViewModels;
 using BookCave.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
@@ -12,7 +13,7 @@ namespace BookCave.Controllers
         private Datacontext _StoreDb = new Datacontext();
 
 
-        //get shopping cart
+        [Authorize]
         public IActionResult Index()
         {
             var cart = OrderService.GetCart(this.HttpContext);
