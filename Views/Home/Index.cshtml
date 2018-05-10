@@ -35,7 +35,7 @@
         <div id="random-books">
             @foreach(var book in Model)
             {
-                <ul class="individual-books-in-random">
+                <ul class="individual-books-in-container">
                 <span class="align-li-in-random">
                     <li><img src="@book.Image" alt="book-cover" width="80" height="120"></li>
                     <li><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId"><i>@book.Title</i></a></li> 
