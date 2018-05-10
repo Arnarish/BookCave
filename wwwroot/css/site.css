@@ -187,3 +187,17 @@
     margin-right: 10%;
     
 }
+#profile-comments-whole{
+    background-color: rgb(245, 245, 245);
+    border-radius: 25px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+#profile-comment-photo{
+    float: left;
+    height: 120px;
+    margin-left: 1%;
+}
+#profile-comment-content{
+    margin-left: 10%;
+}
