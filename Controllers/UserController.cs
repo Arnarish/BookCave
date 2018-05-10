@@ -27,6 +27,7 @@ namespace BookCave.Controllers
         }
         public IActionResult EditProfile()
         {
+            //Use claim to reach the username easier, then get the user profile with the user name
             var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
             var user = _userService.GetUserViewModelByString(claim);
             return View(user);
@@ -34,14 +35,17 @@ namespace BookCave.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProfile(UserInputModel model)
         {
+            
             if(!ModelState.IsValid)
             {
                 return View();
             }
+            //Get The ApplicationUser to be able to replace the claim of the name that appears in the loginPartialView since it has been edited
             var user = await _userManager.GetUserAsync(HttpContext.User);
             await _userManager.ReplaceClaimAsync(user,
                                                 ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "Name"),
                                                 new Claim("Name", $"{model.FullName}"));
+            //Get the user profile using the claim then get the user with the get function from the userService finally update the user
             var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
             var retUser = _userService.GetUser(claim);
             _userService.UpdateUser(retUser, model);
@@ -58,6 +62,7 @@ namespace BookCave.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            //this is the currently logged in users profile
             var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
             var user = _userService.GetUserViewModelByString(claim);
             user = _reviewService.AddReviewsToViewModel(user);
@@ -65,12 +70,14 @@ namespace BookCave.Controllers
         }
         public IActionResult UserDetails(int? id)
         {
+            //this is other users
             var user = _userService.GetUserViewModelById(id);
             if(user == null)
             {
                 return View("NotFound");
             }
             user = _reviewService.AddReviewsToViewModel(user);
+            //if the user tries to access his profile through otherUsers he will be redirected to his profile that is on the action Index
             if(user.Email == ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value)
             {
                 return RedirectToAction("Index");
@@ -97,28 +104,30 @@ namespace BookCave.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
-
+            //adding the role User if it does not exist
             IdentityResult roleResult;
             bool userRoleExists = await _roleManager.RoleExistsAsync("User");
             if (!userRoleExists)
             {
                 roleResult = await _roleManager.CreateAsync(new IdentityRole("User"));
             }
+            //adding the role Admin if it does not exist
             IdentityResult roleResult1;
             bool AdminRoleExists = await _roleManager.RoleExistsAsync("Admin");
             if (!AdminRoleExists)
             {
                 roleResult1 = await _roleManager.CreateAsync(new IdentityRole("Admin"));
             }
+            //if the current user that is registering does not have the role has user he is given that role
             if (!await _userManager.IsInRoleAsync(user, "User"))
             {
                 var userResult = await _userManager.AddToRoleAsync(user, "User");
             }
+            //if in the admin register view the variable employee is checked the registered user is granted the role admin
             if (model.Admin)
             {
                 var userResult = await _userManager.AddToRoleAsync(user, "Admin");
             }
-
             if(result.Succeeded)
             {
                 //The user is Successfully registered
@@ -126,10 +135,12 @@ namespace BookCave.Controllers
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 await _userManager.AddClaimAsync(user, new Claim("UserName", $"{model.Email}"));
 
+                //if the user is already signed in he is an admin creating another account so he wont be locked in to the new account
                 if(!_signInManager.IsSignedIn(User))
                 {
                     await _signInManager.SignInAsync(user, false);
                 }
+                //if the user skipped the image he is given a default image
                 if(model.Image == null)
                 {
                     model.Image = "https://www.freeiconspng.com/uploads/profile-icon-9.png";

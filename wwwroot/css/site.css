@@ -161,6 +161,11 @@
     margin-left: 10px;
     background-color: rgb(245, 245, 245);
 }
+#admin-button-details
+{
+    background-color: rgb(245, 245, 245);
+    
+}
 #favorite-book-btn
 {
     background-color: rgb(245, 245, 245);
@@ -169,6 +174,46 @@
     border-bottom-right-radius: 25px;
 }
 
+#comment-whole{
+    background-color: rgb(245, 245, 245);
+    border-radius: 25px;
+    padding-left: 20px;
+}
+#profile{
+    overflow: hidden;
+    padding-left: 10px;
+    height: 220px;
+    max-width: 50%;
+    display: inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0, 2, 4, 0.2);
+    padding-right: 300px;
+}
+#profile-photo{
+    float: left;
+    box-shadow: 0 4px 8px 0 rgba(0, 2, 4, 0.2);
+    width: 200px;
+    height: 220px; 
+}
+.profile-buttons{
+    float: right;
+    margin: 5px;
+}
+#profile-comment-photo{
+    float: left;
+    height: 150px;
+    
+}
+#profile-comment-content{
+    background-color: rgb(245, 245, 245);
+    border-radius: 25px;
+    overflow: hidden;
+    padding-left: 0px;
+    padding-right: 0px;
+    
+}
+#review-content{
+    padding-left: 90px;
+}
 #search-results-container
 {
     text-align: center;
@@ -189,4 +234,9 @@
 #filter-and-results-container > h1
 {
     padding-top: 2%;
+}
+#list-of-reviews
+{
+    padding-left: 0;
+    padding-right: 0;
 }

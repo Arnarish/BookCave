@@ -71,10 +71,15 @@ namespace BookCave.Controllers
         [Authorize]
         public IActionResult Details(ReviewInputModel model)
         {
+            if(model.Comment == null)
+            {
+                model.Comment = "[User left no review]";
+            }
             if(!ModelState.IsValid)
             {
-                return View("Index");
+                return View("/Book/Details/" + model.BookId);
             }
+            
             var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
             var user = _userService.GetUserViewModelByString(claim);
             model.UserId = user.UserId;
