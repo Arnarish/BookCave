@@ -57,12 +57,21 @@
                         <li><a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@book.BookId">@book.Author</a></li>
                         <li>@book.Genre</li>
                         <li>
-                            <div id="price-of-item-front-page"><b>$@book.Price</b></div>
+                        <div id="price-of-item-front-page"><b>$@book.Price</b></div>
+                        @if(@book.Stock == 0)
+                        {
+                            <button type="button" class="btn btn-danger btn-lg" class="add-to-cart-button" disabled>
+                                    <span>Out of stock</span>
+                            </button>
+                        }
+                        else
+                        {
                             <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@book.BookId">
                                 <button type="button" class="btn btn-info btn-lg" class="add-to-cart-button">
                                     <span class="glyphicon glyphicon-shopping-cart"></span>
                                 </button>
                             </a>
+                        }
                         </li>
                     </span>
                     </ul>

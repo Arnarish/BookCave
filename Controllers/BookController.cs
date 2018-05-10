@@ -117,6 +117,7 @@ namespace BookCave.Controllers
             {
                 return View();
             }
+            model.Price = Convert.ToDouble(model.Price);
             var book = _bookService.GetBookById(model.BookId);
             _bookService.UpdateBook(book, model);
             return RedirectToAction("Index", "Home");

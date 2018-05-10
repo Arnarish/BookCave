@@ -3,6 +3,7 @@
     padding-bottom: 20px;
 }
 
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -118,6 +119,7 @@
     display:inline-block;
     list-style-type: none;
     width: 33%;
+    height: 280px;
     margin-top: 3%;
     padding-top: 2%;
     padding-bottom: 2%;

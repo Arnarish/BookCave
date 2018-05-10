@@ -63,6 +63,7 @@ namespace BookCave.Repositories
             var rand = new Random();
             
             var randomizedBooks = (from a in _db.Books
+                                    where a.Stock != 0
                                     orderby rand.Next()
                                     select new BookListViewModel{
                                         BookId = a.BookId,
