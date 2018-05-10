@@ -1,5 +1,6 @@
 @model BookCave.Models.ViewModels.BookAndReviewListViewModel
 @using Microsoft.AspNetCore.Identity
+@using System.Web
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     ViewData["Title"] = "Book details";
@@ -111,7 +112,6 @@
         </div>
     }
 </div>
-
 <hr>
 <br>
 <fieldset class="form-group">

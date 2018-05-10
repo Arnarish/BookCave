@@ -40,7 +40,7 @@
             @foreach(var review in Model.Reviews)
             {
                 <li class="review-block">
-                @review.UserId,
+                @review.Book.Title,
                 @review.Rating,
                 @review.Comment
                 </li>

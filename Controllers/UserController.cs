@@ -25,14 +25,6 @@ namespace BookCave.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        [Authorize]
-        public IActionResult Index()
-        {
-            var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
-            var user = _userService.GetUserViewModelByString(claim);
-            user = _reviewService.AddReviewsToViewModel(user);
-            return View(user);
-        }
         public IActionResult EditProfile()
         {
             var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
@@ -59,17 +51,25 @@ namespace BookCave.Controllers
             _userService.ChangeFavoriteBook(user, id);
             return Ok();
         }
-
+        [Authorize]
+        public IActionResult Index()
+        {
+            var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
+            var user = _userService.GetUserViewModelByString(claim);
+            user = _reviewService.AddReviewsToViewModel(user);
+            return View(user);
+        }
         public IActionResult UserDetails(int? id)
         {
             var user = _userService.GetUserViewModelById(id);
+            if(user == null)
+            {
+                return View("NotFound");
+            }
+            user = _reviewService.AddReviewsToViewModel(user);
             if(user.Email == ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value)
             {
                 return RedirectToAction("Index");
-            }
-            if(user == null)
-            {
-                return View("AccessDenied");
             }
             return View(user);
         }

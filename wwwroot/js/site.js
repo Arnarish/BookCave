@@ -174,14 +174,18 @@ if(ratingsList != null){
     getAverage.innerHTML = ratingAverage;
 }
 
-$(function () {
-    $(".RemoveLink").click(function () {
+$(function ()
+{
+    $(".RemoveLink").click(function ()
+    {
         // Get the id from the link
         var recordToDelete = $(this).attr("data-id");
-        if (recordToDelete != '') {
+        if (recordToDelete != '') 
+        {
             // Perform the ajax post
             $.post("/ShoppingCart/RemoveFromCart", {"id": recordToDelete },
-                function (data) {
+                function (data) 
+                {
                     // Successful requests get here
                     // Update the page elements
                     if (data.ItemCount == 0) {
@@ -198,11 +202,12 @@ $(function () {
 
 //change favorite book
 
-$("#change-favorite-book").click(function(){
+$("#change-favorite-book").click(function()
+{
     var id = $("#BookId").val();
-    $.post("/User/ChangeFavoriteBook/"+ id, id, function(data, status){
-    })
-    .fail(function(err){
+    $.post("/User/ChangeFavoriteBook/"+ id, id, function(data, status){})
+    .fail(function(err)
+    {
         alert("something went wrong");
         console.log(err);
     });
@@ -210,16 +215,31 @@ $("#change-favorite-book").click(function(){
 });
 
 //Remove book
-$("#remove-book").click(function(){
+$("#remove-book").click(function()
+{
     if(confirm("Are you sure you want to remove tis book?"))
     {
         var id = $("#BookId").val();
-        $.post("/Book/RemoveBook/" + id, id, function(data, status){
-        })
-        .fail(function(err){
+        $.post("/Book/RemoveBook/" + id, id, function(data, status){})
+        .fail(function(err)
+        {
             alert("something went wrong");
             console.log(err);
         });
         this.innerText = "Book Has been Removed";
+    }
+});
+
+//Cart quantity
+$("#remove-from-cart").click(function()
+{
+    {
+        var id = $("#item-count").val();
+        $.post("/Book/RemoveBook/" + id, id, function(data, status){})
+        .fail(function(err)
+        {
+            alert("something went wrong");
+            console.log(err);
+        });
     }
 });
