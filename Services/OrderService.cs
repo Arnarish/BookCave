@@ -38,26 +38,10 @@ namespace BookCave.Services
                 //no items in cart
                 CartItem = new Cart 
                 {
-                    BookId = book.BookId,
                     CartId = ShoppingCartId,
+                    BookId = book.BookId,
                     count = 1,
                     DateCreated = DateTime.Now,
-                    Book = (from b in _StoreDb.Books where book.BookId == b.BookId
-                    select new Book
-                    {
-                        BookId = b.BookId,
-                        Title = b.Title,
-                        Author = b.Author,
-                        ReleaseYear = b.ReleaseYear,
-                        Genre = b.Genre,
-                        ISBN = b.ISBN,
-                        Price = b.Price,
-                        Stock = b.Stock,
-                        TopSeller = b.TopSeller,
-                        OnSale = b.OnSale,
-                        Discount = b.Discount,
-                        Image = b.Image,
-                    }).SingleOrDefault()
                 };
                 _StoreDb.Carts.Add(CartItem);
             }
@@ -71,7 +55,7 @@ namespace BookCave.Services
         public int RemoveFromCart(int id)
         {
             //get the cart
-            var cartitem = _StoreDb.Carts.Single(
+            var cartitem = _StoreDb.Carts.SingleOrDefault(
                             cart => cart.CartId == ShoppingCartId
                             && cart.BookId == id);
             int itemcount = 0;
