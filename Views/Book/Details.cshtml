@@ -1,5 +1,6 @@
 @model BookCave.Models.ViewModels.BookAndReviewListViewModel
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     ViewData["Title"] = "Book details";
 }
@@ -101,7 +102,15 @@
 	</div>
 </div>
 <div>
-    <a class="btn btn-primary" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.BookId">Edit this book</a>
+    @if (this.User.IsInRole("Admin"))
+    {
+        <a class="btn btn-primary" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.BookId">Edit this book</a>
+    }
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <input type="hidden" id="BookId" value="@Model.BookId">
+        <a class="btn btn-default" id="change-favorite-book">Make this book your favorite</a>
+    }
 </div>
 <hr>
 <br>
