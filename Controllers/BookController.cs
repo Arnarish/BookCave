@@ -101,9 +101,11 @@ namespace BookCave.Controllers
             _bookService.AddBook(model);
             return RedirectToAction("Index", "User");
         }
+        [HttpGet]
+        [Authorize(Roles="Admin")]
         public IActionResult Edit(int? id)
         {   
-            var book = _bookService.GetBookById(id);
+            var book = _bookService.GetBookViewModelById(id);
             return View(book);
         }
         [HttpPost]
@@ -114,7 +116,8 @@ namespace BookCave.Controllers
             {
                 return View();
             }
-            _bookService.UpdateBook(model);
+            var book = _bookService.GetBookById(model.BookId);
+            _bookService.UpdateBook(book, model);
             return RedirectToAction("Index", "Home");
         }
         public IActionResult AddBookToWaitingList(int? id)
