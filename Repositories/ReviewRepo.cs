@@ -26,6 +26,11 @@ namespace BookCave.Repositories
                                     UserId = a.UserId,
                                     BookId = a.BookId,
                                 }).ToList();
+            foreach (var r in bookreview)
+            {
+                var user = _db.Users.Where( u => u.UserId == r.UserId).Single();
+                r.User = user;
+            }
 
             return bookreview;
         }
