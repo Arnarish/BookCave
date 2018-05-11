@@ -40,6 +40,7 @@ namespace BookCave.Controllers
             }
             var book = _bookService.GetBookById(id);
             var reviews = _reviewService.GetAllReviewsByBookID(id);
+            reviews.Reverse();
             if(book == null)
             {
                 return RedirectToAction("Index", "Home");

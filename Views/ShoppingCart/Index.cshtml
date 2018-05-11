@@ -8,18 +8,20 @@
 </h3>
 <div id="update-message">
 </div>
-
-<table>
-    <tr>
-        <th>Book Name </th>
-        <th> Price(each) </th>
-        <th> Quantity</th>
-        <th></th>
-    </tr>
+<div id="shoppingcart-whole">
+    
+    <table id="shopping-cart-table" class="table table-hover table-condensed">
+        <tr>
+            <th>Book Name </th>
+            <th> Price(each) </th>
+            <th> Quantity</th>
+            <th></th>
+        </tr>
     @foreach (var item in Model.CartItems)
     {
         <tr id="row-@item.BookId">
             <td>
+            <img src="@item.Book.Image" alt="@item.Book.Title" width="40" height="40">
             <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId">@item.Book.Title</a>&nbsp;
             </td>
             <td>
@@ -47,6 +49,7 @@
                 </a>
             </td>
         </tr>
+    
     }
     <tr>
         <td>
@@ -84,6 +87,7 @@
         </td>
     </tr>
 </table>
+</div>
 <br>
 
 <a asp-controller="Checkout" asp-action="Checkout" >
