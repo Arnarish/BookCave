@@ -13,35 +13,30 @@
         <img id="Details-photo" src="@Model.Image" alt="coverimage" width="160" height="240">
         <ul type="none" class="left-view-box-details-list">
             <li><h2>By: <a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@Model.BookId">@Model.Author</a><h2></li>
+            <li class="list-group-item"> Published: @Model.ReleaseYear</li>
             <li class="list-group-item"> Genre: @Model.Genre</li> 
             <li class="list-group-item"> ISBN: @Model.ISBN</li>
         </ul>
     </div>
     <div class="view-box-book-details" id="right-view-box">
-            @if (Model.Stock != 0)
-            {
-                <span id="in-stock-text">In stock: @Model.Stock</span>
-            }
-            else{
-                <span id="out-of-stock-text">Out of stock</span>
-            }
-            @if (Model.OnSale)
-            {
-                <div id="on-sale-text">
-                    <i><span id="discount-value">@Model.Discount</span>% discount, original price: $<span id="original-price">@Model.Price</span></i>
-                    <br>
-                </div>
-                <span>Price: $@Model.Price</span>
-            }
-            else{
-                <span>Price: $@Model.Price</span>
-            }
-            @if(Model.Stock == 0)
-            {
-                <!-- display none -->
-            }
-            
-        
+        @if (Model.Stock != 0)
+        {
+            <div id="in-stock-text"><b>In stock</b></div>
+        }
+        else{
+            <div id="out-of-stock-text"><i>Out of stock</i></div>
+        }
+        @if (Model.OnSale)
+        {
+            <div id="on-sale-text">
+                <i><span id="discount-value">@Model.Discount</span>% discount, original price: $<span id="original-price">@Model.Price</span></i>
+                <br>
+            </div>
+            <div><h2><b>$@Model.Price</b></h2></div>
+        }
+        else{
+            <div><h2><b>$@Model.Price</b></h2></div>
+        }        
         @if(@Model.Stock != 0)
         {
             <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.BookId" class="add-to-cart-button">
