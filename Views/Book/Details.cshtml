@@ -28,7 +28,7 @@
             @if (Model.OnSale)
             {
                 <div id="on-sale-text">
-                    <i>@Model.Discount% discount, original price: $@Model.Price </i>
+                    <i><span id="discount-value">@Model.Discount</span>% discount, original price: $<span id="original-price">@Model.Price</span></i>
                     <br>
                 </div>
                 <span>Price: $@Model.Price</span>
