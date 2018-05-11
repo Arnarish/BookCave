@@ -148,6 +148,7 @@ namespace BookCave.Controllers
                     model.Image = "https://www.freeiconspng.com/uploads/profile-icon-9.png";
                 }
                 _userService.AddUser(model);
+                //merge guest shopping cart to new user
                 MigrateShoppingCart(model.Email.ToString());
 
                 return RedirectToAction("Index", "Home");
@@ -175,6 +176,7 @@ namespace BookCave.Controllers
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
             if(result.Succeeded)
             {
+                //update shopping cart from guest to the logged in user
                 MigrateShoppingCart(model.Email.ToString());
                 return RedirectToAction("Index", "Home");
             }
@@ -196,6 +198,8 @@ namespace BookCave.Controllers
 
         private void MigrateShoppingCart(string UserName)
         {
+            //use this function to migrate all orders from a user signed in as a guest when he logs in/registers a new account
+            //function finds all orders for the guest session id and updates them to the new username of the logged in user
             var cart = OrderService.GetCart(this.HttpContext);
 
             cart.MigrateCart(UserName);
@@ -205,7 +209,9 @@ namespace BookCave.Controllers
         }
         public IActionResult OrderHistory()
         {
+            //get all orders for a given name
             var OrderHistory = _checkoutService.GetOrderByUserName(User.Identity.Name);
+            //returns the OrderHistory view if user has purchases stored as order, else redirects to home.
             if(OrderHistory != null)
             {
                 return View(OrderHistory);

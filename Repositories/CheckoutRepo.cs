@@ -13,11 +13,13 @@ namespace BookCave.Repositories
 
         public void Add (Order order)
         {
+            //add a order to the database.
             _db.Orders.Add(order);
             _db.SaveChanges();
         }
         public bool ValidUserOrder(int Id, string UserName)
         {
+            //checks if the order is valid based on the user
             bool IsValid = _db.Orders.Any(
                         o => o.OrderId == Id
                         && o.Username == UserName);
@@ -25,6 +27,7 @@ namespace BookCave.Repositories
         }
         public List<UserOrderViewModel> GetOrdersByUserName(string UserName)
         {
+            //returns all orders for a given username as a viewmodel
             var UserOrders = (from u in _db.Orders
                     where u.Username == UserName
                     select new UserOrderViewModel
