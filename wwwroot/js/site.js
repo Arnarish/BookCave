@@ -114,31 +114,6 @@ $(function(){
   });
 });
 
-//discount price javascript
-/*
-var originalPrice = document.getElementById("bookPrice");
-var Discount = document.getElementById("bookDiscount");
-if(originalPrice != null && Discount != null)
-{
-    var newPrice = document.getElementById("priceAfterDiscount");
-
-    function discountCalculated(cost, disc)
-    {
-        var calculateDiscountOnOriginalPrice = cost * (disc / 100);
-        var finalPrice = cost - calculateDiscountOnOriginalPrice;
-
-        return Number((finalPrice).toFixed(2));
-    }
-
-    total = discountCalculated(originalPrice.innerHTML, Discount.innerHTML);
-    document.onload = originalPrice.style.display= "none";
-    document.onload = Discount.style.display= "none";
-
-    newPrice.innerHTML = total;
-}*/
-
-//waiting list buttonpress
-
 var waitingButton = document.getElementById("waiting-list-button");
 if(waitingButton != null)
 {
@@ -306,25 +281,3 @@ $("#remove-from-cart").click(function()
         });
     }
 });
-
-//calculating discount for multiple books
-var originalPrice = document.getElementById("bookPrice");
-var Discount = document.getElementById("bookDiscount");
-if(originalPrice != null && Discount != null)
-{
-    var newPrice = document.getElementById("priceAfterDiscount");
-
-    function discountCalculated(cost, disc)
-    {
-        var calculateDiscountOnOriginalPrice = cost * (disc / 100);
-        var finalPrice = cost - calculateDiscountOnOriginalPrice;
-
-        return Number((finalPrice).toFixed(2));
-    }
-
-    total = discountCalculated(originalPrice.innerHTML, Discount.innerHTML);
-    document.onload = originalPrice.style.display= "none";
-    document.onload = Discount.style.display= "none";
-
-    newPrice.innerHTML = total;
-}

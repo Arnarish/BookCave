@@ -23,7 +23,18 @@ namespace BookCave.Services
         }
         public List<BookListViewModel> GetTopTenBooks()
         {
-            return _bookRepo.GetTopTenBooks();
+            var books =  _bookRepo.GetTopTenBooks();
+            
+            foreach(var b in books)
+            {
+                if(b.OnSale)
+                {
+                    b.Price = Math.Round(b.Price - b.Price*((double)b.Discount/100), 2);
+                }
+            
+                b.ReviewScore = Math.Round(b.ReviewScore, 1);
+            }
+            return books;
         }
         public List<BookListViewModel> GetBooksByAuthor(int? id)
         {
@@ -32,7 +43,14 @@ namespace BookCave.Services
         public List<BookListViewModel> GetBooksByRandom()
         {
             var randomizedBooks = _bookRepo.GetThreeBooksByRandom();
-            
+
+            foreach(var b in randomizedBooks)
+            {
+                if(b.OnSale)
+                {
+                    b.Price = Math.Round(b.Price - b.Price*((double)b.Discount/100), 2);
+                }
+            }
             return randomizedBooks;
         }
 
@@ -71,7 +89,12 @@ namespace BookCave.Services
         }
         public Book GetBookById(int? id)
         {
-            return _bookRepo.GetBookById(id);
+            var book = _bookRepo.GetBookById(id);
+                if(book.OnSale)
+                {
+                    book.Price = Math.Round(book.Price - book.Price*((double)book.Discount/100), 2);
+                }
+            return book;
         }
         public void AddBook(BookInputModel model)
         {

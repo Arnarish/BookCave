@@ -37,23 +37,25 @@
             {
                 <ul type="NONE" class="individual-books-in-container">
                     <li><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId"><img src="@book.Image" alt="book-cover" width="80" height="120"></a></li>
-                    <li><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></li> 
+                    <li><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId"><i>@book.Title</i></a></li> 
                     <li><a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@book.BookId">@book.Author</a></li>
                     <li>@book.Genre</li>
                     <li>
-                        <div id="price-of-item-front-page"><b>$@book.Price</b></div>
-                        @if(@book.Stock == 0)
-                        {
-                            <p>out of stock.</p>
-                        }
-                        else
-                        {
-                            <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@book.BookId">
-                                <button type="button" class="btn btn-info btn-lg" class="add-to-cart-button">
-                                    <span class="glyphicon glyphicon-shopping-cart"></span>
-                                </button>
-                            </a>
-                        }
+                            @if(@book.Discount != 0 || @book.OnSale)
+                            {
+                                <span id="on-sale-text">On sale: <b>$@book.Price</b></span>
+                            }
+                            else
+                            {
+                                <b>$@book.Price</b>
+                            }
+                        </li>
+                    <li>
+                        <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@book.BookId">
+                            <button type="button" class="btn btn-info btn-lg" class="add-to-cart-button">
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                            </button>
+                        </a>
                     </li>
                 </ul>
             }
