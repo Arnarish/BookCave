@@ -42,7 +42,8 @@
         On sale</label>
     </div>
     <div class="form-group">
-        <input type="number" name="Discount" class="form-control" placeholder="Enter Discount...">
+        <input type="number" asp-for="Discount" class="form-control" placeholder="Enter Discount...">
+        <span asp-validation-for="Discount" class="text-danger"></span>
     </div>
     <div class="form-group">
         <input type="text" asp-for="Image" class="form-control" placeholder="Enter Image URL...">

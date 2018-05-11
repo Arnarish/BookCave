@@ -17,11 +17,14 @@ namespace BookCave.Models.InputModels
         [Required]
         public string ISBN { get; set; }
         [Required]
+        [Range(0, double.MaxValue)]
         public double Price { get; set; }
         [Required]
         public int Stock { get; set; }
         public bool TopSeller { get; set; }
         public bool OnSale { get; set; }
+        [Required]
+        [Range(0, 100)]
         public int Discount { get; set; }
         [Required]
         public string Image { get; set; }
