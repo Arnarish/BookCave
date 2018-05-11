@@ -248,9 +248,19 @@
 
 #navbar
 {
+    padding-top: 0%;
+    padding-bottom: 0%;
     background-color: rgb(51, 122, 183);
     border: hidden;
     font-size: 20px;
     font-weight: bold;
 }
-
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+.navbar-inverse .btn-link {
+    color: white;
+}
+.btn-default {
+    margin-top: 5px;
+}
