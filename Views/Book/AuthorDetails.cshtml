@@ -20,7 +20,16 @@
             <td><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a></td> 
             <td>@book.Genre</td>
             <td>
-                <div id="price-of-item-front-page"><b>$@book.Price</b></div>
+                <div id="price-of-item-front-page">                           
+                    @if(@book.OnSale)
+                    {
+                        <span id="on-sale-text">On sale: <b>$@book.Price</b></span>
+                    }
+                    else
+                    {
+                        <b>$@book.Price</b>
+                    }
+                </div>
                 <button type="button" class="btn btn-info btn-lg">
                     <span class="glyphicon glyphicon-shopping-cart"></span>
                 </button>

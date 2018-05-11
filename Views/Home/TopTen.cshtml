@@ -22,7 +22,7 @@
                 <td><a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@book.BookId">@book.Author</a></td>
                 <td>@book.ReleaseYear</td>
                 <td>
-                    @if(@book.Discount != 0 || @book.OnSale)
+                    @if(@book.OnSale)
                             {
                                 <span id="on-sale-text">On sale: <b>$@book.Price</b></span>
                             }
