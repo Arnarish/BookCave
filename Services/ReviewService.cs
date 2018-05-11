@@ -17,9 +17,9 @@ namespace BookCave.Services
         }
         public List<ReviewListViewModel> GetAllReviewsByBookID(int? id)
         {
-            var book = _ReviewRepo.GetAllReviewsByBookID(id);
+            var reviews = _ReviewRepo.GetAllReviewsByBookID(id);
 
-            return book;
+            return reviews;
         }
         public void AddReview(ReviewInputModel model)
         {
@@ -35,6 +35,7 @@ namespace BookCave.Services
         public UserViewModel AddReviewsToViewModel(UserViewModel model)
         {
             model.Reviews = _ReviewRepo.GetAllReviewsByUserID(model.UserId);
+            model.Reviews.Reverse();
             return model;
         }
     }

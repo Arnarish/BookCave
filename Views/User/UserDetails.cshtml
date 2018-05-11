@@ -6,7 +6,8 @@
 <h2>Profile info for @Model.FullName</h2>
 <div>
     <div>
-        <img src="@Model.Image" alt="@Model.FullName" height="80" width="80">
+        <img class="profile-photo" src="@Model.Image" alt="@Model.FullName" height="80" width="80">
+        <div class="profile">
         <p>Full name: @Model.FullName</p>
         <p>Email @Model.Email</p>
         <p>Address: @Model.Address</p>
@@ -22,11 +23,11 @@
            {
                 <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.FavoriteBookId">@Model.FavoriteBook</a>
            } 
-            </p>           
+            </p>
+        </div>           
     </div>
     
 </div>
-<hr>
 
 
 <fieldset class="form-group">
@@ -39,22 +40,23 @@
         </ul>
         <h2>Average rating: <span id="average-value"></span> out of 5</h2>
     <div>
-        <ul type="NONE" id="list-of-reviews">
+        <ul type="NONE" class="list-of-reviews">
             @foreach(var review in Model.Reviews)
             {
-                <hr>
+                <div class="profile-comment-content">
                 <li class="review-block">
                 <a asp-controller="Book" asp-action="Details" asp-route-id="@review.Book.BookId">
-                    <img src="@review.Book.Image" alt="@review.Book.Title" width="80" height="80">
+                    <img class="profile-comment-photo" src="@review.Book.Image" alt="@review.Book.Title" width="80" height="80">
                 </a>
+                <div class="review-content">
                 <span>book: <a asp-controller="Book" asp-action="Details" asp-route-id="@review.Book.BookId">@review.Book.Title</a></span>
                 <span>Rating: @review.Rating</span>
-                <div>
                     <h4>Comment:</h4>
                     <span>@review.Comment</span>
                 </div>
                 </li>
-                
+                </div>
+                <br>
             }
         </ul>
     </div>
