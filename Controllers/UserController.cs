@@ -206,7 +206,12 @@ namespace BookCave.Controllers
         public IActionResult OrderHistory()
         {
             var OrderHistory = _checkoutService.GetOrderByUserName(User.Identity.Name);
-            return View(OrderHistory);
+            if(OrderHistory != null)
+            {
+                return View(OrderHistory);
+            }
+            return RedirectToAction("Index", "Home");
+            
         }
     }
 }

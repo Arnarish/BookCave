@@ -19,6 +19,6 @@ namespace BookCave.Data.EntityModels
         public string Email      { get; set; }
         public double Total     { get; set; }
         public DateTime OrderDate      { get; set; }
-        public List<OrderDetails> OrderDetails { get; set; }
+        public virtual List<OrderDetails> OrderDetails { get; set; }
     }
 }

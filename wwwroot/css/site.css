@@ -179,7 +179,7 @@
     border-radius: 25px;
     padding-left: 20px;
 }
-#profile{
+.profile{
     overflow: hidden;
     padding-left: 10px;
     height: 220px;
@@ -188,7 +188,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 2, 4, 0.2);
     padding-right: 300px;
 }
-#profile-photo{
+.profile-photo{
     float: left;
     box-shadow: 0 4px 8px 0 rgba(0, 2, 4, 0.2);
     width: 200px;
@@ -198,12 +198,12 @@
     float: right;
     margin: 5px;
 }
-#profile-comment-photo{
+.profile-comment-photo{
     float: left;
     height: 150px;
     
 }
-#profile-comment-content{
+.profile-comment-content{
     background-color: rgb(245, 245, 245);
     border-radius: 25px;
     overflow: hidden;
@@ -211,7 +211,7 @@
     padding-right: 0px;
     
 }
-#review-content{
+.review-content{
     padding-left: 90px;
 }
 #search-results-container
@@ -235,7 +235,7 @@
 {
     padding-top: 2%;
 }
-#list-of-reviews
+.list-of-reviews
 {
     padding-left: 0;
     padding-right: 0;
@@ -248,9 +248,30 @@
 
 #navbar
 {
+    padding-top: 0%;
+    padding-bottom: 0%;
     background-color: rgb(51, 122, 183);
     border: hidden;
     font-size: 20px;
     font-weight: bold;
 }
 
+.navbar-inverse .navbar-nav > li > a 
+{
+    color: white;
+}
+.navbar-inverse .btn-link 
+{
+    color: white;
+}
+.btn-default {
+    margin-top: 5px;
+}
+
+#shoppingcart-whole
+{
+    background: rgb(245, 245, 245);
+    padding: 10px;
+    margin-right: 40%;
+    
+}

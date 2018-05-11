@@ -1,4 +1,52 @@
-@model BookCave.Models.UserOrderViewModel
+@model List<BookCave.Models.ViewModels.UserOrderViewModel>
 @{
-    ViewData["Title"] = "Order History"
+    ViewData["Title"] = "Order History";
 }
+<h2>@Model[0].FullName's order history</h2>
+<div class="container">
+	<div class="row">
+		<div class="table-responsive">
+    @foreach(var Order in Model)
+    {
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Book Name</th>
+            <th>Quantity</th>
+            <th>Price(each)</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach(var Detail in Order.OrderDetails)
+            {
+                <tr>
+                    <td>
+                        @Detail.Books.Title
+                    </td>
+                    <td>
+                        @Detail.BookQuantity
+                    </td>
+                    <td>
+                        @Detail.UnitPrice
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                Ordered: @Order.OrderDate
+                </td>
+                <td>
+                <p>Total price: </p>
+                </td>
+                <td>
+                <p>@Order.Total</p>
+                </td>
+            </tr>
+        </tfoot>
+      </table>
+    }
+    </div>
+	</div>
+</div>
