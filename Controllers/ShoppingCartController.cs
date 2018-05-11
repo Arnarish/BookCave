@@ -1,16 +1,20 @@
+using System;
 using System.Linq;
 using System.Web;
 using BookCave.Data;
 using BookCave.Models.ViewModels;
 using BookCave.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BookCave.Controllers
 {
     public class ShoppingCartController : Controller
     {
         private BookService _bookService = new BookService();
+        private int CartCount = 0;
 
 
         [Authorize]
@@ -30,11 +34,15 @@ namespace BookCave.Controllers
         {
             //get book from the database
             var addedBook = _bookService.GetBookById(id);
+            
 
             //add it to the shopping cart
             var cart = OrderService.GetCart(this.HttpContext);
 
             cart.AddToCart(addedBook);
+
+            CartCount++;
+            CartCounter(this.HttpContext);
 
             return RedirectToAction("Index", "Home"); 
         }
@@ -53,6 +61,13 @@ namespace BookCave.Controllers
                 DeleteId = id
             };
 
+            CartCount = 0;
+            CartCounter(this.HttpContext);
+
+            if(result.CartTotal == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return Json(result);
         }
         [HttpPost]
@@ -69,7 +84,12 @@ namespace BookCave.Controllers
                 CartItems = cart.GetCartItems(),
                 CartTotal = cart.GetTotal()
                 };
-
+            CartCount++;
+            CartCounter(this.HttpContext);
+            if(viewModel.CartTotal == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return Json(viewModel);
 
         }
@@ -89,8 +109,27 @@ namespace BookCave.Controllers
                 ItemCount = itemCount,
                 DeleteId = id
             };
-
+            if(result.CartTotal == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            CartCount--;
+            CartCounter(this.HttpContext);
             return Json(result);
+        }
+        //this function handles the cart counter in the shared layout
+        public void CartCounter(HttpContext context)
+        {
+            var key = context.User.Identity.Name;
+
+            var cart = OrderService.GetCart(this.HttpContext);
+
+            if(CartCount <= 0)
+            {
+                CartCount = 0;
+            }
+            //stores the number of items in the cart as int in the session, the session is then read in the _layout view and changed to string.
+            context.Session.SetInt32(key, CartCount);
         }
     }
 }

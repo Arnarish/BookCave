@@ -15,83 +15,83 @@ namespace BookCave.Repositories
 {
     public class OrderRepo
     {
-        private Datacontext _StoreDb = new Datacontext();
+        private Datacontext _storeDb = new Datacontext();
         public void AddToCart(Book book, string ShoppingCartId)
         {   
-            var CartItem = _StoreDb.Carts.SingleOrDefault(
+            var cartItem = _storeDb.Carts.SingleOrDefault(
                                         c => c.CartId == ShoppingCartId
                                         && c.BookId == book.BookId);
-            if(CartItem == null)
+            if(cartItem == null)
             {
                 //no items in cart
-                CartItem = new Cart 
+                cartItem = new Cart 
                 {
                     CartId = ShoppingCartId,
                     BookId = book.BookId,
                     Count = 1,
                     DateCreated = DateTime.Now,
                 };
-                _StoreDb.Carts.Add(CartItem);
+                _storeDb.Carts.Add(cartItem);
             }
             else
             {
                 //if the book exists in the cart, increase the quantity
-                CartItem.Count++;
+                cartItem.Count++;
             }            
-            _StoreDb.SaveChanges();
+            _storeDb.SaveChanges();
         }
 
         public int DecBook(Cart CartItem)
         {
-            int Count = 0;
-            var incItem = _StoreDb.Carts.SingleOrDefault(
+            int count = 0;
+            var incItem = _storeDb.Carts.SingleOrDefault(
                                                  i => i.CartId == CartItem.CartId
                                                 && i.BookId == CartItem.BookId);
             if(CartItem.Count > 1)
             {
                 incItem.Count--;
-                Count = incItem.Count;
+                count = incItem.Count;
             }
             else
             {
-                _StoreDb.Carts.Remove(CartItem);
+                _storeDb.Carts.Remove(CartItem);
             }
 
-            _StoreDb.SaveChanges();
+            _storeDb.SaveChanges();
 
-            return Count;
+            return count;
         }
 
         public int RemoveFromCart(int id, string ShoppingCartId)
         {
-            var CartItem = _StoreDb.Carts.SingleOrDefault(
+            var cartItem = _storeDb.Carts.SingleOrDefault(
                             cart => cart.CartId == ShoppingCartId
                             && cart.BookId == id);
-            int ItemCount = 0;
+            int itemCount = 0;
             
-            if(CartItem != null)
+            if(cartItem != null)
             {
-                if(CartItem.Count > 1)
+                if(cartItem.Count > 1)
                 {
-                    CartItem.Count--;
-                    ItemCount = CartItem.Count;
+                    cartItem.Count--;
+                    itemCount = cartItem.Count;
                 }
                 else
                 {
-                    _StoreDb.Carts.Remove(CartItem);
+                    _storeDb.Carts.Remove(cartItem);
                 }
             }       
-            _StoreDb.SaveChanges();
+            _storeDb.SaveChanges();
 
-            return ItemCount;
+            return itemCount;
         }
         public int RemoveAllFromCart(int id, string ShoppingCartId)
         {
-            var CartItem = _StoreDb.Carts.SingleOrDefault(
+            var CartItem = _storeDb.Carts.SingleOrDefault(
                             cart => cart.CartId == ShoppingCartId
                             && cart.BookId == id);
-            _StoreDb.Carts.Remove(CartItem);
-            _StoreDb.SaveChanges();
+            _storeDb.Carts.Remove(CartItem);
+            _storeDb.SaveChanges();
 
             return (int)0;
         }
@@ -99,23 +99,23 @@ namespace BookCave.Repositories
             
         public void EmptyCart(string ShoppingCartId)
         {
-            var cartItems = _StoreDb.Carts.Where(
+            var cartItems = _storeDb.Carts.Where(
                     cart => cart.CartId == ShoppingCartId);
             foreach(var item in cartItems)
             {
-                _StoreDb.Carts.Remove(item);
+                _storeDb.Carts.Remove(item);
             }
-            _StoreDb.SaveChanges();
+            _storeDb.SaveChanges();
         }
         public void MigrateCart(string UserName, string ShoppingCartId)
         {
-            var shoppingCart = _StoreDb.Carts.Where(
+            var shoppingCart = _storeDb.Carts.Where(
                     c => c.CartId == ShoppingCartId);
             foreach(Cart item in shoppingCart)
             {
                 item.CartId = UserName;
             }
-            _StoreDb.SaveChanges();
+            _storeDb.SaveChanges();
         }
         public int CreateOrder(Order order, string ShoppingCartId)
         {
@@ -130,24 +130,25 @@ namespace BookCave.Repositories
                     OrderId = order.OrderId,
                     BookId = item.BookId,
                     BookQuantity = item.Count,
-                    UnitPrice = Math.Round(item.Book.Price * (1-((double)item.Book.Discount / 100)))
+                    UnitPrice = Math.Round(item.Book.Price * (1-((double)item.Book.Discount / 100)), 2, MidpointRounding.AwayFromZero)
                 };
                 
-                orderTotal += Math.Round((item.Book.Price * (1-((double)item.Book.Discount / 100))) * item.Count, 2);
-                _StoreDb.OrderDetails.Add(orderDetails);
-            }
+                orderTotal += Math.Round((item.Book.Price * (1-((double)item.Book.Discount / 100))) * item.Count, 2, MidpointRounding.AwayFromZero);
+                _storeDb.OrderDetails.Add(orderDetails);
+            }   
             //set order total to ordertotal Count
             if(orderTotal < 50)
             {
                 // add $5 to the order to acCount for shipping cost
-                order.Total = (float)(orderTotal + (double)5);
+                order.Total = Math.Round((orderTotal + (double)5), 2, MidpointRounding.AwayFromZero);
             }
             else
             {
-                order.Total = (float)orderTotal;
+                order.Total = orderTotal;   
             }
             //save the order
-            _StoreDb.SaveChanges();
+            _storeDb.Orders.Update(order);
+            _storeDb.SaveChanges();
             //empty the cart
             EmptyCart(ShoppingCartId);
             //return the order id as a confirmation number
@@ -155,22 +156,22 @@ namespace BookCave.Repositories
         }
         public List<Cart> GetCartItems(string ShoppingCartId)
         {
-            var item = _StoreDb.Carts.Where(
+            var item = _storeDb.Carts.Where(
                         cart => cart.CartId == ShoppingCartId)
                         .ToList();
             foreach ( var c in item ) {
-                var book = _StoreDb.Books.Where( b => b.BookId == c.BookId ).Single();
+                var book = _storeDb.Books.Where( b => b.BookId == c.BookId ).Single();
                 c.Book = book;
             }
             return item;
         }
         public int GetCount(string ShoppingCartId)
         {
-            int? Count = (from cartItems in _StoreDb.Carts
+            int? count = (from cartItems in _storeDb.Carts
                         where cartItems.CartId == ShoppingCartId
                         select (int?)cartItems.Count).Sum();
             //return 0 if all entries are null
-            return Count ?? 0;
+            return count ?? 0;
         }
         public double GetTotal(string ShoppingCartId)
         {
@@ -191,7 +192,7 @@ namespace BookCave.Repositories
         }
         public List<OrderDetails> getOrderDetails(int id)
         {
-            return _StoreDb.OrderDetails.Where(od => od.OrderId == id).ToList();
+            return _storeDb.OrderDetails.Where(od => od.OrderId == id).ToList();
         }
     }
 }

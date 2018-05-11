@@ -23,9 +23,9 @@ namespace BookCave.Services
 
         public List<UserOrderViewModel> GetOrderByUserName(string UserName)
         {
-            var UserOrders = _checkRepo.GetOrdersByUserName(UserName);
+            var userOrders = _checkRepo.GetOrdersByUserName(UserName);
             
-            foreach(var order in UserOrders)
+            foreach(var order in userOrders)
             {
                 order.OrderDetails = _orderRepo.getOrderDetails(order.OrderId);
                 foreach(var book in order.OrderDetails)
@@ -33,7 +33,7 @@ namespace BookCave.Services
                         book.Books = _bookRepo.GetOrderDetailsBooks(book.BookId);
                     }
             }
-            return UserOrders;
+            return userOrders;
         }
         public Order AddOrderDetails(Order order)
         {
