@@ -130,17 +130,17 @@ namespace BookCave.Repositories
                     OrderId = order.OrderId,
                     BookId = item.BookId,
                     BookQuantity = item.count,
-                    UnitPrice = item.Book.Price
+                    UnitPrice = Math.Round(item.Book.Price * (1-((double)item.Book.Discount / 100)))
                 };
                 
                 orderTotal += Math.Round((item.Book.Price * (1-((double)item.Book.Discount / 100))) * item.count, 2);
                 _StoreDb.OrderDetails.Add(orderDetails);
             }
             //set order total to ordertotal count
-            if(orderTotal > 50)
+            if(orderTotal < 50)
             {
                 // add $5 to the order to account for shipping cost
-                order.Total = (orderTotal + 5);
+                order.Total = (orderTotal + (double)5);
             }
             else
             {

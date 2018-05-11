@@ -68,7 +68,7 @@ namespace BookCave.Controllers
                 //Add and save order
                 _checkoutS.Add(Order);
 
-                cart.CreateOrder(Order);
+                int OrderId = cart.CreateOrder(Order);
 
                 return RedirectToAction("Complete", new { id = Order.OrderId });
             }
