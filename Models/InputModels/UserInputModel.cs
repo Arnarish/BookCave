@@ -5,6 +5,7 @@ namespace BookCave.Models.InputModels
     public class UserInputModel
     {
         [Required (ErrorMessage ="Name is required")]
+        [MaxLength(28)]
         public string FullName { get; set; }
         public string Email { get; set; }
         [Required (ErrorMessage ="Image is required")]

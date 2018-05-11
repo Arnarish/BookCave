@@ -31,7 +31,6 @@ namespace BookCave.Controllers
             
             return View(books);
         }
-
         public IActionResult Details(int? id)
         {
             if(id == null)
@@ -72,7 +71,7 @@ namespace BookCave.Controllers
         [Authorize]
         public IActionResult Details(ReviewInputModel model)
         {
-            //create a review
+            //we use the details httppost to add a review to the database
             if(model.Comment == null)
             {
                 model.Comment = "[User left no review]";
@@ -88,7 +87,6 @@ namespace BookCave.Controllers
             _reviewService.AddReview(model);
             return RedirectToAction("Details", model.BookId);
         }
-        
         public IActionResult AuthorDetails(int? id)
         {
             var books = _bookService.GetBooksByAuthor(id);
@@ -104,6 +102,7 @@ namespace BookCave.Controllers
         [HttpPost]
         public IActionResult Create(BookInputModel model)
         {
+            //This adds another book to the database
             if(!ModelState.IsValid)
             {
                 return View();
@@ -122,6 +121,7 @@ namespace BookCave.Controllers
         [Authorize(Roles="Admin")]
         public IActionResult Edit(BookInputModel model)
         {
+            //This updates the Book based on the changes made
             if(!ModelState.IsValid)
             {
                 return View();
@@ -134,6 +134,7 @@ namespace BookCave.Controllers
         [HttpPost]
         public IActionResult RemoveBook(int id)
         {
+            //Get the Book then remove it
             var book = _bookService.GetBookById(id);
             _bookService.RemoveBook(book);
             return RedirectToAction("Index", "Home");
