@@ -264,3 +264,13 @@ $("#remove-from-cart").click(function()
         });
     }
 });
+
+//recalculate original price after discount
+
+var newPrice = document.getElementById("original-price");
+var disc = document.getElementById("discount-value");
+if(disc != null && newPrice != null)
+{
+    var oldPrice = (newPrice.innerHTML / (1 - disc.innerHTML/100)).toFixed(2);
+    newPrice.innerHTML = oldPrice;
+}
