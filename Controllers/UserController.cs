@@ -210,11 +210,12 @@ namespace BookCave.Controllers
         public IActionResult OrderHistory()
         {
             //get all orders for a given name
-            var OrderHistory = _checkoutService.GetOrderByUserName(User.Identity.Name);
+            var orderHistory = _checkoutService.GetOrderByUserName(User.Identity.Name);
             //returns the OrderHistory view if user has purchases stored as order, else redirects to home.
-            if(OrderHistory != null)
+            orderHistory.Reverse();
+            if(orderHistory != null)
             {
-                return View(OrderHistory);
+                return View(orderHistory);
             }
             return RedirectToAction("Index", "Home");
             
