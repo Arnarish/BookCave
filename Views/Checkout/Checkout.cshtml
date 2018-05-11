@@ -11,7 +11,7 @@
                         Review Your Order & Complete Checkout
                     </h2>
                     <hr/>
-                    <a asp-action="Index" asp-controller="Home" class="btn btn-info" style="width: 100%;">Add More Books</a>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-info" style="width: 100%;">I'm not done shopping, take me back!</a>
                     <hr/>
                     <div class="shopping_cart">
                         <form class="form-horizontal" role="form" action="" method="post" id="payment-form">
@@ -38,7 +38,7 @@
                                                                 <ul>
                                                                     @foreach (var item in Model.CartItems)
                                                                     {
-                                                                        <li><h4>@item.count x - @item.Book.Title</h4></li>
+                                                                        <li><h4>@item.Count x - @item.Book.Title</h4></li>
                                                                     }
                                                                 </ul>
                                                             </td>

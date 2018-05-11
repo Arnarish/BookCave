@@ -27,24 +27,22 @@
             <td>
             @if(!item.Book.OnSale)
             {
-                @item.Book.Price
+                <span id="Price-@item.BookId">@item.Book.Price</span>
             }
             else
             {
                 double price = Math.Round((item.Book.Price * (1 - ((double)item.Book.Discount / 100))), 2);
                 
-                <p>@price</p>
+                <span id="Price-@item.BookId">@price</span>
             }
             </td>
-            <td id="item-count-@item.BookId">
-            <button class="btn" id="dec" type="button" data-id="@item.BookId">-</button>
-            <span id="quantity">@item.count</span>
-            <button class="btn"id="inc" type="button" data-id="@item.BookId">+</button>
+            <td>
+            <button class="btn dec" type="button" data-id="@item.BookId">-</button>
+            <span id="item-count-@item.BookId">@item.Count</span>
+            <button class="btn inc" type="button" data-id="@item.BookId">+</button>
             </td>
             <td>
-                <a>
                     &nbsp;<button class="RemoveLink btn btn-danger btn-sm" data-id="@item.BookId">Remove from cart</button>
-                </a>
             </td>
         </tr>
     
@@ -57,8 +55,8 @@
         </td>
         <td>
         </td>
-        <td id="cart-total">
-            $@Model.CartTotal
+        <td >
+            <p>$<span id="cart-total">@Model.CartTotal</span></p>
         </td>
     </tr>
     <tr>
@@ -70,17 +68,13 @@
         <td>
         </td>
         <td>
-            @if(Model.CartTotal >= 50)
-            {
-                <p>Free</p>
-            }
-            else if(Model.CartTotal < 1)
+            @if(Model.CartTotal < 1)
             {
                 <p>No books means nothing to ship!<br> please consider buying a book.</p>
             }
             else
             {
-                <P>$ 5</P>
+                <P>$5 will be charged for orders under $50</P>
             }
         </td>
     </tr>

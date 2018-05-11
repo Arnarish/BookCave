@@ -155,7 +155,7 @@ if(ratingsList != null){
 
 $(function ()
 {
-    $("#dec").click(function ()
+    $(".dec").click(function ()
     {
         // Get the id from the link
         var recordToDelete = $(this).attr("data-id");
@@ -167,13 +167,17 @@ $(function ()
                 {
                     // Successful requests get here
                     // Update the page elements
-                    if (data.ItemCount == 0) {
-                        $('#row-' + data.DeleteId).fadeOut('slow');
+                    var price = $('#Price-' + recordToDelete).text();
+                    var total = $('#cart-total').text();
+                    var itemCount = $('#item-count-' + recordToDelete).text();
+                    // if theres only one item in the cart, fade the row out.
+                    if (itemCount < 2) 
+                    {
+                        $('#row-' + recordToDelete).fadeOut('slow');
                     } else {
-                        $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        $('#item-count-' + recordToDelete).html(parseInt(itemCount) - parseInt(1));
                     }
-                    $('#cart-total').text(data.CartTotal);
-                    $('#cart-status').text('Cart (' + data.CartCount + ')');
+                    $('#cart-total').html(parseInt(total) - parseInt(price));
                 });
         }
     });
@@ -181,7 +185,7 @@ $(function ()
 
 $(function ()
 {
-    $("#inc").click(function ()
+    $(".inc").click(function ()
     {
         // Get the id from the link
         var recordToAdd = $(this).attr("data-id");
@@ -193,9 +197,11 @@ $(function ()
                 {
                     // Successful requests get here
                     // Update the page elements
-                    $('#item-count-' + data.recordToAdd).text(+ ($(this).text())+1);
-                    $('#cart-total').text(data.CartTotal);
-                    $('#cart-status').text('Cart (' + data.CartCount + ')');
+                    var price = $('#Price-' + recordToAdd).text();
+                    var total = $('#cart-total').text();
+                    var itemCount = $('#item-count-' + recordToAdd).text();
+                    $('#item-count-' + recordToAdd).html(parseInt(itemCount) + parseInt(1));
+                    $('#cart-total').html(parseInt(total) + parseInt(price));
                 });
         }
     });
@@ -215,9 +221,12 @@ $(function ()
                 {
                     // Successful requests get here
                     // Update the page elements
-                    $('#row-' + data.DeleteId).fadeOut('slow');
-                    $('#cart-total').text(data.CartTotal);
-                    $('#cart-status').text('Cart (' + data.CartCount + ')');
+                    var price = $('#Price-' + recordToDelete).text();
+                    var total = $('#cart-total').text();
+                    var itemCount = $('#item-count-' + recordToDelete).text();
+                    var bookSum = parseInt(price) * parseInt(itemCount);
+                    $('#row-' + recordToDelete).fadeOut('slow');
+                    $('#cart-total').html(parseInt(total) - parseInt(bookSum));
                 });
         }
     });

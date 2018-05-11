@@ -26,7 +26,7 @@ namespace BookCave.Controllers
               CartItems = cart.GetCartItems(),
               CartTotal = cart.GetTotal()
             };
-            if(viewModel.CartTotal <= 0)
+            if(viewModel.CartTotal < 1)
             {
                 return RedirectToAction("Index", "ShoppingCart");
             }
@@ -38,6 +38,7 @@ namespace BookCave.Controllers
         {
             var Order = new Order();
             var cart = OrderService.GetCart(this.HttpContext);
+            TryUpdateModelAsync(Order);
             
 
             try
