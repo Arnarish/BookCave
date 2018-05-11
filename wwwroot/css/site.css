@@ -228,7 +228,7 @@
     padding-top: 8px;
     padding-bottom: 4px;
     background-color: rgb(51, 122, 183);
-    color: snow;
+    color: white;
 }
 
 #filter-and-results-container > h1
@@ -239,4 +239,17 @@
 {
     padding-left: 0;
     padding-right: 0;
+}
+#on-sale-text
+{
+    color: green;
+    font-weight: bold;
+}
+
+#navbar
+{
+    background-color: rgb(51, 122, 183);
+    border: hidden;
+    font-size: 20px;
+    font-weight: bold;
 }

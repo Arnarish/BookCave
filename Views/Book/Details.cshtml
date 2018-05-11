@@ -28,15 +28,13 @@
             @if (Model.OnSale)
             {
                 <div id="on-sale-text">
-                    <span id="bookPrice">@Model.Price</span>
-                    <span id="bookDiscount">@Model.Discount</span>
                     <i>@Model.Discount% discount, original price: $@Model.Price </i>
                     <br>
-                    <span id="priceAfterDiscount"></span>
                 </div>
+                <span>Price: $@Model.Price</span>
             }
             else{
-                <span>Price: @Model.Price$</span>
+                <span>Price: $@Model.Price</span>
             }
             @if(Model.Stock == 0)
             {
@@ -86,7 +84,7 @@
                                     <input type="hidden" name="BookAverageRating" value="@Model.ReviewScore">
                                     <input type="hidden" name="AmountOfRatings" value="@Model.Reviews.Count()">
                                     <div class="text-right">
-                                        <!--<div class="stars starrr" data-rating="0"></div>-->
+                                        <p>Please leave a rating between 1-5</p>
                                         <input id="number" type="number" name="Rating" value="1" min="1" max="5" >
                                         <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
                                         <span class="glyphicon glyphicon-remove"></span>Cancel</a>

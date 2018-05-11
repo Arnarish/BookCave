@@ -56,6 +56,7 @@ namespace BookCave.Repositories
                                 Discount = a.Discount,
                                 Image = a.Image,
                           }).Take(10).ToList();
+
             return topTen;
         }
         public List<BookListViewModel> GetThreeBooksByRandom()

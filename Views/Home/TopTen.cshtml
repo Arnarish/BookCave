@@ -21,14 +21,39 @@
                 <td id="title-from-top-ten"><a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId"><i>@book.Title</i></a></td> 
                 <td><a asp-controller="Book" asp-action="AuthorDetails" asp-route-id="@book.BookId">@book.Author</a></td>
                 <td>@book.ReleaseYear</td>
-                <td>$@book.Price</td>
+                <td>
+                    @if(@book.Discount != 0 || @book.OnSale)
+                            {
+                                <span id="on-sale-text">On sale: <b>$@book.Price</b></span>
+                            }
+                            else
+                            {
+                                <b>$@book.Price</b>
+                            }
+                    <div>
+                        @if(@book.Stock == 0)
+                        {
+                            <button type="button" class="btn btn-danger btn-lg" class="add-to-cart-button" disabled>
+                                    <span>Out of stock</span>
+                            </button>
+                        }
+                        else
+                        {
+                            <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@book.BookId">
+                                <button type="button" class="btn btn-info btn-lg" class="add-to-cart-button">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                </button>
+                            </a>
+                        }
+                    </div>
+                </td>
                 @if(@book.ReviewScore == 0)
                 {
                     <td>No ratings</td>
                 }
                 else
                 {
-                    <td>@book.ReviewScore</td>
+                    <td><h1>@book.ReviewScore</h1></td>
                 }
                 
             </tr>
