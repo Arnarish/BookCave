@@ -131,8 +131,7 @@ namespace BookCave.Controllers
         //this function handles the cart counter in the shared layout
         public void CartCounter(HttpContext context)
         {
-            //use the username as a session key to identify each user
-            var key = context.User.Identity.Name;
+            string key = context.Session.Id.ToString();
 
             if(CartCount <= 0)
             {

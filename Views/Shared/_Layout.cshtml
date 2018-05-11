@@ -1,5 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
+@{ 
+    @using Microsoft.AspNetCore.Http;
+}
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,11 +33,9 @@
                 <div class="nav navbar-right">
                     <span>&nbsp;</span>
                     <a class="cartCount">
-                        @{ 
-                            @using Microsoft.AspNetCore.Http;
-                        }
+                        
                         @* use session to keep count of items in the cart *@
-                        @Context.Session.GetInt32(Context.User.Identity.Name).ToString()
+                        @Context.Session.GetInt32(Context.Session.Id).ToString()
                     </a>
                     <a class="btn btn-default" asp-controller="ShoppingCart" asp-action="Index"><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/5641-200.png" alt="cart" width="30" height="30"></a>
                 </div>
