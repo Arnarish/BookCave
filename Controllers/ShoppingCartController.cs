@@ -10,7 +10,7 @@ namespace BookCave.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private Datacontext _StoreDb = new Datacontext();
+        private BookService _bookService = new BookService();
 
 
         [Authorize]
@@ -29,7 +29,7 @@ namespace BookCave.Controllers
         public IActionResult AddToCart(int id)
         {
             //get book from the database
-            var addedBook = _StoreDb.Books.SingleOrDefault(book => book.BookId == id);
+            var addedBook = _bookService.GetBookById(id);
 
             //add it to the shopping cart
             var cart = OrderService.GetCart(this.HttpContext);
@@ -61,7 +61,7 @@ namespace BookCave.Controllers
             var cart = OrderService.GetCart(this.HttpContext);
 
             //get book from the database
-            var addedBook = _StoreDb.Books.SingleOrDefault(book => book.BookId == id);
+            var addedBook = _bookService.GetBookById(id);
 
             cart.AddToCart(addedBook);
             var viewModel = new ShoppingCartViewModel
