@@ -1,5 +1,6 @@
 using BookCave.Data.EntityModels;
 using BookCave.Repositories;
+using System.Collections.Generic;
 using System.Web;
 
 namespace BookCave.Services
@@ -14,6 +15,11 @@ namespace BookCave.Services
         public bool ValidUserOrder(int Id, string UserName)
         {
             return _CheckRepo.ValidUserOrder(Id, UserName);            
+        }
+
+        public List<Order> GetOrderByUserName(string UserName)
+        {
+            return _CheckRepo.GetOrdersByUserName(UserName);
         }
     }
 }

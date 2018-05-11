@@ -13,6 +13,7 @@ namespace BookCave.Controllers
     {
         private ReviewService _reviewService;
         private UserService _userService;
+        private CheckoutService _checkoutService;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -21,6 +22,7 @@ namespace BookCave.Controllers
         {
             _reviewService = new ReviewService();
             _userService = new UserService();
+            _checkoutService = new CheckoutService();
             _signInManager = signInManager;
             _userManager = userManager;
             _roleManager = roleManager;
@@ -200,6 +202,11 @@ namespace BookCave.Controllers
             this.HttpContext.Session.Clear();
             cart.SetCartId(this.HttpContext);
             
+        }
+        public IActionResult OrderHistory()
+        {
+            var OrderHistory = _checkoutService.GetOrderByUserName(User.Identity.Name);
+            return View(OrderHistory);
         }
     }
 }
