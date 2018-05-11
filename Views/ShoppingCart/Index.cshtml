@@ -37,11 +37,9 @@
             }
             </td>
             <td id="item-count-@item.BookId">
-            <button class="btn dec" type="button" data-id="@item.BookId">-</button>
-            @item.count
-            <a asp-controller="ShoppingCart" asp-action="IncBook" asp-route-id="@item.BookId">
-            <button class="btn inc" type="button" data-id="@item.BookId">+</button>
-            </a>
+            <button class="btn" id="dec" type="button" data-id="@item.BookId">-</button>
+            <span id="quantity">@item.count</span>
+            <button class="btn"id="inc" type="button" data-id="@item.BookId">+</button>
             </td>
             <td>
                 <a>
