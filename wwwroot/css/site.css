@@ -295,6 +295,7 @@
 {
     width: 50%;
 }
+/* used for the cartcounter in _layout */
 .cartCount
 {
     pointer-events: none;
