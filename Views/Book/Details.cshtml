@@ -59,7 +59,10 @@
     {
         <div id="admin-button-details">
         <a class="btn btn-primary" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.BookId">Edit this book</a>
-        <button type="button" class="btn btn-danger" id="remove-book">Remove book</button>
+        <form asp-controller="Book" asp-action="RemoveBook" asp-route-id="@Model.BookId" method="post">
+            <input type="hidden" name="id" value="@Model.BookId">
+            <button type="submit"  class="btn btn-danger">Remove book</button>
+        </form>
         </div>
     }
     @if (SignInManager.IsSignedIn(User))
