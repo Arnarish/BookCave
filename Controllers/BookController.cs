@@ -71,6 +71,7 @@ namespace BookCave.Controllers
         [Authorize]
         public IActionResult Details(ReviewInputModel model)
         {
+            //create a review
             if(model.Comment == null)
             {
                 model.Comment = "[User left no review]";
@@ -89,10 +90,8 @@ namespace BookCave.Controllers
         
         public IActionResult AuthorDetails(int? id)
         {
-
-                var books = _bookService.GetBooksByAuthor(id);
-
-                return View(books);    
+            var books = _bookService.GetBooksByAuthor(id);
+            return View(books);    
         }
         [Authorize(Roles = "Admin")]
         [HttpGet]
@@ -131,13 +130,7 @@ namespace BookCave.Controllers
             _bookService.UpdateBook(book, model);
             return RedirectToAction("Index", "Home");
         }
-        public IActionResult AddBookToWaitingList(int? id)
-        {
-
-            var book = _bookService.GetBookById(id);
-            
-            return View();
-        }
+        [HttpPost]
         public IActionResult RemoveBook(int id)
         {
             var book = _bookService.GetBookById(id);
