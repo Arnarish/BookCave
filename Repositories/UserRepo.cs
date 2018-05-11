@@ -65,9 +65,9 @@ namespace BookCave.Repositories
                     select u).SingleOrDefault();
                     return retUser;
         }
-        public void AddUser(User model)
+        public void AddUser(User user)
         {
-            _db.Users.Add(model);
+            _db.Users.Add(user);
             _db.SaveChanges();
         }
         public void UpdateUser(User user)
