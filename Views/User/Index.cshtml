@@ -33,38 +33,40 @@
            } 
             </p>
         </div>  
-        <div id="profile-buttons">
+        <div class="profile-buttons">
         @if(claim == Model.Email)
         {
             <a class ="btn btn-primary" asp-controller="User" asp-action="OrderHistory">View all orders</a>
             <a class ="btn btn-primary" asp-controller="User" asp-action="EditProfile">Manage profile</a>
+            <br/>
+            @if (this.User.IsInRole("Admin"))
+            {
+                <div class="profile-buttons">
+                    <a class ="btn btn-primary" asp-controller="Book" asp-action="Create">Add a book</a>
+                    <a class ="btn btn-primary" asp-controller="User" asp-action="Register">Register a user</a>
+                </div>
+            }
         }
     </div>
-    </div>
+    
+
+</div>
     
 </div>
-@if (this.User.IsInRole("Admin"))
-{
-    <div>
-        <a class ="btn btn-primary" asp-controller="Book" asp-action="Create">Add a book</a>
-        <a class ="btn btn-primary" asp-controller="User" asp-action="Register">Register a user</a>
-    </div>
-}
-
 
 <fieldset class="form-group">
     <legend>Reviews: (@Model.Reviews.Count())</legend>
 
-    <div id="profile-comments-whole">
+    <div>
         <ul type="NONE" id="list-of-reviews">
             @foreach(var review in Model.Reviews)
             {
-                <hr>
+                <div id="profile-comment-content">
                 <li class="review-block">
                 <a asp-controller="Book" asp-action="Details" asp-route-id="@review.Book.BookId">
                     <img id="profile-comment-photo" src="@review.Book.Image" alt="@review.Book.Title" width="80" height="80">
                 </a>
-                <div id="profile-comment-content">
+                <div id="review-content">
                 <span>book: <a asp-controller="Book" asp-action="Details" asp-route-id="@review.Book.BookId">@review.Book.Title</a></span>
                 <span>Rating: @review.Rating</span>
                 
@@ -72,7 +74,8 @@
                     <span>@review.Comment</span>
                 </div>
                 </li>
-                
+                </div>
+                <br>
             }
         </ul>
     </div>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BookCave.Data;
@@ -40,7 +41,7 @@ namespace BookCave.Repositories
             var book = (from b in _db.Books
                         where b.BookId == review.BookId
                         select b).SingleOrDefault();
-            book.ReviewScore = (review.Rating + average * amount) / (amount + 1);
+            book.ReviewScore = Math.Round((review.Rating + average * amount) / (amount + 1), 2);
             _db.SaveChanges();
         }
         public List<ReviewListViewModel> GetAllReviewsByUserID(int UserId)

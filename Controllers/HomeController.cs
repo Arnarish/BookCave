@@ -26,9 +26,9 @@ namespace BookCave.Controllers
             return View(randomizedBooks);
         }
         [HttpGet]
-        public IActionResult SearchResults(string searchString, string genre)
+        public IActionResult SearchResults(string searchString, string genre, int sorted)
         {
-            var bookSearch = _bookService.SearchResults(searchString, genre);
+            var bookSearch = _bookService.SearchResults(searchString, genre, sorted);
 
             if(bookSearch == null)
             {

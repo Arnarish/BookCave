@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BookCave.Data.EntityModels;
 using BookCave.Models.InputModels;
@@ -35,9 +36,18 @@ namespace BookCave.Services
             return randomizedBooks;
         }
 
-        public List<BookListViewModel> SearchResults(string searchString, string genre)
+        public List<BookListViewModel> SearchResults(string searchString, string genre, int sorted)
         {
-            return _bookRepo.SearchResults(searchString, genre);
+            
+            var books =  _bookRepo.SearchResults(searchString, genre, sorted);
+            foreach(var b in books)
+            {
+                if(b.OnSale)
+                {
+                    b.Price = Math.Round(b.Price - b.Price*((double)b.Discount/100), 2);
+                }
+            }
+            return books;
         }
         public BookListViewModel GetBookViewModelById(int? id)
         {
