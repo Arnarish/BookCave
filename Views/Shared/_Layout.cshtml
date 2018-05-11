@@ -28,6 +28,14 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About us</a></li>
                 </ul>
                 <div class="nav navbar-right">
+                    <span>&nbsp;</span>
+                    <a class="cartCount">
+                        @{ 
+                            @using Microsoft.AspNetCore.Http;
+                        }
+                        @* use session to keep count of items in the cart *@
+                        @Context.Session.GetInt32(Context.User.Identity.Name).ToString()
+                    </a>
                     <a class="btn btn-default" asp-controller="ShoppingCart" asp-action="Index"><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/5641-200.png" alt="cart" width="30" height="30"></a>
                 </div>
                 @await Html.PartialAsync("_LoginPartial")

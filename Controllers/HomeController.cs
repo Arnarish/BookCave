@@ -28,8 +28,8 @@ namespace BookCave.Controllers
         [HttpGet]
         public IActionResult SearchResults(string searchString, string genre, int sorted)
         {
+            //Returns a list of books the matched the search criteria
             var bookSearch = _bookService.SearchResults(searchString, genre, sorted);
-
             if(bookSearch == null)
             {
                 return View();    
@@ -44,6 +44,7 @@ namespace BookCave.Controllers
         
         public IActionResult TopTen()
         {
+            //top ten based on rating in descending order
             var topTenBooks = _bookService.GetTopTenBooks();
 
             return View(topTenBooks);

@@ -9,15 +9,15 @@ namespace BookCave.Services
 {
     public class ReviewService
     {
-        private ReviewRepo _ReviewRepo;
+        private ReviewRepo _reviewRepo;
 
         public ReviewService()
         {
-            _ReviewRepo = new ReviewRepo();
+            _reviewRepo = new ReviewRepo();
         }
         public List<ReviewListViewModel> GetAllReviewsByBookID(int? id)
         {
-            var reviews = _ReviewRepo.GetAllReviewsByBookID(id);
+            var reviews = _reviewRepo.GetAllReviewsByBookID(id);
 
             return reviews;
         }
@@ -30,11 +30,11 @@ namespace BookCave.Services
                 UserId = model.UserId,
                 BookId = model.BookId
             };
-            _ReviewRepo.AddReview(review, model.BookAverageRating, model.AmountOfRatings);
+            _reviewRepo.AddReview(review, model.BookAverageRating, model.AmountOfRatings);
         }
         public UserViewModel AddReviewsToViewModel(UserViewModel model)
         {
-            model.Reviews = _ReviewRepo.GetAllReviewsByUserID(model.UserId);
+            model.Reviews = _reviewRepo.GetAllReviewsByUserID(model.UserId);
             model.Reviews.Reverse();
             return model;
         }

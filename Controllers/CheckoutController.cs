@@ -20,15 +20,18 @@ namespace BookCave.Controllers
         private UserService _userS = new UserService();
         public IActionResult Checkout()
         {
+            //get the cart, needed to list out items in the cart
             var cart = OrderService.GetCart(this.HttpContext);
+
             var viewModel = new ShoppingCartViewModel
             {
               CartItems = cart.GetCartItems(),
               CartTotal = cart.GetTotal()
             };
+            //cart total can't be less than 1, redirect the user to the homepage
             if(viewModel.CartTotal < 1)
             {
-                return RedirectToAction("Index", "ShoppingCart");
+                return RedirectToAction("Index", "Home");
             }
             
             return View(viewModel);
@@ -37,9 +40,9 @@ namespace BookCave.Controllers
         public IActionResult Checkout(OrderInputModel OrderModel)
         {
             var Order = new Order();
+
             var cart = OrderService.GetCart(this.HttpContext);
-            TryUpdateModelAsync(Order);
-            
+            TryUpdateModelAsync(Order);            
 
             try
             {
@@ -56,11 +59,10 @@ namespace BookCave.Controllers
 
                 //Add and save order
                 _checkoutS.Add(Order);
-
+                //returns the OrderId, we use that generate the complete page
                 int OrderId = cart.CreateOrder(Order);
-
-
-                return RedirectToAction("Complete", new { id = Order.OrderId });
+                //Checkout Complete!
+                return RedirectToAction("Complete", new { id = OrderId });
             }
             catch
             {
@@ -71,6 +73,7 @@ namespace BookCave.Controllers
         public IActionResult Billing()
         {
             var User = GetUser();
+            //fill out the checkoutview for autofill in the billing view
             var CheckoutView = new CheckoutUserViewModel()
             {
                 FullName = User.FullName,
@@ -98,6 +101,7 @@ namespace BookCave.Controllers
 
         private UserViewModel GetUser()
         {
+            //returns the current user to be used as a viewmodel
             var claim = ((ClaimsIdentity) User.Identity).FindFirst(c => c.Type == "UserName")?.Value;
             var CurrentUser = _userS.GetUserViewModelByString(claim);
 

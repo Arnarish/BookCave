@@ -295,3 +295,9 @@
 {
     width: 50%;
 }
+.cartCount
+{
+    pointer-events: none;
+    display: inline-block;
+    color: white;
+}
