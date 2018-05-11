@@ -1,4 +1,55 @@
-@model BookCave.Models.UserOrderViewModel
+@model List<BookCave.Models.ViewModels.UserOrderViewModel>
 @{
-    ViewData["Title"] = "Order History"
+    ViewData["Title"] = "Order History";
+    @* cshtml doesn't like single quotation marks (') in it's code *@
+    string topText = "'s order history";
 }
+<h2>@Model[0].FullName@topText</h2>
+
+<div class="container">
+	<div class="row">
+		<div class="table-responsive">
+    @foreach(var Order in Model)
+    {
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="OH-Title">Book Title</th>
+            <th class="OH-Quantity">Quantity</th>
+            <th class="OH-Price">Price(each)</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach(var Detail in Order.OrderDetails)
+            {
+                <tr>
+                    <td class="OH-Title">
+                        <a asp-action="Details" asp-controller="Book" asp-route-id="@Detail.Books.BookId">@Detail.Books.Title</a>
+                    </td>
+                    <td class="OH-Quantity">
+                        @Detail.BookQuantity
+                    </td>
+                    <td class="OH-Price">
+                        $@Detail.UnitPrice
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="OH-Title">
+                Ordered: @Order.OrderDate
+                </td>
+                <td>
+                <p class="OH-Quantity">Total price: </p>
+                </td>
+                <td>
+                <p Class="OH-Price">$@Order.Total</p>
+                </td>
+            </tr>
+        </tfoot>
+      </table>
+    }
+    </div>
+	</div>
+</div>

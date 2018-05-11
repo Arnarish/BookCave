@@ -28,22 +28,10 @@ namespace BookCave.Controllers
             };
             if(viewModel.CartTotal <= 0)
             {
-                return View("Index", "Home");
+                return RedirectToAction("Index", "ShoppingCart");
             }
             
             return View(viewModel);
-        }
-        public IActionResult Billing()
-        {
-            var User = GetUser();
-            var CheckoutView = new CheckoutUserViewModel()
-            {
-                FullName = User.FullName,
-                Address = User.Address,
-                PostalCode = User.Postal.ToString(),
-                Email = User.Email
-            };
-            return View(CheckoutView);
         }
         [HttpPost]
         public IActionResult Checkout(OrderInputModel OrderModel)
@@ -70,6 +58,7 @@ namespace BookCave.Controllers
 
                 int OrderId = cart.CreateOrder(Order);
 
+
                 return RedirectToAction("Complete", new { id = Order.OrderId });
             }
             catch
@@ -78,6 +67,19 @@ namespace BookCave.Controllers
                 return View(Order);
             }
         }
+        public IActionResult Billing()
+        {
+            var User = GetUser();
+            var CheckoutView = new CheckoutUserViewModel()
+            {
+                FullName = User.FullName,
+                Address = User.Address,
+                PostalCode = User.Postal.ToString(),
+                Email = User.Email
+            };
+            return View(CheckoutView);
+        }
+        
         public IActionResult Complete(int Id)
         {
             //validate this is the customers order

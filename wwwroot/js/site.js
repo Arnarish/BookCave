@@ -155,11 +155,10 @@ if(ratingsList != null){
 
 $(function ()
 {
-    $(".dec").click(function ()
+    $("#dec").click(function ()
     {
         // Get the id from the link
         var recordToDelete = $(this).attr("data-id");
-        console.log(recordToDelete);
         if (recordToDelete != '') 
         {
             // Perform the ajax post
@@ -182,11 +181,10 @@ $(function ()
 
 $(function ()
 {
-    $(".inc").click(function ()
+    $("#inc").click(function ()
     {
         // Get the id from the link
         var recordToAdd = $(this).attr("data-id");
-        console.log(recordToAdd);
         if (recordToAdd != '')
         {
             // Perform the ajax post
@@ -209,7 +207,6 @@ $(function ()
     {
         // Get the id from the link
         var recordToDelete = $(this).attr("data-id");
-        console.log(recordToDelete);
         if (recordToDelete != '') 
         {
             // Perform the ajax post

@@ -28,7 +28,7 @@ namespace BookCave.Repositories
                 {
                     CartId = ShoppingCartId,
                     BookId = book.BookId,
-                    count = 1,
+                    Count = 1,
                     DateCreated = DateTime.Now,
                 };
                 _StoreDb.Carts.Add(CartItem);
@@ -36,21 +36,21 @@ namespace BookCave.Repositories
             else
             {
                 //if the book exists in the cart, increase the quantity
-                CartItem.count++;
+                CartItem.Count++;
             }            
             _StoreDb.SaveChanges();
         }
 
         public int DecBook(Cart CartItem)
         {
-            int count = 0;
+            int Count = 0;
             var incItem = _StoreDb.Carts.SingleOrDefault(
                                                  i => i.CartId == CartItem.CartId
                                                 && i.BookId == CartItem.BookId);
-            if(CartItem.count > 1)
+            if(CartItem.Count > 1)
             {
-                incItem.count--;
-                count = incItem.count;
+                incItem.Count--;
+                Count = incItem.Count;
             }
             else
             {
@@ -59,7 +59,7 @@ namespace BookCave.Repositories
 
             _StoreDb.SaveChanges();
 
-            return count;
+            return Count;
         }
 
         public int RemoveFromCart(int id, string ShoppingCartId)
@@ -71,10 +71,10 @@ namespace BookCave.Repositories
             
             if(CartItem != null)
             {
-                if(CartItem.count > 1)
+                if(CartItem.Count > 1)
                 {
-                    CartItem.count--;
-                    ItemCount = CartItem.count;
+                    CartItem.Count--;
+                    ItemCount = CartItem.Count;
                 }
                 else
                 {
@@ -129,22 +129,22 @@ namespace BookCave.Repositories
                 {
                     OrderId = order.OrderId,
                     BookId = item.BookId,
-                    BookQuantity = item.count,
+                    BookQuantity = item.Count,
                     UnitPrice = Math.Round(item.Book.Price * (1-((double)item.Book.Discount / 100)))
                 };
                 
-                orderTotal += Math.Round((item.Book.Price * (1-((double)item.Book.Discount / 100))) * item.count, 2);
+                orderTotal += Math.Round((item.Book.Price * (1-((double)item.Book.Discount / 100))) * item.Count, 2);
                 _StoreDb.OrderDetails.Add(orderDetails);
             }
-            //set order total to ordertotal count
+            //set order total to ordertotal Count
             if(orderTotal < 50)
             {
-                // add $5 to the order to account for shipping cost
-                order.Total = (orderTotal + (double)5);
+                // add $5 to the order to acCount for shipping cost
+                order.Total = (float)(orderTotal + (double)5);
             }
             else
             {
-                order.Total = orderTotal;
+                order.Total = (float)orderTotal;
             }
             //save the order
             _StoreDb.SaveChanges();
@@ -166,11 +166,11 @@ namespace BookCave.Repositories
         }
         public int GetCount(string ShoppingCartId)
         {
-            int? count = (from cartItems in _StoreDb.Carts
+            int? Count = (from cartItems in _StoreDb.Carts
                         where cartItems.CartId == ShoppingCartId
-                        select (int?)cartItems.count).Sum();
+                        select (int?)cartItems.Count).Sum();
             //return 0 if all entries are null
-            return count ?? 0;
+            return Count ?? 0;
         }
         public double GetTotal(string ShoppingCartId)
         {
@@ -180,14 +180,18 @@ namespace BookCave.Repositories
             {
                 if(item.Book.OnSale)
                 {
-                    total += Math.Round((item.Book.Price * (1-((double)item.Book.Discount / 100))) * item.count, 2);
+                    total += Math.Round((item.Book.Price * (1-((double)item.Book.Discount / 100))) * item.Count, 2);
                 }
                 else
                 {
-                    total += item.Book.Price * item.count;
+                    total += item.Book.Price * item.Count;
                 }
             }
             return total ?? 0;
+        }
+        public List<OrderDetails> getOrderDetails(int id)
+        {
+            return _StoreDb.OrderDetails.Where(od => od.OrderId == id).ToList();
         }
     }
 }

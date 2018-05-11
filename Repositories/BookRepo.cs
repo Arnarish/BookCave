@@ -182,5 +182,10 @@ namespace BookCave.Repositories
             _db.Books.Remove(book);
             _db.SaveChanges();
         }
+        public Book GetOrderDetailsBooks(int id)
+        {
+            var book = _db.Books.Where(b => b.BookId == id).SingleOrDefault();
+            return book;
+        }
     }
 }

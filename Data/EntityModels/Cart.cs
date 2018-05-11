@@ -10,7 +10,7 @@ namespace BookCave.Data.EntityModels
         public int Id { get; set; }
         public string CartId { get; set; }
         public int BookId { get; set; }
-        public int count { get; set; }
+        public int Count { get; set; }
         public DateTime DateCreated  { get; set; }
         [ForeignKey("BookId")]
         public virtual Book Book { get; set; }
