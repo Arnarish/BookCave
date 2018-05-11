@@ -135,17 +135,18 @@ namespace BookCave.Repositories
                 
                 orderTotal += Math.Round((item.Book.Price * (1-((double)item.Book.Discount / 100))) * item.Count, 2, MidpointRounding.AwayFromZero);
                 _storeDb.OrderDetails.Add(orderDetails);
-            }
+            }   
             //set order total to ordertotal Count
             if(orderTotal < 50)
             {
                 // add $5 to the order to acCount for shipping cost
-                order.Total = Math.Round((orderTotal + (double)5), 2 ,MidpointRounding.AwayFromZero);
+                order.Total = Math.Round((orderTotal + (double)5), 2, MidpointRounding.AwayFromZero);
             }
             else
             {
                 order.Total = orderTotal;   
             }
+            _storeDb.Orders.Update(order);
             //save the order
             _storeDb.SaveChanges();
             //empty the cart
