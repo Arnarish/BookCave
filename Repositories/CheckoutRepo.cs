@@ -42,8 +42,6 @@ namespace BookCave.Repositories
                     }).ToList();
                     
                     return UserOrders;
-            
-            //return _db.Orders.Where(u =>u.Username == UserName).ToList();
         }
     }
 }
