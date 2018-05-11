@@ -119,7 +119,6 @@ namespace BookCave.Repositories
         }
         public int CreateOrder(Order order, string ShoppingCartId)
         {
-            //move to repo
             double orderTotal = 0;
 
             var cartItems = GetCartItems(ShoppingCartId);
@@ -133,11 +132,20 @@ namespace BookCave.Repositories
                     BookQuantity = item.count,
                     UnitPrice = item.Book.Price
                 };
-                orderTotal += (item.count * item.Book.Price);
+                
+                orderTotal += Math.Round((item.Book.Price * (1-((double)item.Book.Discount / 100))) * item.count, 2);
                 _StoreDb.OrderDetails.Add(orderDetails);
             }
             //set order total to ordertotal count
-            order.Total = orderTotal;
+            if(orderTotal > 50)
+            {
+                // add $5 to the order to account for shipping cost
+                order.Total = (orderTotal + 5);
+            }
+            else
+            {
+                order.Total = orderTotal;
+            }
             //save the order
             _StoreDb.SaveChanges();
             //empty the cart
@@ -166,9 +174,6 @@ namespace BookCave.Repositories
         }
         public double GetTotal(string ShoppingCartId)
         {
-            /*double? total = (from cartItems in _StoreDb.Carts
-                                where cartItems.CartId == ShoppingCartId
-                                select (int?)cartItems.count * cartItems.Book.Price).Sum();*/
             var stuff = GetCartItems(ShoppingCartId);
             double? total = 0;
             foreach (var item in stuff)

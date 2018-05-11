@@ -4,5 +4,7 @@
 }
 
 <h2>Checkout Complete!</h2>
-<p>Thank you for your order, your order number is: @model</p>
-<a asp-action="index" asp-controller="Home">Click here to go back to the front page.</a>
+<p>Thank you for your order, your order number is: @Model</p>
+<a asp-action="index" asp-controller="Home">
+    <button type="submit" class="btn btn-info btn-sm" style="width:100%;">Take me back to the front page.</button>
+</a>

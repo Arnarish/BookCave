@@ -13,7 +13,5 @@ namespace BookCave.Data.EntityModels
         public double UnitPrice { get; set; }
         [ForeignKey("BookId")]
         public virtual Book Books { get; set; }
-        [ForeignKey("OrderId")]
-        public virtual Order Order { get; set; }
     }
 }
