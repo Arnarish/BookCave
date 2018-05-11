@@ -15,7 +15,7 @@ namespace BookCave.Services
 {
     public partial class OrderService
     {
-        private OrderRepo _OrderRep = new OrderRepo();
+        private OrderRepo _orderRepo = new OrderRepo();
         string ShoppingCartId { get; set; }
         public const string CartSessionKey = "CartId";
         public static OrderService GetCart(HttpContext context)
@@ -31,35 +31,35 @@ namespace BookCave.Services
         }
         public void AddToCart(Book book)
         {           
-                _OrderRep.AddToCart(book, this.ShoppingCartId);
+                _orderRepo.AddToCart(book, this.ShoppingCartId);
         }
         public int RemoveFromCart(int id)
         {
-            return _OrderRep.RemoveFromCart(id, this.ShoppingCartId);
+            return _orderRepo.RemoveFromCart(id, this.ShoppingCartId);
         }
         public int RemoveAllFromCart(int id)
         {
-            return _OrderRep.RemoveAllFromCart(id, this.ShoppingCartId);
+            return _orderRepo.RemoveAllFromCart(id, this.ShoppingCartId);
         }
         public void EmptyCart()
         {
-            _OrderRep.EmptyCart(this.ShoppingCartId);
+            _orderRepo.EmptyCart(this.ShoppingCartId);
         }
         public List<Cart> GetCartItems()
         {
-            return _OrderRep.GetCartItems(this.ShoppingCartId).ToList();
+            return _orderRepo.GetCartItems(this.ShoppingCartId).ToList();
         }
         public int GetCount()
         {
-            return _OrderRep.GetCount(this.ShoppingCartId);
+            return _orderRepo.GetCount(this.ShoppingCartId);
         }
         public double GetTotal()
         {
-            return _OrderRep.GetTotal(this.ShoppingCartId);
+            return _orderRepo.GetTotal(this.ShoppingCartId);
         }
         public int CreateOrder(Order order)
         {          
-            return _OrderRep.CreateOrder(order, this.ShoppingCartId);
+            return _orderRepo.CreateOrder(order, this.ShoppingCartId);
         }
         public string GetCartId(HttpContext context)
         {
@@ -91,7 +91,7 @@ namespace BookCave.Services
         }
         public void MigrateCart(string UserName)
         {
-            _OrderRep.MigrateCart(UserName, this.ShoppingCartId);
+            _orderRepo.MigrateCart(UserName, this.ShoppingCartId);
         }
         public string GetShoppingCartId()
         {
